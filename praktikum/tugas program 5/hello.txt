@@ -1,2 +1,0 @@
-LOGIN STATUS : FAILED.
-Please check your correct name or password.
