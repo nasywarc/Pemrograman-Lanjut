@@ -1,4 +1,4 @@
-# PROGRAM "JUDUL"
+# PROGRAM Pylistudent
 # Nasywa Azizah Zharifah
 # 225150307111060
 
@@ -12,12 +12,14 @@ def input_data () :
     dict_data['nim'].append(input_nim)
     dict_data['major'].append(input_major)
 
+print("Welcome to Pylistudent")
+
 dict_data = {"name" : [], "nim" : [], "major" : []}
 loop = True
 
 while loop :
     input_data()
-    keep_loop = input("Do you wanna add another data?\n(Type \"Yes\" or \"No\")\n")
+    keep_loop = input("Do you wanna add another data? (Type \"Yes\" or \"No\")\nYour input : ")
     if keep_loop == 'No' or keep_loop == 'no' :
         loop = False
     elif keep_loop == 'Yes' or keep_loop == 'yes' :
@@ -26,4 +28,5 @@ while loop :
         print("Your input is invalid.")
         loop = False
 
-print(dict_data)
+for name in dict_data['name'] :
+    print(name)
