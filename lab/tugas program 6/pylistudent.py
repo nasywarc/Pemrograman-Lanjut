@@ -37,8 +37,10 @@ while loop :
         loop = False
 
 print(
-'''===================================================
+'''
+
            Creating a list of student......
+           
 '''
 )
 print(
