@@ -16,4 +16,5 @@ def swapList(newList):
 # membuat list newList dan mengisinya dengan angka
 newList = [12, 35, 9, 56, 24]
 
+# print list dengan memanggil fungsi swapList
 print(swapList(newList))
