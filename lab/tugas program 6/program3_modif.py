@@ -15,5 +15,5 @@ def remov_duplicates(input):
     print(s)
 
 if __name__ == "__main__": # akan berjalan jika program ini dijalankan sbg program utama
-    input = 'Python is great and Java is also great'
+    input = input("Type the sentence you want to sort : ")
     remov_duplicates(input) # memanggil fungsi remov_duplicates
