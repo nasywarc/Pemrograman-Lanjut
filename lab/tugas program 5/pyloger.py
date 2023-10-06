@@ -26,8 +26,8 @@ if user__choice == '1':
 
         # kondisi jika sudah terdapat file users.csv, akan menggunakan a (append)
         # setelah itu mengisi sesuai input user
-        if os.path.exists("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv"):
-            with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv", "a", newline='') as users__data:
+        if os.path.exists("./users.csv"):
+            with open("./users.csv", "a", newline='') as users__data:
                 field_names = ['name', 'pass', 'access']
                 writer = csv.DictWriter(users__data, fieldnames=field_names)
                 writer.writerow(
@@ -39,7 +39,7 @@ if user__choice == '1':
         # setelah itu membuat atribut name, pass, dan access user dan mengisi sesuai-
         # input user
         else:
-            with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv", "x", newline='') as users__data:
+            with open("./users.csv", "x", newline='') as users__data:
                 field_names = ['name', 'pass', 'access']
                 writer = csv.DictWriter(users__data, fieldnames=field_names)
                 writer.writeheader()  # menuliskan header yaitu name, pass, access
@@ -53,8 +53,8 @@ if user__choice == '1':
 
         # kondisi jika sudah terdapat file users.csv, akan menggunakan a (append)
         # setelah itu mengisi sesuai input user
-        if os.path.exists("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv"):
-            with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv", "a", newline='') as users__data:
+        if os.path.exists("./users.csv"):
+            with open("./users.csv", "a", newline='') as users__data:
                 field_names = ['name', 'pass', 'access']
                 writer = csv.DictWriter(users__data, fieldnames=field_names)
                 writer.writerow(
@@ -66,7 +66,7 @@ if user__choice == '1':
         # setelah itu membuat atribut name, pass, dan access user dan mengisi sesuai-
         # input user
         else:
-            with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv", "x", newline='') as users__data:
+            with open("./users.csv", "x", newline='') as users__data:
                 field_names = ['name', 'pass', 'access']
                 writer = csv.DictWriter(users__data, fieldnames=field_names)
                 writer.writeheader()  # menuliskan header yaitu name, pass, access
@@ -80,13 +80,13 @@ elif user__choice == '2':
 
     # kondisi jika sudah terdapat file users.csv
     # program akan menanyakan name dan pass user
-    if os.path.exists("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv"):
+    if os.path.exists("./users.csv"):
         print("You will be directed to log in.\n")
         user__name = input('Enter your name : ')
         user__pass = input('Enter your password : ')
 
         # membuka file users.csv untuk dibaca (read)
-        with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/users.csv", "r", newline='') as users__data:
+        with open("./users.csv", "r", newline='') as users__data:
             field_names = ['name', 'pass', 'access']
             reader = csv.DictReader(users__data)
             found = False
@@ -110,12 +110,12 @@ elif user__choice == '2':
                 # kalimat sambutan untuk admin
                 # setelah itu program akan membuka file untuk dibaca lalu ditampilkan
                 if access_index == '1':
-                    with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/hello.txt", "w") as greeting_admin:
+                    with open("./hello.txt", "w") as greeting_admin:
                         greeting_admin.write("LOGIN STATUS : SUCCESS.")
                         greeting_admin.write(f"\nWelcome, {log_in_username}.")
                         greeting_admin.write(
                             "\nYou have successfully logged in as a \"Admin\".")
-                    with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/hello.txt", "r") as greeting_admin:
+                    with open("./hello.txt", "r") as greeting_admin:
                         print("\n" + greeting_admin.read())
                         print("===============================================")
 
@@ -124,12 +124,12 @@ elif user__choice == '2':
                 # kalimat sambutan untuk guest
                 # setelah itu program akan membuka file untuk dibaca lalu ditampilkan
                 else:
-                    with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/hello.txt", "w") as greeting_guest:
+                    with open("./hello.txt", "w") as greeting_guest:
                         greeting_guest.write("LOGIN STATUS : SUCCESS.")
                         greeting_guest.write(f"\nWelcome, {log_in_username}.")
                         greeting_guest.write(
                             "\nYou have successfully logged in as a \"Guest\".")
-                    with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/hello.txt", "r") as greeting_guest:
+                    with open("./hello.txt", "r") as greeting_guest:
                         print("\n" + greeting_guest.read())
                         print("===============================================")
 
@@ -137,11 +137,11 @@ elif user__choice == '2':
             # untuk ditulis kalimat lain yang memberitahu bahwa nama/pass salah
             # setelah itu program akan membuka file untuk dibaca lalu ditampilkan
             else:
-                with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/hello.txt", "w") as failed:
+                with open("./hello.txt", "w") as failed:
                     failed.write("LOGIN STATUS : FAILED.")
                     failed.write(
                         "\nPlease check your correct name or password.")
-                with open("C:/Users/Nasywa Azizah/data/kuliah/semester 3/PEMLAN/repo git/Pemrograman-Lanjut/lab/tugas program 5/hello.txt", "r") as failed:
+                with open("./hello.txt", "r") as failed:
                     print("\n" + failed.read())
                     print("===============================================")
 
