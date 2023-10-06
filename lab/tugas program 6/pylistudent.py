@@ -15,6 +15,7 @@ def input_data () :
 print("Welcome to Pylistudent")
 
 dict_data = {"name" : [], "nim" : [], "major" : []}
+i = 1
 loop = True
 
 while loop :
@@ -24,9 +25,16 @@ while loop :
         loop = False
     elif keep_loop == 'Yes' or keep_loop == 'yes' :
         loop = True
+        i+=1
     else :
         print("Your input is invalid.")
         loop = False
 
-for name in dict_data['name'] :
-    print(name)
+for total in range (0, i) : 
+    print(f"Student {total+1}")
+    for name in dict_data['name'] :
+        print(name)
+        for nim in dict_data['nim'] :
+            print(nim)
+            for major in dict_data['major'] :
+                print(major)
