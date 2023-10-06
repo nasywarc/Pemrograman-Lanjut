@@ -4,9 +4,9 @@
 
 def input_data () :
 
-    input_name = input("\nType your name\t: ")
+    input_name = input("\nType your Name\t: ")
     input_nim = input("Type your NIM\t: ")
-    input_major = input("Type your major\t: ")
+    input_major = input("Type your Major\t: ")
 
     dict_data['name'].append(input_name)
     dict_data['nim'].append(input_nim)
@@ -40,7 +40,7 @@ print(
 '''
 
            Creating a list of student......
-           
+
 '''
 )
 print(
