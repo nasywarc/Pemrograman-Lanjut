@@ -1,2 +1,3 @@
-LOGIN STATUS : FAILED.
-Please check your correct name or password.
+LOGIN STATUS : SUCCESS.
+Welcome, Nasywa Azizah.
+You have successfully logged in as a "Admin".
