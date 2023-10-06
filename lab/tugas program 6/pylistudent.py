@@ -4,7 +4,7 @@
 
 def input_data () :
 
-    input_name = input("Type your name : ")
+    input_name = input("\nType your name : ")
     input_nim = input("Type your NIM : ")
     input_major = input("Type your major : ")
 
@@ -13,7 +13,7 @@ def input_data () :
     dict_data['major'].append(input_major)
 
 print("Welcome to Pylistudent.")
-print("This program is created to list student data.\n")
+print("This program is created to list student data.")
 
 dict_data = {"name" : [], "nim" : [], "major" : []}
 i = 1
@@ -21,7 +21,7 @@ loop = True
 
 while loop :
     input_data()
-    keep_loop = input("Do you wanna add another data? (Type \"Yes\" or \"No\")\nInput : ")
+    keep_loop = input("\nDo you wanna add another data? (Type \"Yes\" or \"No\")\nInput : ")
     if keep_loop == 'No' or keep_loop == 'no' :
         loop = False
     elif keep_loop == 'Yes' or keep_loop == 'yes' :
@@ -30,10 +30,16 @@ while loop :
     else :
         print("Your input is invalid.")
         loop = False
-print("\n")
+print(
+'''
+====================================
+          LIST OF STUDENT
+====================================
+'''
+)
 for total in range (0, i) : 
     print(f"Student {total+1}")
     print(f"Name\t: {dict_data['name'][total]}")
     print(f"NIM\t: {dict_data['nim'][total]}")
     print(f"Major\t: {dict_data['major'][total]}")
-    
+print("====================================")
