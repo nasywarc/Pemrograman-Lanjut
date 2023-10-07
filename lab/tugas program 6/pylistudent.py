@@ -1,4 +1,4 @@
-# PROGRAM Pylistudent
+# PROGRAM PYLISTUDENT (Python for Student List) 
 # Nasywa Azizah Zharifah
 # 225150307111060
 
