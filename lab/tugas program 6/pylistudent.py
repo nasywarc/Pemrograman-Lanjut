@@ -61,4 +61,4 @@ for total in range (0, i) :
     print(f"Name\t: {dict_data['name'][total]}")
     print(f"NIM\t: {dict_data['nim'][total]}")
     print(f"Major\t: {dict_data['major'][total]}")
-print("==================================================")
+print("===================================================")
