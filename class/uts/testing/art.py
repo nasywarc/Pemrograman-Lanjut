@@ -1,6 +1,6 @@
 logo = '''
-                                                    888      
-                                                    888      
+Pemrograman Lanjut - Kelompok 5                     888      
+"New York House Finder"                             888      
                                                     888      
 88888b.  .d88b. 888  888  888888  888 .d88b. 888d888888  888 
 888 "88bd8P  Y8b888  888  888888  888d88""88b888P"  888 .88P 
