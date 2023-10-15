@@ -1,5 +1,6 @@
 import os
 import csv
+import art
 
 def search_by_name (search) :
     search_lower = search.lower()
@@ -40,12 +41,14 @@ print('''
                     NEW YORK HOUSING FINDER
 =============================================================='''
 )
+print(art.logo)
 found = False
 loop = True
 run_again = 0
 while loop :
     if run_again > 0 :
         os.system('cls')
+        print(art.logo)
     search_by = input("\n1. Search by ID\n2. Search by Name\n3. Exit\nInput (1 / 2 / 3) -> ")
     if search_by == '1' :
         search = input("\nInput ID -> ")
