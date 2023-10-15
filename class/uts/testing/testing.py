@@ -59,9 +59,9 @@ while loop :
         print('============================================================')
         loop = False
 
-    if search_by != '3' :
+    if search_by == '1'  or search_by == '2':
         keep_run = input("Do you want to continue?\nInput (Yes / No) -> ").lower()
-        
+
         if keep_run == 'yes' :
             run_again += 1
         elif keep_run == 'no'  :
