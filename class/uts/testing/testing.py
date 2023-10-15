@@ -43,12 +43,16 @@ print('''
 '''
 )
 found = False
-search_by = input("Search by (\'ID\' or \'Name\'):\nInput -> ")
+loop = True
+search_by = input("Search by (\'ID\' or \'Name\'):\nType \"exit\" to leave program.\nInput -> ")
 if search_by == "ID" or search_by == "id" :
     search = input("\nSearch : \nInput ID -> ")
     search_by_id(search)
 elif search_by == "Name" or search_by == "name" :
     search = input("\nSearch : \nInput Name -> ")
     search_by_name(search)
+elif search_by == "exit" :
+    print("Goodbye.")
+    loop = False
 else:
     print("Your input is invalid.")
