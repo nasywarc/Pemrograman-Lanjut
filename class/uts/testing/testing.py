@@ -29,6 +29,7 @@ def search_by_id (search) :
         for row in read_file :
             if search == row['id']:
                 found = True
+                print("Data")
                 print(f"ID = {row['id']}\nName = {row['name']}\nHost Name =  {row['host_name']}\nNeightbourhood Group = {row['neighbourhood_group']}\nNeighbourhood = {row['neighbourhood']}\nLatitude = {row['latitude']}\nLongtitude = {row['longitude']}\nRoom Type = {row['room_type']}\nPrice = {row['price']}\nMinimum Nights = {row['minimum_nights']}\nNumber of Reviews = {row['number_of_reviews']}\nLast Review = {row['last_review']}\nReviews per Month = {row['reviews_per_month']}\nCalculated Host Listing Count = {row['calculated_host_listings_count']}\nAvailability = {row['availability_365']}\n")
         if found == False :
             print(f"There is no ID such \"{search}\"")
@@ -47,10 +48,10 @@ while loop :
         os.system('cls')
     search_by = input("\n1. Search by ID\n2. Search by Name\n3. Exit\nInput (1 / 2 / 3) -> ")
     if search_by == '1' :
-        search = input("\nSearch : \nInput ID -> ")
+        search = input("\nInput ID -> ")
         search_by_id(search)
     elif search_by == '2' :
-        search = input("\nSearch : \nInput Name -> ")
+        search = input("\nInput Name -> ")
         search_by_name(search)
     elif search_by == '3' :
         print("\nThe program has been stopped.")
@@ -60,7 +61,7 @@ while loop :
         print("\nYour input is invalid.")
         print('==============================================================')
         loop = False
-    keep_run = input("Do you want tp continue?\nInput (Yes / No) -> ").lower()
+    keep_run = input("Do you want to continue?\nInput (Yes / No) -> ").lower()
     if keep_run == 'yes' :
         run_again += 1
     elif keep_run == 'no'  :
