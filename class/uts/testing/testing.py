@@ -45,7 +45,7 @@ run_again = 0
 while loop :
     if run_again > 0 :
         os.system('cls')
-    search_by = input("\n1. Search by ID\n2. Search by Name\n3. Exit\nInput Number -> ")
+    search_by = input("\n1. Search by ID\n2. Search by Name\n3. Exit\nInput (1 / 2 / 3) -> ")
     if search_by == '1' :
         search = input("\nSearch : \nInput ID -> ")
         search_by_id(search)
@@ -57,10 +57,10 @@ while loop :
         print('==============================================================')
         loop = False
     else:
-        print("Your input is invalid.")
+        print("\nYour input is invalid.")
         print('==============================================================')
         loop = False
-    keep_run = input("Do you want tp continue? \"yes\" or \"no\"")
+    keep_run = input("Do you want tp continue?\nInput (Yes / No) -> ").lower()
     if keep_run == 'yes' :
         run_again += 1
     elif keep_run == 'no'  :
@@ -68,6 +68,6 @@ while loop :
         print('==============================================================')
         loop = False
     else :
-        print("Your input is invalid.")
+        print("\nYour input is invalid.")
         print('==============================================================')
         loop = False
