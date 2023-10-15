@@ -6,7 +6,7 @@ def search_by_name (search) :
     i = 1
     with open("C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv", "r", newline='', encoding="cp437", errors='ignore') as new_york:
         read_file = csv.DictReader(new_york)
-        print("\nResult :\n")
+        print("\nResult\n------")
         global found
         for row in read_file :
             if search.lower() in row['name'].lower():
@@ -20,7 +20,7 @@ def search_by_name (search) :
 def search_by_id (search) :
     with open("C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv", "r", newline='', encoding="cp437", errors='ignore') as new_york:
         read_file = csv.DictReader(new_york)
-        print("\nResult :\n")
+        print("\nResult\n------")
         global found
         for row in read_file :
             if search == row['id']:
