@@ -1,8 +1,5 @@
 import os
 import csv
-import pandas as pd
-import numpy
-import re
 
 def search_by_name (search) :
     search_lower = search.lower()
@@ -24,20 +21,15 @@ def search_by_name (search) :
 def search_by_id (search) :
     with open("C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv", "r", newline='', encoding="cp437", errors='ignore') as new_york:
         read_file = csv.DictReader(new_york)
-        
         print("\nResult :")
         for row in read_file :
-            if matches in row:
-                print(f"Found '{search}' in the text.")
+            if search in row['id']:
+                print(f"{row['id']}\t{row['name']}")
 
 
 os.system('cls')
-search = input("Search: \n")
-pattern = rf"\b{re.escape(search)}\b"
-text = "blabla"
-matches = re.findall(pattern, text)
+search = input("Search : \n")
 search_by_id(search)
-# df = pd.DataFrame(search)
 
 # with open("C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv", "r", newline='', encoding="cp437", errors='ignore') as new_york:
 #         read_file = csv.DictReader(new_york)
