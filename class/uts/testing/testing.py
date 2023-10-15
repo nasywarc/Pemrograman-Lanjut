@@ -11,21 +11,12 @@ def search_by_name (search) :
         print("\nResult :")
         global found
         for row in read_file :
-            if search in row['name']:
+            if search in row['name'] or search_lower in row['name'] or search_capital in row['name'] or search_title in row['name']:
                 found = True
-                print(f"ID = {row['id']}\nName = {row['name']}\n")
-            elif search_lower in row['name']:
-                found = True
-                print(f"ID = {row['id']}\nName = {row['name']}\n")
-            elif search_capital in row['name'] :
-                found = True
-                print(f"ID = {row['id']}\nName = {row['name']}\n")
-            elif search_title in row['name']:
-                found = True
-                print(f"ID = {row['id']}\nName = {row['name']}\n")
-        print('\n==============================================================')
+                print(f"ID = {row['id']}\nName = {row['name']}\nHost Name =  {row['host_name']}\nNeightbourhood Group = {row['neighbourhood_group']}\nNeighbourhood = {row['neighbourhood']}\nLatitude = {row['latitude']}\nLongtitude = {row['longitude']}\nRoom Type = {row['room_type']}\nPrice = {row['price']}\nMinimum Nights = {row['minimum_nights']}\nNumber of Reviews = {row['number_of_reviews']}\nLast Review = {row['last_review']}\nReviews per Month = {row['reviews_per_month']}\nCalculated Host Listing Count = {row['calculated_host_listings_count']}\nAvailability = {row['availability_365']}")
         if found == False :
             print(f"There is no name such \"{search}\"")
+        print('==============================================================')
 
 def search_by_id (search) :
     with open("C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv", "r", newline='', encoding="cp437", errors='ignore') as new_york:
@@ -36,10 +27,10 @@ def search_by_id (search) :
         for row in read_file :
             if search == row['id']:
                 found = True
-                print(f"ID = {row['id']}\nName = {row['name']}\n")
-        print('==============================================================')
+                print(f"ID = {row['id']}\nName = {row['name']}\nHost Name =  {row['host_name']}\nNeightbourhood Group = {row['neighbourhood_group']}\nNeighbourhood = {row['neighbourhood']}\nLatitude = {row['latitude']}\nLongtitude = {row['longitude']}\nRoom Type = {row['room_type']}\nPrice = {row['price']}\nMinimum Nights = {row['minimum_nights']}\nNumber of Reviews = {row['number_of_reviews']}\nLast Review = {row['last_review']}\nReviews per Month = {row['reviews_per_month']}\nCalculated Host Listing Count = {row['calculated_host_listings_count']}\nAvailability = {row['availability_365']}")
         if found == False :
             print(f"There is no ID such \"{search}\"")
+        print('==============================================================')
 
 os.system('cls')
 print('''
