@@ -19,7 +19,6 @@ def search_by_name (search) :
                 i += 1
         if found == False :
             print(f"There is no name such \"{search}\"")
-        print('==============================================================')
 
 def search_by_id (search) :
     with open("C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv", "r", newline='', encoding="cp437", errors='ignore') as new_york:
@@ -33,26 +32,26 @@ def search_by_id (search) :
                 print(f"ID = {row['id']}\nName = {row['name']}\nHost Name =  {row['host_name']}\nNeightbourhood Group = {row['neighbourhood_group']}\nNeighbourhood = {row['neighbourhood']}\nLatitude = {row['latitude']}\nLongtitude = {row['longitude']}\nRoom Type = {row['room_type']}\nPrice = {row['price']}\nMinimum Nights = {row['minimum_nights']}\nNumber of Reviews = {row['number_of_reviews']}\nLast Review = {row['last_review']}\nReviews per Month = {row['reviews_per_month']}\nCalculated Host Listing Count = {row['calculated_host_listings_count']}\nAvailability = {row['availability_365']}")
         if found == False :
             print(f"There is no ID such \"{search}\"")
-        print('==============================================================')
 
 os.system('cls')
 print('''
 ==============================================================
                     NEW YORK HOUSING FINDER
-==============================================================
-'''
+=============================================================='''
 )
 found = False
 loop = True
-search_by = input("Search by (\'ID\' or \'Name\'):\nType \"exit\" to leave program.\nInput -> ")
-if search_by == "ID" or search_by == "id" :
-    search = input("\nSearch : \nInput ID -> ")
-    search_by_id(search)
-elif search_by == "Name" or search_by == "name" :
-    search = input("\nSearch : \nInput Name -> ")
-    search_by_name(search)
-elif search_by == "exit" :
-    print("Goodbye.")
-    loop = False
-else:
-    print("Your input is invalid.")
+while loop :
+    search_by = input("\nSearch by (\'ID\' or \'Name\') or type \"exit\" to leave program :\nInput -> ")
+    if search_by == "ID" or search_by == "id" :
+        search = input("\nSearch : \nInput ID -> ")
+        search_by_id(search)
+    elif search_by == "Name" or search_by == "name" :
+        search = input("\nSearch : \nInput Name -> ")
+        search_by_name(search)
+    elif search_by == "exit" :
+        print("\nSTATUS : EXIT")
+        print('==============================================================')
+        loop = False
+    else:
+        print("Your input is invalid.\n")
