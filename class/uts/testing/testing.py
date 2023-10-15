@@ -29,7 +29,7 @@ def search_by_id (search) :
         for row in read_file :
             if search == row['id']:
                 found = True
-                print(f"ID = {row['id']}\nName = {row['name']}\nHost Name =  {row['host_name']}\nNeightbourhood Group = {row['neighbourhood_group']}\nNeighbourhood = {row['neighbourhood']}\nLatitude = {row['latitude']}\nLongtitude = {row['longitude']}\nRoom Type = {row['room_type']}\nPrice = {row['price']}\nMinimum Nights = {row['minimum_nights']}\nNumber of Reviews = {row['number_of_reviews']}\nLast Review = {row['last_review']}\nReviews per Month = {row['reviews_per_month']}\nCalculated Host Listing Count = {row['calculated_host_listings_count']}\nAvailability = {row['availability_365']}")
+                print(f"ID = {row['id']}\nName = {row['name']}\nHost Name =  {row['host_name']}\nNeightbourhood Group = {row['neighbourhood_group']}\nNeighbourhood = {row['neighbourhood']}\nLatitude = {row['latitude']}\nLongtitude = {row['longitude']}\nRoom Type = {row['room_type']}\nPrice = {row['price']}\nMinimum Nights = {row['minimum_nights']}\nNumber of Reviews = {row['number_of_reviews']}\nLast Review = {row['last_review']}\nReviews per Month = {row['reviews_per_month']}\nCalculated Host Listing Count = {row['calculated_host_listings_count']}\nAvailability = {row['availability_365']}\n")
         if found == False :
             print(f"There is no ID such \"{search}\"")
 
@@ -41,17 +41,33 @@ print('''
 )
 found = False
 loop = True
+run_again = 0
 while loop :
-    search_by = input("\nSearch by (\'ID\' or \'Name\') or type \"exit\" to leave program :\nInput -> ")
-    if search_by == "ID" or search_by == "id" :
+    if run_again > 0 :
+        os.system('cls')
+    search_by = input("\n1. Search by ID\n2. Search by Name\n3. Exit\nInput Number -> ")
+    if search_by == '1' :
         search = input("\nSearch : \nInput ID -> ")
         search_by_id(search)
-    elif search_by == "Name" or search_by == "name" :
+    elif search_by == '2' :
         search = input("\nSearch : \nInput Name -> ")
         search_by_name(search)
-    elif search_by == "exit" :
-        print("\nSTATUS : EXIT")
+    elif search_by == '3' :
+        print("\nThe program has been stopped.")
         print('==============================================================')
         loop = False
     else:
-        print("Your input is invalid.\n")
+        print("Your input is invalid.")
+        print('==============================================================')
+        loop = False
+    keep_run = input("Do you want tp continue? \"yes\" or \"no\"")
+    if keep_run == 'yes' :
+        run_again += 1
+    elif keep_run == 'no'  :
+        print("\nThe program has been stopped.")
+        print('==============================================================')
+        loop = False
+    else :
+        print("Your input is invalid.")
+        print('==============================================================')
+        loop = False
