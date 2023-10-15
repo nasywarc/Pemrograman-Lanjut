@@ -31,6 +31,7 @@ def search_by_id (search) :
             print(f"There is no ID such \"{search}\"\n")
 
 os.system('cls')
+print('============================================================')
 print(art.logo)
 found = False
 loop = True
@@ -40,6 +41,7 @@ while loop :
 
     if run_again > 0 :
         os.system('cls')
+        print('============================================================')
         print(art.logo)
     print('============================================================')
     search_by = input("1. Search by ID\n2. Search by Name\n3. Exit\nInput (1 / 2 / 3) -> ")
