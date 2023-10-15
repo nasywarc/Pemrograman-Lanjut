@@ -35,12 +35,15 @@ print(art.logo)
 found = False
 loop = True
 run_again = 0
+
 while loop :
+
     if run_again > 0 :
         os.system('cls')
         print(art.logo)
     print('============================================================')
     search_by = input("1. Search by ID\n2. Search by Name\n3. Exit\nInput (1 / 2 / 3) -> ")
+
     if search_by == '1' :
         search = input("\nInput ID -> ")
         search_by_id(search)
@@ -55,8 +58,10 @@ while loop :
         print("\nYour input is invalid.")
         print('============================================================')
         loop = False
+
     if search_by != '3' :
         keep_run = input("Do you want to continue?\nInput (Yes / No) -> ").lower()
+        
         if keep_run == 'yes' :
             run_again += 1
         elif keep_run == 'no'  :
