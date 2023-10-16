@@ -14,21 +14,6 @@ def show () :
             print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
             i += 1
 
-def search_by_name (search) :
-    i = 1
-    global file_path
-    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
-        read_file = csv.DictReader(new_york)
-        print("\nResult\n------")
-        global found
-        for row in read_file :
-            if search.lower() in row['name'].lower():
-                found = True
-                print(f"Data - {i}")
-                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID =  {row['host_id']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
-                i += 1
-        if found == False :
-            print(f"There is no name such \"{search}\"\n")
 
 def search_by_id (search) :
     global file_path
@@ -40,11 +25,44 @@ def search_by_id (search) :
             if search == row['id']:
                 found = True
                 print("Data")
-                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID =  {row['host_id']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
+                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID = {row['host_id']}\n\tHost Name = {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
         if found == False :
             print(f"There is no ID such \"{search}\"\n")
 
-def is_duplicate(rows, id_to_check):
+def search_by_name (search) :
+    i = 1
+    global file_path
+    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
+        read_file = csv.DictReader(new_york)
+        print("\nResult\n------")
+        global found
+        for row in read_file :
+            if search.lower() in row['name'].lower():
+                found = True
+                print(f"Data - {i}")
+                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID = {row['host_id']}\n\tHost Name = {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
+                i += 1
+        if found == False :
+            print(f"There is no name such \"{search}\"\n")
+
+def search_by_filter (search) :
+    i = 1
+    global file_path
+    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
+        read_file = csv.DictReader(new_york)
+        global found
+        filter_neighbour = input("Enter Neighbourhood -> ")
+        filter_price = int(input("Enter Max Price -> $"))
+        for row in read_file :
+            if search.lower() in row['neighbourhood_group'].lower() and filter_neighbour == row['neighbourhood'].lower() and filter_price >= int(row['price']):
+                found = True
+                print(f"Data - {i}")
+                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID = {row['host_id']}\n\tHost Name = {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
+                i += 1
+        if found == False :
+            print(f"There is no data that meet's all of the criteria.\n")
+
+def is_duplicate(rows, id_to_check):            # bug
     for row in rows:
         if id_to_check == row['id']:
             return True
@@ -219,6 +237,7 @@ def help_menu():
 file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
 os.system('cls')
 
+print('============================================================')
 print(art.logo)
 found = False
 loop = True
@@ -245,7 +264,9 @@ while loop :
         search_by_name(search)
 
     elif search_by == '4':
-        pass
+        print("\n\" * \" can't be blank")
+        search = input("Enter Neighbourhood Group* -> ")
+        search_by_filter(search)
 
     elif search_by == '5':
         add()
