@@ -25,7 +25,7 @@ def search_by_name (search) :
             if search.lower() in row['name'].lower():
                 found = True
                 print(f"Data - {i}")
-                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
+                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID =  {row['host_id']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
                 i += 1
         if found == False :
             print(f"There is no name such \"{search}\"\n")
@@ -40,7 +40,7 @@ def search_by_id (search) :
             if search == row['id']:
                 found = True
                 print("Data")
-                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
+                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID =  {row['host_id']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
         if found == False :
             print(f"There is no ID such \"{search}\"\n")
 
@@ -193,6 +193,46 @@ def update_availability(search):
             found = True
             break
 
+def update (search) :
+    global file_path
+    with open(file_path, "r", "w", newline='', encoding="cp437", errors='ignore') as new_york:
+        read_file = csv.DictReader(new_york)
+        write_file = csv.DictWriter(new_york)
+        global found
+
+        for row in read_file :
+            if search == row['id']:
+                found = True
+                new_availability = input("Enter new availability : ")
+                row['availability_365'] = new_availability
+                print("New data")
+                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
+        
+        if found == False :
+            print(f"There is no ID such \"{search}\"\n")
+
+def update_gpt(search):
+    global file_path
+    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as read_file:
+        rows = list(csv.DictReader(read_file))
+        found = False
+
+    for row in rows:
+        if search == row['id']:
+            found = True
+            new_availability = input("Enter new availability : ")
+            row['availability_365'] = new_availability
+
+    if found:
+        with open(file_path, "w", newline='', encoding="cp437", errors='ignore') as write_file:
+            fieldnames = rows[0].keys()
+            writer = csv.DictWriter(write_file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"Data with ID {search} has been updated.\n")
+    else:
+        print(f"There is no ID such \"{search}\"\n")
+
 file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
 os.system('cls')
 
@@ -212,28 +252,37 @@ while loop :
 
     if search_by == '1' :
         show()
+
     elif search_by == '2' :
         search = input("\nInput ID -> ")
         search_by_id(search)
+
     elif search_by == '3' :
         search = input("\nInput Name -> ")
         search_by_name(search)
+
     elif search_by == '4':
         pass
+
     elif search_by == '5':
         add()
+
     elif search_by == '6':
         search = input("\nInput data ID to be updated -> ")
-        update_availability(search)
+        update_gpt(search)
+
     elif search_by == '7' :
         search = input("\nInput data ID to be deleted -> ")
         delete(search)
+
     elif search_by == '8':
         pass
+
     elif search_by == '9':
         print("\nThe program has been stopped.")
         print('============================================================')
         loop = False
+
     else:
         print("\nYour input is invalid.")
         print('============================================================')
@@ -244,10 +293,12 @@ while loop :
 
         if keep_run == 'yes' :
             run_again += 1
+
         elif keep_run == 'no'  :
             print("\nThe program has been stopped.")
             print('============================================================')
             loop = False
+
         else :
             print("\nYour input is invalid.")
             print('============================================================')
