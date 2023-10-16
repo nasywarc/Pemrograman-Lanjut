@@ -193,25 +193,7 @@ def update_availability(search):
             found = True
             break
 
-def update (search) :
-    global file_path
-    with open(file_path, "r", "w", newline='', encoding="cp437", errors='ignore') as new_york:
-        read_file = csv.DictReader(new_york)
-        write_file = csv.DictWriter(new_york)
-        global found
-
-        for row in read_file :
-            if search == row['id']:
-                found = True
-                new_availability = input("Enter new availability : ")
-                row['availability_365'] = new_availability
-                print("New data")
-                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost Name =  {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = {row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
-        
-        if found == False :
-            print(f"There is no ID such \"{search}\"\n")
-
-def update_gpt(search):
+def update(search):
     global file_path
     with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as read_file:
         rows = list(csv.DictReader(read_file))
@@ -269,7 +251,7 @@ while loop :
 
     elif search_by == '6':
         search = input("\nInput data ID to be updated -> ")
-        update_gpt(search)
+        update(search)
 
     elif search_by == '7' :
         search = input("\nInput data ID to be deleted -> ")
