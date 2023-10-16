@@ -1,6 +1,6 @@
 import os
 import csv
-# import art
+import art
 
 def show () :
     print("show")
@@ -180,19 +180,6 @@ def delete(search):
     else:
         print(f"There is no ID such \"{search}\"\n")
 
-def update_availability(search):
-    global file_path
-    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
-        rows = list(csv.DictReader(new_york))
-    
-    found = False
-    for row in rows:
-        if search == row['id']:
-            new_availability = input(f"Enter the new availability for ID {search}: ")
-            row['availability_365'] = new_availability
-            found = True
-            break
-
 def update(search):
     global file_path
     with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as read_file:
@@ -217,6 +204,7 @@ def update(search):
 
 def help_menu():
     os.system('cls')
+    print(art.logo)
     print("\n======================== Menu Bantuan ======================")
     print("1. Tampilkan data: Menampilkan semua data dalam file CSV.")
     print("2. Cari data berdasarkan ID: Cari data dengan menyediakan ID.")
@@ -231,7 +219,7 @@ def help_menu():
 file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
 os.system('cls')
 
-# print(art.logo)
+print(art.logo)
 found = False
 loop = True
 run_again = 0
@@ -241,7 +229,7 @@ while loop :
     if run_again > 0 :
         os.system('cls')
         print('============================================================')
-        # print(art.logo)
+        print(art.logo)
     print('============================================================')
     search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help\n9. Exit\nInput (1-9) -> ")
 
