@@ -21,6 +21,7 @@ def search_by_id (search) :
         read_file = csv.DictReader(new_york)
         print("\nResult\n------")
         global found
+        found = False
         for row in read_file :
             if search == row['id']:
                 found = True
@@ -36,6 +37,7 @@ def search_by_name (search) :
         read_file = csv.DictReader(new_york)
         print("\nResult\n------")
         global found
+        found = False
         for row in read_file :
             if search.lower() in row['name'].lower():
                 found = True
@@ -51,6 +53,7 @@ def search_by_filter (search) :
     with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
         read_file = csv.DictReader(new_york)
         global found
+        found = False
         filter_neighbour = input("Enter Neighbourhood -> ")
         filter_price = int(input("Enter Max Price -> $"))
         print("\nResult\n------")
@@ -183,6 +186,8 @@ def add () :
 
 def delete(search):
     global file_path
+    global found
+    found = False
     with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
         rows = list(csv.DictReader(new_york))
     for row in rows:
@@ -201,6 +206,8 @@ def delete(search):
 
 def update(search):
     global file_path
+    global found
+    found = False
     with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as read_file:
         rows = list(csv.DictReader(read_file))
         found = False
