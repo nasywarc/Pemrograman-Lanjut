@@ -1,6 +1,6 @@
 import os
 import csv
-import art
+# import art
 
 def show () :
     print("show")
@@ -215,10 +215,23 @@ def update(search):
     else:
         print(f"There is no ID such \"{search}\"\n")
 
+def help_menu():
+    os.system('cls')
+    print("\n======================== Menu Bantuan ======================")
+    print("1. Tampilkan data: Menampilkan semua data dalam file CSV.")
+    print("2. Cari data berdasarkan ID: Cari data dengan menyediakan ID.")
+    print("3. Cari data berdasarkan Nama: Cari data dengan menyediakan nama.")
+    print("4. Tambah data: Tambahkan entri baru ke dalam file CSV.")
+    print("5. Perbarui data: Perbarui ketersediaan untuk entri yang sudah ada.")
+    print("6. Hapus data: Hapus entri dengan menyediakan ID-nya.")
+    print("7. Keluar: Keluar dari program.")
+    print("============================================================")
+
+
 file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
 os.system('cls')
 
-print(art.logo)
+# print(art.logo)
 found = False
 loop = True
 run_again = 0
@@ -228,7 +241,7 @@ while loop :
     if run_again > 0 :
         os.system('cls')
         print('============================================================')
-        print(art.logo)
+        # print(art.logo)
     print('============================================================')
     search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help\n9. Exit\nInput (1-7) -> ")
 
@@ -258,7 +271,7 @@ while loop :
         delete(search)
 
     elif search_by == '8':
-        pass
+        help_menu()
 
     elif search_by == '9':
         print("\nThe program has been stopped.")
