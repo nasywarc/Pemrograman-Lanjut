@@ -180,6 +180,19 @@ def delete(search):
     else:
         print(f"There is no ID such \"{search}\"\n")
 
+def update_availability(search):
+    global file_path
+    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
+        rows = list(csv.DictReader(new_york))
+    
+    found = False
+    for row in rows:
+        if search == row['id']:
+            new_availability = input(f"Enter the new availability for ID {search}: ")
+            row['availability_365'] = new_availability
+            found = True
+            break
+
 file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
 os.system('cls')
 
@@ -195,7 +208,7 @@ while loop :
         print('============================================================')
         print(art.logo)
     print('============================================================')
-    search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Add data\n5. Update data\n6. Delete data\n7. Exit\nInput (1-7) -> ")
+    search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data\n7. Delete data\n8. Help\n9. Exit\nInput (1-7) -> ")
 
     if search_by == '1' :
         show()
@@ -206,11 +219,18 @@ while loop :
         search = input("\nInput Name -> ")
         search_by_name(search)
     elif search_by == '4':
+        pass
+    elif search_by == '5':
         add()
     elif search_by == '6':
+        search = input("\nInput data ID to be updated -> ")
+        update_availability(search)
+    elif search_by == '7' :
         search = input("\nInput data ID to be deleted -> ")
         delete(search)
-    elif search_by == '7' :
+    elif search_by == '8':
+        pass
+    elif search_by == '9':
         print("\nThe program has been stopped.")
         print('============================================================')
         loop = False
@@ -219,7 +239,7 @@ while loop :
         print('============================================================')
         loop = False
 
-    if search_by == '1'  or search_by == '2' or search_by == '3' or search_by == '4' or search_by == '5' or search_by == '6':
+    if search_by == '1'  or search_by == '2' or search_by == '3' or search_by == '4' or search_by == '5' or search_by == '6' or search_by == '7' or search_by == '8':
         keep_run = input("Do you want to continue?\nInput (Yes / No) -> ").lower()
 
         if keep_run == 'yes' :
