@@ -232,7 +232,7 @@ def update(search):
 def help_menu():
     os.system('cls')
     print(art.logo)
-    print("\n======================== Menu Bantuan ======================")
+    print("\n========================= HELP MENU ========================")
     print("1. Tampilkan data: Menampilkan semua data dalam file CSV.")
     print("2. Cari data berdasarkan ID: Cari data dengan menyediakan ID.")
     print("3. Cari data berdasarkan Nama: Cari data dengan menyediakan nama.")
