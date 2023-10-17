@@ -144,7 +144,7 @@ def add () :
                     'calculated_host_listings_count': add_calc_host,
                     'availability_365': add_avail
                     })
-            print("\nThe data has been created.")
+            print("\nThe data has been created.\n")
 
     else:
         with open(file_path, "x", newline='', encoding="cp437", errors='ignore') as new_york:
