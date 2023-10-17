@@ -67,7 +67,7 @@ def search_by_filter (search) :
         if found == False :
             print(f"There is no data that meet's all of the criteria.\n")
 
-def is_duplicate(rows, id_to_check):            # bug
+def is_duplicate(rows, id_to_check):
     for row in rows:
         if id_to_check == row['id']:
             return True
@@ -235,10 +235,8 @@ def help_menu():
     print("\n========================= HELP MENU ========================")
     print("1. Show data : Show every data in CSV file .")
     print("2. Find data by ID : Search data by Housing ID.")
-    # print("3. Find data by Name : Search data by the name of the housing.")
     print('''3. Find data by Name : Search data by the name 
    of the housing.''')
-    # print("4. Find data by Filter : Filter search result based on Neighbourhood Group, Neighbourhood, and Price.")
     print('''4. Find data by Filter : Filter search result based on 
    Neighbourhood Group, Neighbourhood, and Price.''')
     print("5. Add data : Add new entry to the CSV file.")
