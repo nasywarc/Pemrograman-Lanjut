@@ -259,7 +259,7 @@ while loop :
         print('============================================================')
         print(art.logo)
     print('============================================================')
-    search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help\n9. Exit\nInput (1-9) -> ")
+    search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help menu\n9. Exit\nInput (1-9) -> ")
 
     if search_by == '1' :
         show()
