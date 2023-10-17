@@ -236,7 +236,9 @@ def help_menu():
     print("1. Show data : Show every data in CSV file .")
     print("2. Find data by ID : Search data by Housing ID.")
     print("3. Find data by Name : Search data by the name of the housing.")
-    print("4. Find data by Filter : Filter search result based on Neighbourhood Group, Neighbourhood, and Price.")
+    # print("4. Find data by Filter : Filter search result based on Neighbourhood Group, Neighbourhood, and Price.")
+    print('''4. Find data by Filter : Filter search result based on 
+          Neighbourhood Group, Neighbourhood, and Price.''')
     print("5. Add data : Add new entry to the CSV file.")
     print("6. Update data : Update availability of the housing.")
     print("7. Delete data : Delete entry by id.")
