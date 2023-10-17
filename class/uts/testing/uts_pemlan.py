@@ -247,7 +247,7 @@ def help_menu():
 
 
 # file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
-file_path = "csv/new_york_housing.csv"
+file_path = "new_york_housing.csv"
 os.system('cls')
 
 print('============================================================')
