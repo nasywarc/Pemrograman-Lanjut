@@ -58,7 +58,7 @@ def search_by_filter (search) :
         filter_price = int(input("Enter Max Price -> $"))
         print("\nResult\n------")
         for row in read_file :
-            if search.lower() in row['neighbourhood_group'].lower() and filter_neighbour == row['neighbourhood'].lower() and filter_price >= int(row['price']):
+            if search.lower() in row['neighbourhood_group'].lower() and filter_neighbour.lower() == row['neighbourhood'].lower() and filter_price >= int(row['price']) and int(row['availability_365']) > 0:
                 found = True
                 print(f"Data - {i}")
                 print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID = {row['host_id']}\n\tHost Name = {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = ${row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
