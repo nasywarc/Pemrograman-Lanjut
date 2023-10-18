@@ -61,6 +61,7 @@ def search_by_filter (search) :
             filter_price_int = int(filter_price)
         except ValueError :
             print("\nError : Price is not an integer.\n")
+            
         print("\nResult\n------")
         for row in read_file :
             if search.lower() in row['neighbourhood_group'].lower() and filter_neighbour.lower() == row['neighbourhood'].lower() and filter_price_int >= int(row['price']) and int(row['availability_365']) > 0:
