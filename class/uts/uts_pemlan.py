@@ -294,15 +294,24 @@ while loop :
             print("\nWrong directory.\n")
 
     elif search_by == '5':
-        add()
+        try :
+            add()
+        except FileNotFoundError:
+            print("\nWrong directory.\n")
 
     elif search_by == '6':
         search = input("\nInput data ID to be updated -> ")
-        update(search)
+        try :
+            update(search)
+        except FileNotFoundError:
+            print("\nWrong directory.\n")
 
     elif search_by == '7' :
         search = input("\nInput data ID to be deleted -> ")
-        delete(search)
+        try :
+            delete(search)
+        except FileNotFoundError:
+            print("\nWrong directory.\n")
 
     elif search_by == '8':
         help_menu()
