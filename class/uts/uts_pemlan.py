@@ -266,20 +266,32 @@ while loop :
     search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help menu\n9. Exit\nInput (1-9) -> ")
 
     if search_by == '1' :
-        show()
+        try :
+            show()
+        except FileNotFoundError:
+            print("\nWrong directory.\n")
 
     elif search_by == '2' :
         search = input("\nInput ID -> ")
-        search_by_id(search)
+        try :
+            search_by_id(search)
+        except FileNotFoundError:
+            print("\nWrong directory.\n")
 
     elif search_by == '3' :
         search = input("\nInput Name -> ")
-        search_by_name(search)
+        try :
+            search_by_name(search)
+        except FileNotFoundError:
+            print("\nWrong directory.\n")
 
     elif search_by == '4':
         print("\nAll criteria must be filled.")
         search = input("Enter Neighbourhood Group -> ")
-        search_by_filter(search)
+        try :
+            search_by_filter(search)
+        except FileNotFoundError:
+            print("\nWrong directory.\n")
 
     elif search_by == '5':
         add()
