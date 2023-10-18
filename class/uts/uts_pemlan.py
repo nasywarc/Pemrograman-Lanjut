@@ -269,21 +269,21 @@ while loop :
         try :
             show()
         except FileNotFoundError:
-            print("\nWrong directory.\n")
+            print("\nError : Cannot find filepath.\n")
 
     elif search_by == '2' :
         search = input("\nInput ID -> ")
         try :
             search_by_id(search)
         except FileNotFoundError:
-            print("\nWrong directory.\n")
+            print("\nError : Cannot find filepath.\n")
 
     elif search_by == '3' :
         search = input("\nInput Name -> ")
         try :
             search_by_name(search)
         except FileNotFoundError:
-            print("\nWrong directory.\n")
+            print("\nError : Cannot find filepath.\n")
 
     elif search_by == '4':
         print("\nAll criteria must be filled.")
@@ -291,27 +291,27 @@ while loop :
         try :
             search_by_filter(search)
         except FileNotFoundError:
-            print("\nWrong directory.\n")
+            print("\nError : Cannot find filepath.\n")
 
     elif search_by == '5':
         try :
             add()
         except FileNotFoundError:
-            print("Wrong directory.\n")
+            print("Error : Cannot find filepath.\n")
 
     elif search_by == '6':
         search = input("\nInput data ID to be updated -> ")
         try :
             update(search)
         except FileNotFoundError:
-            print("\nWrong directory.\n")
+            print("\nError : Cannot find filepath.\n")
 
     elif search_by == '7' :
         search = input("\nInput data ID to be deleted -> ")
         try :
             delete(search)
         except FileNotFoundError:
-            print("\nWrong directory.\n")
+            print("\nError : Cannot find filepath.\n")
 
     elif search_by == '8':
         help_menu()
