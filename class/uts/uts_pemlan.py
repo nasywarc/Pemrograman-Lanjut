@@ -297,7 +297,7 @@ while loop :
         try :
             add()
         except FileNotFoundError:
-            print("\nWrong directory.\n")
+            print("Wrong directory.\n")
 
     elif search_by == '6':
         search = input("\nInput data ID to be updated -> ")
