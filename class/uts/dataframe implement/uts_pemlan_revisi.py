@@ -3,27 +3,20 @@ import csv
 import art
 import pandas as pd
 
-def show () :
-    global df
+def print_data() :
     print(df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
 
+def show () :
+    global df
+    print_data()
 
 def search_by_id (search) :
-    global file_path
-    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
-        read_file = csv.DictReader(new_york)
-        print("\nResult\n------")
-        global found
-        found = False
-        for row in read_file :
-            if search == row['id']:
-                found = True
-                print("Data")
-                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID = {row['host_id']}\n\tHost Name = {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = ${row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
-                if int(row['availability_365']) == 0 :
-                    print("\t(FULLY BOOKED.)\n")
-        if found == False :
-            print(f"There is no ID such \"{search}\"\n")
+    global df
+    if search == df[df['id']] :
+        found = True
+        print_data()
+    if found == False :
+        print(f"There is no ID such \"{search}\"\n")
 
 def search_by_name (search) :
     i = 1
@@ -253,7 +246,7 @@ os.system('cls')
 
 print('============================================================')
 print(art.logo)
-# print(df[['id','name']].to_string())
+
 found = False
 loop = True
 run_again = 0
@@ -329,7 +322,7 @@ while loop :
         loop = False
 
     if search_by == '1'  or search_by == '2' or search_by == '3' or search_by == '4' or search_by == '5' or search_by == '6' or search_by == '7' or search_by == '8':
-        keep_run = input("Do you want to continue?\nInput (Yes / No) -> ").lower()
+        keep_run = input("\nDo you want to continue?\nInput (Yes / No) -> ").lower()
 
         if keep_run == 'yes' :
             run_again += 1
