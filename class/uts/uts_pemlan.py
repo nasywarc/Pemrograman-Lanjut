@@ -3,7 +3,6 @@ import csv
 import art
 
 def show () :
-    print("show")
     i = 1
     global file_path
     with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
