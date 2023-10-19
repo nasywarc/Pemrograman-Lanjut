@@ -11,8 +11,8 @@ def show () :
     print_data()
 
 def search_by_id (search) :
-    global df
-    if search == df[df['id']] :
+    global df, found
+    if search in df['id'].values :
         found = True
         print_data()
     if found == False :
