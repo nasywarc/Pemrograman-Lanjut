@@ -260,7 +260,7 @@ os.system('cls')
 
 print('============================================================')
 print(art.logo)
-print(df['id'].to_string())
+print(f"{df['id'].to_string()}\t{df['name'].to_string()}")
 found = False
 loop = True
 run_again = 0
