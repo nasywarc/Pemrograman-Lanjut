@@ -1,6 +1,7 @@
 import os
 import csv
 import art
+import pandas as pd
 
 def show () :
     i = 1
@@ -253,6 +254,8 @@ def help_menu():
 
 # file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
 file_path = "new_york_housing.csv"
+df = pd.read_csv('new_york_housing.csv')
+
 os.system('cls')
 
 print('============================================================')
@@ -261,7 +264,7 @@ found = False
 loop = True
 run_again = 0
 
-while loop :
+'''while loop :
 
     if run_again > 0 :
         os.system('cls')
@@ -345,4 +348,4 @@ while loop :
         else :
             print("\nYour input is invalid.")
             print('============================================================')
-            loop = False
+            loop = False'''
