@@ -4,6 +4,7 @@ import art
 import pandas as pd
 
 def print_data() :
+    global df
     print("\nResult\n------")
     print(df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
 
@@ -32,6 +33,7 @@ def search_by_name (search) :
         print(f"There is no Name such \"{search}\"\n")
 
 def search_by_filter (search) :
+    global df
     filter_neighbour = input("Enter Neighbourhood -> ")
     filter_price = input("Enter Max Price -> $")
 
@@ -65,7 +67,7 @@ def add () :
     add_neighb_grp = input("Enter neighbourhood group : ")
     add_neighb = input("Enter neighbourhood : ")
     add_latitude = input("Enter latitude : ")
-    add_longtitude = input("Enter longtitude : ")
+    add_longitude = input("Enter longtitude : ")
     add_room_type = input("Enter room type : ")
     add_price = input("Enter price : ")
     add_min_nights = input("Enter minimum nights : ")
@@ -75,23 +77,24 @@ def add () :
     add_calc_host = input("Enter calculated host listing count : ")
     add_avail = input("Enter availability : ")
 
-    df.loc[len(df.index)] = [add_ID,
-                             add_name,
-                             add_host_ID,
-                             add_host_name,
-                             add_neighb_grp,
-                             add_neighb,
-                             add_latitude,
-                             add_longtitude,
-                             add_room_type,
-                             add_price,
-                             add_min_nights,
-                             add_num_of_reviews,
-                             add_last_review,
-                             add_rev_per_mon,
-                             add_calc_host,
-                             add_avail]
-
+    new_data = {'id': add_ID,
+                'name': add_name,
+                'host_id': add_host_ID,
+                'host_name': add_host_name,
+                'neighbourhood_group': add_neighb_grp,
+                'neighbourhood': add_neighb,
+                'latitude': add_latitude,
+                'longitude': add_longitude,
+                'room_type': add_room_type,
+                'price': add_price,
+                'minimum_nights': add_min_nights,
+                'number_of_reviews': add_num_of_reviews,
+                'last_review': add_last_review,
+                'reviews_per_month': add_rev_per_mon,
+                'calculated_host_listings': add_calc_host,
+                'avaiability_365': add_avail}
+    # df.append(new_data, ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
     print("\nThe data has been created.")
 
 def delete(search):
