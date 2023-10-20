@@ -40,15 +40,19 @@ def search_by_filter (search) :
     try :
         filter_price_int = int(filter_price)
     except ValueError :
-        print("\nError : Price is not an integer.\n")
+        print("\nError : Price is not an integer.")
+    
+    try :
+        result_df = df[(df['neighbourhood_group'].astype(str) == search.capitalize()) & (df['neighbourhood'].astype(str) == filter_neighbour.capitalize()) & (df['price'].astype(int) <= filter_price_int)]
+    
+        print("\nResult\n------")
 
-    result_df = df[(df['neighbourhood_group'].astype(str) == search.capitalize()) & (df['neighbourhood'].astype(str) == filter_neighbour.capitalize()) & (df['price'].astype(int) <= filter_price_int)]
-    print("\nResult\n------")
-
-    if not result_df.empty:
-        print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
-    else:    
-        print(f"There is no data that meet's all of the criteria.\n")
+        if not result_df.empty:
+            print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+        else:    
+            print(f"There is no data that meet's all of the criteria.\n")
+    except UnboundLocalError:
+        print("Cannot access local variable, please input an integer.")
 
 def is_duplicate(rows, id_to_check):
     for row in rows:
