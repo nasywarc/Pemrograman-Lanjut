@@ -71,7 +71,7 @@ def add () :
     add_neighb_grp = input("Enter neighbourhood group : ")
     add_neighb = input("Enter neighbourhood : ")
     add_latitude = input("Enter latitude : ")
-    add_longitude = input("Enter longtitude : ")
+    add_longitude = input("Enter longitude : ")
     add_room_type = input("Enter room type : ")
     add_price = input("Enter price : ")
     add_min_nights = input("Enter minimum nights : ")
@@ -97,29 +97,24 @@ def add () :
                 'reviews_per_month': add_rev_per_mon,
                 'calculated_host_listings': add_calc_host,
                 'avaiability_365': add_avail}
-    # df.append(new_data, ignore_index=True)
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
+    
+    df.to_csv("new_york_housing.csv", index=False)
     print("\nThe data has been created.")
 
-def delete(search):
-    global file_path
-    global found
-    found = False
-    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
-        rows = list(csv.DictReader(new_york))
-    for row in rows:
-        if search == row['id']:
-            rows.remove(row)
-            found = True
-    if found:
-        with open(file_path, "w", newline='', encoding="cp437", errors='ignore') as new_york:
-            fieldnames = rows[0].keys()
-            writer = csv.DictWriter(new_york, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(rows)
-        print(f"Data with ID {search} deleted successfully.\n")
+def delete():
+    global df
+    print("You're going to delete a data by ID.\n")
+    delete_ID = input("Enter ID to delete: ")
+
+    if delete_ID in df['id'].values:
+        df = df[df['id'] != delete_ID]
+        
+        df.to_csv("new_york_housing.csv", index=False)
+
+        print(f"Data with ID {delete_ID} deleted successfully.\n")
     else:
-        print(f"There is no ID such \"{search}\"\n")
+        print(f"There is no ID such \"{delete_ID}\"\n")
 
 def update(search):
     global file_path
@@ -226,9 +221,8 @@ while loop :
             print("\nError : Cannot find filepath.\n")
 
     elif search_by == '7' :
-        search = input("\nInput data ID to be deleted -> ")
         try :
-            delete(search)
+            delete()
         except FileNotFoundError:
             print("\nError : Cannot find filepath.\n")
 
