@@ -36,7 +36,7 @@ def search_by_filter (search) :
         filter_price_int = int(filter_price)
     except ValueError :
         print("\nError : Price is not an integer.\n")
-    result_df = df[(df['neighbourhood_group'].astype(str).lower() == search.lower()) & (df['neighbourhood'].astype(str).lower() == filter_neighbour.lower()) & (df['price'].astype(int) <= filter_price_int)]
+    result_df = df[(df['neighbourhood_group'].astype(str) == search.capitalize()) & (df['neighbourhood'].astype(str) == filter_neighbour.capitalize()) & (df['price'].astype(int) <= filter_price_int)]
     print("\nResult\n------")
     if not result_df.empty:
         print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
