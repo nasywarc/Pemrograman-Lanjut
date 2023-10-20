@@ -116,28 +116,15 @@ def delete():
         print(f"There is no ID such \"{delete_ID}\"\n")
 
 def update(search):
-    global file_path
-    global found
-    found = False
-    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as read_file:
-        rows = list(csv.DictReader(read_file))
-        found = False
+    global df
+    result_df = df[df['id'].astype(str) == search]
 
-    for row in rows:
-        if search == row['id']:
-            found = True
-            new_availability = input("Enter new availability : ")
-            row['availability_365'] = new_availability
-
-    if found:
-        with open(file_path, "w", newline='', encoding="cp437", errors='ignore') as write_file:
-            fieldnames = rows[0].keys()
-            writer = csv.DictWriter(write_file, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(rows)
-        print(f"Data with ID {search} has been updated.\n")
+    if not result_df.empty:
+        print("\nResult\n------")
+        print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
         print(f"There is no ID such \"{search}\"\n")
+
 
 def help_menu():
     os.system('cls')
