@@ -23,35 +23,25 @@ def search_by_id (search) :
 def search_by_name (search) :
     global df
     result_df = df[df['name'].astype(str).str.contains(search, case=False)]
+    print("\nResult\n------")
     if not result_df.empty:
-        print("\nResult\n------")
         print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
         print(f"There is no Name such \"{search}\"\n")
 
 def search_by_filter (search) :
-    i = 1
-    global file_path
-    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
-        read_file = csv.DictReader(new_york)
-        global found
-        found = False
-        filter_neighbour = input("Enter Neighbourhood -> ")
-        filter_price = input("Enter Max Price -> $")
-        try :
-            filter_price_int = int(filter_price)
-        except ValueError :
-            print("\nError : Price is not an integer.\n")
-            
-        print("\nResult\n------")
-        for row in read_file :
-            if search.lower() in row['neighbourhood_group'].lower() and filter_neighbour.lower() == row['neighbourhood'].lower() and filter_price_int >= int(row['price']) and int(row['availability_365']) > 0:
-                found = True
-                print(f"Data - {i}")
-                print(f"\tID = {row['id']}\n\tName = {row['name']}\n\tHost ID = {row['host_id']}\n\tHost Name = {row['host_name']}\n\tNeighbourhood Group = {row['neighbourhood_group']}\n\tNeighbourhood = {row['neighbourhood']}\n\tLatitude = {row['latitude']}\n\tLongtitude = {row['longitude']}\n\tRoom Type = {row['room_type']}\n\tPrice = ${row['price']}\n\tMinimum Nights = {row['minimum_nights']}\n\tNumber of Reviews = {row['number_of_reviews']}\n\tLast Review = {row['last_review']}\n\tReviews per Month = {row['reviews_per_month']}\n\tCalculated Host Listing Count = {row['calculated_host_listings_count']}\n\tAvailability = {row['availability_365']}\n")
-                i += 1
-        if found == False :
-            print(f"There is no data that meet's all of the criteria.\n")
+    filter_neighbour = input("Enter Neighbourhood -> ")
+    filter_price = input("Enter Max Price -> $")
+    try :
+        filter_price_int = int(filter_price)
+    except ValueError :
+        print("\nError : Price is not an integer.\n")
+    result_df = df[(df['neighbourhood_group'].astype(str).lower() == search.lower()) & (df['neighbourhood'].astype(str).lower() == filter_neighbour.lower()) & (df['price'].astype(int) <= filter_price_int)]
+    print("\nResult\n------")
+    if not result_df.empty:
+        print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+    else:    
+        print(f"There is no data that meet's all of the criteria.\n")
 
 def is_duplicate(rows, id_to_check):
     for row in rows:
