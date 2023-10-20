@@ -96,7 +96,7 @@ def add () :
                 'last_review': add_last_review,
                 'reviews_per_month': add_rev_per_mon,
                 'calculated_host_listings': add_calc_host,
-                'avaiability_365': add_avail}
+                'availability_365': add_avail}
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
     
     df.to_csv("new_york_housing.csv", index=False)
@@ -107,9 +107,8 @@ def delete():
     print("You're going to delete a data by ID.\n")
     delete_ID = input("Enter ID to delete: ")
 
-    if delete_ID in df['id'].values:
-        df = df[df['id'] != delete_ID]
-        
+    if delete_ID in df['id'].astype(str).values:
+        df = df[df['id'].astype(str) != delete_ID]
         df.to_csv("new_york_housing.csv", index=False)
 
         print(f"Data with ID {delete_ID} deleted successfully.\n")
