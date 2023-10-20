@@ -22,12 +22,12 @@ def search_by_id (search) :
 
 def search_by_name (search) :
     global df
-    result_df = df[df['name'].astype(str) in search]
+    result_df = df[df['name'].astype(str).str.contains(search, case=False)]
     if not result_df.empty:
         print("\nResult\n------")
         print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
-        print(f"There is no ID such \"{search}\"\n")
+        print(f"There is no Name such \"{search}\"\n")
 
 def search_by_filter (search) :
     i = 1
@@ -238,7 +238,7 @@ df = pd.read_csv('new_york_housing.csv')
 
 os.system('cls')
 
-print('============================================================')
+print('==============================================================================================')
 print(art.logo)
 
 found = False
@@ -249,9 +249,9 @@ while loop :
 
     if run_again > 0 :
         os.system('cls')
-        print('============================================================')
+        print('==============================================================================================')
         print(art.logo)
-    print('============================================================')
+    print('==============================================================================================')
     search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help menu\n9. Exit\nInput (1-9) -> ")
 
     if search_by == '1' :
@@ -307,12 +307,12 @@ while loop :
 
     elif search_by == '9':
         print("\nThe program has been stopped.")
-        print('============================================================')
+        print('==============================================================================================')
         loop = False
 
     else:
         print("\nYour input is invalid.")
-        print('============================================================')
+        print('==============================================================================================')
         loop = False
 
     if search_by == '1'  or search_by == '2' or search_by == '3' or search_by == '4' or search_by == '5' or search_by == '6' or search_by == '7' or search_by == '8':
@@ -323,10 +323,10 @@ while loop :
 
         elif keep_run == 'no'  :
             print("\nThe program has been stopped.")
-            print('============================================================')
+            print('==============================================================================================')
             loop = False
 
         else :
             print("\nYour input is invalid.")
-            print('============================================================')
+            print('==============================================================================================')
             loop = False
