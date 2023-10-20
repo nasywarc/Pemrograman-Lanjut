@@ -117,11 +117,13 @@ def delete():
 
 def update(search):
     global df
-    result_df = df[df['id'].astype(str) == search]
+    if search in df['id'].astype(str).values:
+        new_availability = input("Enter new availability: ")
+        
+        df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability
+        df.to_csv("new_york_housing.csv", index=False)
 
-    if not result_df.empty:
-        print("\nResult\n------")
-        print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+        print(f"Availability for ID {search} updated successfully.\n")
     else:
         print(f"There is no ID such \"{search}\"\n")
 
