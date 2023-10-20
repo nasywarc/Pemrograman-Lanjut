@@ -42,7 +42,7 @@ def search_by_filter (search) :
 
     result_df = df[(df['neighbourhood_group'].astype(str) == search.capitalize()) & (df['neighbourhood'].astype(str) == filter_neighbour.capitalize()) & (df['price'].astype(int) <= filter_price_int)]
     print("\nResult\n------")
-    
+
     if not result_df.empty:
         print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:    
@@ -55,24 +55,10 @@ def is_duplicate(rows, id_to_check):
     return False
 
 def add () :
-    global file_path
+    global df
     print("You're going to add a new data.\n")
-    with open(file_path, "r", newline='', encoding="cp437", errors='ignore') as new_york:
-        read_file = csv.DictReader(new_york)
-        duplicate = False
-        add_ID = input("Enter ID : ")
-        for row in read_file :
-            if add_ID == row['id']:
-                duplicate = True
-        while duplicate :
-            print("ID has been used.\n")
-            add_ID = input("Enter ID : ")
-            for row in read_file :
-                if add_ID == row['id']:
-                    duplicate = True
-                else :
-                    duplicate = False
-            
+
+    add_ID = input("Enter ID : ")        
     add_name = input("Enter name : ")
     add_host_name = input("Enter host name : ")
     add_host_ID = input("Enter host ID : ")
@@ -89,82 +75,24 @@ def add () :
     add_calc_host = input("Enter calculated host listing count : ")
     add_avail = input("Enter availability : ")
 
-    if os.path.exists(file_path):
-        with open(file_path, "a", newline='', encoding="cp437", errors='ignore') as new_york:
-            field_names = ['id',
-                           'name',
-                           'host_id',
-                           'host_name',
-                           'neighbourhood_group',
-                           'neighbourhood','latitude',
-                           'longitude',
-                           'room_type',
-                           'price',
-                           'minimum_nights',
-                           'number_of_reviews',
-                           'last_review',
-                           'reviews_per_month',
-                           'calculated_host_listings_count',
-                           'availability_365']
-            writer = csv.DictWriter(new_york, fieldnames=field_names)
-            writer.writerow({
-                    'id' : add_ID,
-                    'name': add_name,
-                    'host_id': add_host_ID,
-                    'host_name': add_host_name,
-                    'neighbourhood_group': add_neighb_grp,
-                    'neighbourhood': add_neighb,
-                    'latitude': add_latitude,
-                    'longitude': add_longtitude,
-                    'room_type': add_room_type,
-                    'price': add_price,
-                    'minimum_nights': add_min_nights,
-                    'number_of_reviews': add_num_of_reviews,
-                    'last_review': add_last_review,
-                    'reviews_per_month': add_rev_per_mon,
-                    'calculated_host_listings_count': add_calc_host,
-                    'availability_365': add_avail
-                    })
-            print("\nThe data has been created.\n")
+    df.loc[len(df.index)] = [add_ID,
+                             add_name,
+                             add_host_ID,
+                             add_host_name,
+                             add_neighb_grp,
+                             add_neighb,
+                             add_latitude,
+                             add_longtitude,
+                             add_room_type,
+                             add_price,
+                             add_min_nights,
+                             add_num_of_reviews,
+                             add_last_review,
+                             add_rev_per_mon,
+                             add_calc_host,
+                             add_avail]
 
-    else:
-        with open(file_path, "x", newline='', encoding="cp437", errors='ignore') as new_york:
-            field_names = ['id',
-                           'name',
-                           'host_id',
-                           'host_name',
-                           'neighbourhood_group',
-                           'neighbourhood','latitude',
-                           'longitude',
-                           'room_type',
-                           'price',
-                           'minimum_nights',
-                           'number_of_reviews',
-                           'last_review',
-                           'reviews_per_month',
-                           'calculated_host_listings_count',
-                           'availability_365']
-            writer = csv.DictWriter(new_york, fieldnames=field_names)
-            writer.writeheader()
-            writer.writerow({
-                    'id' : add_ID,
-                    'name': add_name,
-                    'host_id': add_host_ID,
-                    'host_name': add_host_name,
-                    'neighbourhood_group': add_neighb_grp,
-                    'neighbourhood': add_neighb,
-                    'latitude': add_latitude,
-                    'longitude': add_longtitude,
-                    'room_type': add_room_type,
-                    'price': add_price,
-                    'minimum_nights': add_min_nights,
-                    'number_of_reviews': add_num_of_reviews,
-                    'last_review': add_last_review,
-                    'reviews_per_month': add_rev_per_mon,
-                    'calculated_host_listings_count': add_calc_host,
-                    'availability_365': add_avail
-                    })
-            print("\nThe data has been created.")
+    print("\nThe data has been created.")
 
 def delete(search):
     global file_path
