@@ -12,10 +12,10 @@ def show () :
 
 def search_by_id (search) :
     global df, found
-    if search in df['id'].values :
-        found = True
-        print_data()
-    if found == False :
+    result_df = df[df['id'].astype(str) == search]  # Cari ID yang sesuai
+    if not result_df.empty:
+        print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+    else:
         print(f"There is no ID such \"{search}\"\n")
 
 def search_by_name (search) :
