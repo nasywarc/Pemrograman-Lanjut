@@ -14,6 +14,7 @@ def show () :
 def search_by_id (search) :
     global df
     result_df = df[df['id'].astype(str) == search]
+
     if not result_df.empty:
         print("\nResult\n------")
         print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
@@ -24,6 +25,7 @@ def search_by_name (search) :
     global df
     result_df = df[df['name'].astype(str).str.contains(search, case=False)]
     print("\nResult\n------")
+
     if not result_df.empty:
         print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
@@ -32,12 +34,15 @@ def search_by_name (search) :
 def search_by_filter (search) :
     filter_neighbour = input("Enter Neighbourhood -> ")
     filter_price = input("Enter Max Price -> $")
+
     try :
         filter_price_int = int(filter_price)
     except ValueError :
         print("\nError : Price is not an integer.\n")
+
     result_df = df[(df['neighbourhood_group'].astype(str) == search.capitalize()) & (df['neighbourhood'].astype(str) == filter_neighbour.capitalize()) & (df['price'].astype(int) <= filter_price_int)]
     print("\nResult\n------")
+    
     if not result_df.empty:
         print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:    
