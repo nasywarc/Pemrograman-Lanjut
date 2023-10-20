@@ -1,5 +1,4 @@
 import os
-import csv
 import art
 import pandas as pd
 
@@ -32,27 +31,23 @@ def search_by_name (search) :
     else:
         print(f"There is no Name such \"{search}\"\n")
 
-def search_by_filter (search) :
+def search_by_filter(search):
     global df
     filter_neighbour = input("Enter Neighbourhood -> ")
-    filter_price = input("Enter Max Price -> $")
+    filter_price = int(input("Enter Max Price -> $"))
 
-    try :
+    try:
         filter_price_int = int(filter_price)
-    except ValueError :
-        print("\nError : Price is not an integer.")
-    
-    try :
-        result_df = df[(df['neighbourhood_group'].astype(str) == search.capitalize()) & (df['neighbourhood'].astype(str) == filter_neighbour.capitalize()) & (df['price'].astype(int) <= filter_price_int)]
-    
+        result_df = df[(df['neighbourhood_group'].str.lower() == search.lower()) & (df['neighbourhood'].str.lower() == filter_neighbour.lower()) & (df['price'].astype(int) <= filter_price_int)]
+
         print("\nResult\n------")
 
         if not result_df.empty:
             print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
-        else:    
-            print(f"There is no data that meet's all of the criteria.\n")
-    except UnboundLocalError:
-        print("Cannot access local variable, please input an integer.")
+        else:
+            print(f"There is no data that meets all of the criteria.\n")
+    except ValueError:
+        print("\nError: Price is not an integer.")
 
 def is_duplicate(rows, id_to_check):
     for row in rows:
