@@ -2,6 +2,9 @@ import os
 import art
 import pandas as pd
 
+def testing () :
+    print(df[['id', 'name']].to_string())
+
 def print_data() :
     global df
     print("\nResult\n------")
@@ -150,8 +153,10 @@ print('=========================================================================
 print(art.logo)
 
 found = False
-loop = True
+loop = False
 run_again = 0
+
+testing()
 
 while loop :
 
