@@ -8,6 +8,7 @@ def print_data (data_by, condition, result, unique) :
         print(result[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
         print(f"\nThere is no {data_by} that {unique}")
+    print(line)
 
 def show () :
     global df
