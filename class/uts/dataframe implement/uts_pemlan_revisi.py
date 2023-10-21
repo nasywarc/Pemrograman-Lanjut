@@ -2,8 +2,10 @@ import os
 import art
 import pandas as pd
 
-def testing () :
-    print(df[['id', 'name']].to_string())
+def testing():
+    min_price = df['price'].astype(int).min()
+    print("Minimum price:", min_price)
+    # print(df[df['price'.min()]])
 
 def print_data() :
     global df
@@ -118,8 +120,11 @@ def update(search):
     if search in df['id'].astype(str).values:
         new_availability = input("Enter new availability: ")
         
-        df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability
-        df.to_csv("new_york_housing.csv", index=False)
+        try :
+            df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability
+            df.to_csv("new_york_housing.csv", index=False)
+        except FutureWarning :
+            print('')
 
         print(f"Availability for ID {search} updated successfully.\n")
     else:
@@ -153,10 +158,10 @@ print('=========================================================================
 print(art.logo)
 
 found = False
-loop = False
+loop = True
 run_again = 0
 
-testing()
+# testing()
 
 while loop :
 
