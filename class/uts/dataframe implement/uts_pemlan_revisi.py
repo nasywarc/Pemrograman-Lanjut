@@ -78,7 +78,6 @@ def add () :
     df.to_csv("new_york_housing.csv", index=False)
     print("\nThe data has been created.")
 
-
 def update(search):
     if search in df['id'].astype(str).values:
         new_availability = input("Enter new availability: ")
@@ -126,7 +125,6 @@ line = '========================================================================
 os.system('cls')
 print(line)
 print(art.logo)
-
 loop = True
 
 while loop :
