@@ -3,11 +3,11 @@ import art
 import pandas as pd
 
 def print_data (data_by, condition, result, unique) :
+    print("\nResult\n------")
     if not condition:
-        print("\nResult\n------")
         print(result[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
-        print(f"There is no {data_by} that {unique}")
+        print(f"\nThere is no {data_by} that {unique}")
 
 def show () :
     global df
@@ -17,13 +17,11 @@ def show () :
 def search_by_id (search) :
     global df
     result_df = df[df['id'].astype(str) == search]
-
     print_data(data_by="ID", condition=result_df.empty, result=result_df, unique=f'like \"{search}\"')
 
 def search_by_name (search) :
     global df
     result_df = df[df['name'].astype(str).str.contains(search, case=False)]
-
     print_data(data_by="name", condition=result_df.empty, result=result_df, unique=f'like \"{search}\"')
 
 def search_by_filter(search):
@@ -40,7 +38,6 @@ def search_by_filter(search):
             print("\nError: Price is not an integer.")
     
     result_df = df[(df['neighbourhood_group'].str.lower() == search.lower()) & (df['neighbourhood'].str.lower() == filter_neighbour.lower()) & (df['price'].astype(int) <= filter_price_int)]
-
     print_data(data_by="data", condition=result_df.empty, result=result_df, unique='meets all of the criteria.')
 
 def add () :
@@ -81,7 +78,6 @@ def add () :
                 'calculated_host_listings': add_calc_host,
                 'availability_365': add_avail}
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
-    
     df.to_csv("new_york_housing.csv", index=False)
     print("\nThe data has been created.")
 
@@ -98,7 +94,7 @@ def update(search):
         except ValueError :
             print("\nError : Please input an integer.")
     else:
-        print(f"There is no ID such \"{search}\"")
+        print(f"There is no ID that like \"{search}\"")
 
 def delete():
     global df
@@ -108,34 +104,35 @@ def delete():
     if delete_ID in df['id'].astype(str).values:
         df = df[df['id'].astype(str) != delete_ID]
         df.to_csv("new_york_housing.csv", index=False)
-
         print(f"Data with ID {delete_ID} deleted successfully.")
     else:
-        print(f"There is no ID such \"{delete_ID}\"")
+        print(f"There is no ID that like \"{delete_ID}\"")
 
 def help_menu():
+    global line
     os.system('cls')
     print(art.logo)
-    print("\n========================= HELP MENU ========================")
+    print("\n======================================== HELP MENU ===========================================")
     print("1. Show data : Show every data in CSV file .")
     print("2. Find data by ID : Search data by Housing ID.")
-    print('''3. Find data by Name : Search data by the name 
-   of the housing.''')
-    print('''4. Find data by Filter : Filter search result based on 
-   Neighbourhood Group, Neighbourhood, and Price.''')
+    print("3. Find data by Name : Search data by the name of the housing.")
+    print('''4. Find data by Filter : Filter search result based on Neighbourhood Group, Neighbourhood, 
+   and Price.''')
     print("5. Add data : Add new entry to the CSV file.")
     print("6. Update data : Update availability of the housing.")
     print("7. Delete data : Delete entry by id.")
     print("9. Exit : Stop the program.")
-    print("============================================================")
+    print(line)
 
 
 file_path = "new_york_housing.csv"
 df = pd.read_csv('new_york_housing.csv')
 
 os.system('cls')
+line = '=============================================================================================='
 
-print('==============================================================================================')
+
+print(line)
 print(art.logo)
 
 found = False
@@ -146,9 +143,9 @@ while loop :
 
     if run_again > 0 :
         os.system('cls')
-        print('==============================================================================================')
+        print(line)
         print(art.logo)
-    print('==============================================================================================')
+    print(line)
     search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help menu\n9. Exit\nInput (1-9) -> ")
 
     if search_by == '1' :
@@ -203,12 +200,12 @@ while loop :
 
     elif search_by == '9':
         print("\nThe program has been stopped.")
-        print('==============================================================================================')
+        print(line)
         loop = False
 
     else:
         print("\nYour input is invalid.")
-        print('==============================================================================================')
+        print(line)
         loop = False
 
     if search_by == '1'  or search_by == '2' or search_by == '3' or search_by == '4' or search_by == '5' or search_by == '6' or search_by == '7' or search_by == '8':
@@ -219,10 +216,10 @@ while loop :
 
         elif keep_run == 'no'  :
             print("\nThe program has been stopped.")
-            print('==============================================================================================')
+            print(line)
             loop = False
 
         else :
             print("\nYour input is invalid.")
-            print('==============================================================================================')
+            print(line)
             loop = False
