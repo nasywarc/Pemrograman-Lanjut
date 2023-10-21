@@ -2,24 +2,29 @@ import os
 import art
 import pandas as pd
 
-def print_data() :
-    global df
-    print("\nResult\n------")
-    print(df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+def print_data (data_by, condition, result, unique) :
+    if not condition:
+        print("\nResult\n------")
+        print(result[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+    else:
+        print(f"There is no {data_by} such \"{unique}\"\n")
 
 def show () :
     global df
-    print_data()
+    print("\nResult\n------")
+    print(df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
 
 def search_by_id (search) :
     global df
     result_df = df[df['id'].astype(str) == search]
 
-    if not result_df.empty:
-        print("\nResult\n------")
-        print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
-    else:
-        print(f"There is no ID such \"{search}\"\n")
+    print_data(data_by="ID", condition=result_df.empty, result=result_df, unique=search)
+
+    # if not result_df.empty:
+    #     print("\nResult\n------")
+    #     print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+    # else:
+    #     print(f"There is no ID such \"{search}\"\n")
 
 def search_by_name (search) :
     global df
@@ -48,12 +53,6 @@ def search_by_filter(search):
             print(f"There is no data that meets all of the criteria.\n")
     except ValueError:
         print("\nError: Price is not an integer.")
-
-def is_duplicate(rows, id_to_check):
-    for row in rows:
-        if id_to_check == row['id']:
-            return True
-    return False
 
 def add () :
     global df
