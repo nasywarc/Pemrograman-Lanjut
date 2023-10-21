@@ -109,13 +109,11 @@ def update(search):
         new_availability = input("Enter new availability: ")
         try :
             new_availability_int = int(new_availability)
+            df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability_int
+            df.to_csv("new_york_housing.csv", index=False)
+            print(f"\nAvailability for ID {search} updated successfully.")
         except ValueError :
             print("Error : Please input an integer.")
-        
-        df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability_int
-        df.to_csv("new_york_housing.csv", index=False)
-
-        print(f"\nAvailability for ID {search} updated successfully.")
     else:
         print(f"There is no ID such \"{search}\"")
 
