@@ -7,7 +7,7 @@ def print_data (data_by, condition, result, unique) :
         print("\nResult\n------")
         print(result[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
-        print(f"There is no {data_by} such \"{unique}\"\n")
+        print(f"There is no {data_by} that {unique}\n")
 
 def show () :
     global df
@@ -18,23 +18,13 @@ def search_by_id (search) :
     global df
     result_df = df[df['id'].astype(str) == search]
 
-    print_data(data_by="ID", condition=result_df.empty, result=result_df, unique=search)
-
-    # if not result_df.empty:
-    #     print("\nResult\n------")
-    #     print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
-    # else:
-    #     print(f"There is no ID such \"{search}\"\n")
+    print_data(data_by="ID", condition=result_df.empty, result=result_df, unique=f'like \"{search}\"')
 
 def search_by_name (search) :
     global df
     result_df = df[df['name'].astype(str).str.contains(search, case=False)]
-    print("\nResult\n------")
 
-    if not result_df.empty:
-        print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
-    else:
-        print(f"There is no Name such \"{search}\"\n")
+    print_data(data_by="name", condition=result_df.empty, result=result_df, unique=f'like \"{search}\"')
 
 def search_by_filter(search):
     global df
@@ -45,12 +35,14 @@ def search_by_filter(search):
         filter_price_int = int(filter_price)
         result_df = df[(df['neighbourhood_group'].str.lower() == search.lower()) & (df['neighbourhood'].str.lower() == filter_neighbour.lower()) & (df['price'].astype(int) <= filter_price_int)]
 
-        print("\nResult\n------")
+        print_data(data_by="ID", condition=result_df.empty, result=result_df, unique='meets all of the criteria.')
 
-        if not result_df.empty:
-            print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
-        else:
-            print(f"There is no data that meets all of the criteria.\n")
+        # print("\nResult\n------")
+
+        # if not result_df.empty:
+        #     print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
+        # else:
+        #     print(f"There is no data that meets all of the criteria.\n")
     except ValueError:
         print("\nError: Price is not an integer.")
 
