@@ -112,13 +112,12 @@ def update(search):
         except ValueError :
             print("Error : Please input an integer.")
         
-        
-            df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability_int
-            df.to_csv("new_york_housing.csv", index=False)
+        df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability_int
+        df.to_csv("new_york_housing.csv", index=False)
 
-        print(f"Availability for ID {search} updated successfully.\n")
+        print(f"\nAvailability for ID {search} updated successfully.")
     else:
-        print(f"There is no ID such \"{search}\"\n")
+        print(f"There is no ID such \"{search}\"")
 
 def delete():
     global df
@@ -129,9 +128,9 @@ def delete():
         df = df[df['id'].astype(str) != delete_ID]
         df.to_csv("new_york_housing.csv", index=False)
 
-        print(f"Data with ID {delete_ID} deleted successfully.\n")
+        print(f"Data with ID {delete_ID} deleted successfully.")
     else:
-        print(f"There is no ID such \"{delete_ID}\"\n")
+        print(f"There is no ID such \"{delete_ID}\"")
 
 def help_menu():
     os.system('cls')
