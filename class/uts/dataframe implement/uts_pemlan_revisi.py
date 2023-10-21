@@ -58,7 +58,8 @@ def add () :
     add_calc_host = input("Enter calculated host listing count : ")
     add_avail = input("Enter availability : ")
 
-    new_data = {'id': add_ID,
+    new_data = {
+                'id': add_ID,
                 'name': add_name,
                 'host_id': add_host_ID,
                 'host_name': add_host_name,
@@ -73,7 +74,8 @@ def add () :
                 'last_review': add_last_review,
                 'reviews_per_month': add_rev_per_mon,
                 'calculated_host_listings': add_calc_host,
-                'availability_365': add_avail}
+                'availability_365': add_avail
+                }
     
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
     df.to_csv("new_york_housing.csv", index=False)
@@ -107,17 +109,18 @@ def delete():
 
 def help_menu():
     os.system('cls')
+    print(line)
     print(art.logo)
-    print("\n======================================== HELP MENU ===========================================")
-    print("1. Show data : Show every data in CSV file .")
-    print("2. Find data by ID : Search data by Housing ID.")
-    print("3. Find data by Name : Search data by the name of the housing.")
-    print('''4. Find data by Filter : Filter search result based on Neighbourhood Group, Neighbourhood, 
+    print("======================================== HELP MENU ===========================================")
+    print("1. Show data\t\t: Show every data in CSV file .")
+    print("2. Find data by ID\t: Search data by Housing ID.")
+    print("3. Find data by Name\t: Search data by the name of the housing.")
+    print('''4. Find data by Filter\t: Filter search result based on Neighbourhood Group, Neighbourhood, 
    and Price.''')
-    print("5. Add data : Add new entry to the CSV file.")
-    print("6. Update data : Update availability of the housing.")
-    print("7. Delete data : Delete entry by id.")
-    print("9. Exit : Stop the program.")
+    print("5. Add data\t\t: Add new entry to the CSV file.")
+    print("6. Update data\t\t: Update availability of the housing.")
+    print("7. Delete data\t\t: Delete entry by id.")
+    print("9. Exit\t\t\t: Stop the program.")
     print(line)
 
 
