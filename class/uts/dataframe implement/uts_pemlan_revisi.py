@@ -38,6 +38,7 @@ def search_by_filter(search):
     print_data(data_by="data", condition=result_df.empty, result=result_df, unique='meets all of the criteria.')
 
 def add () :
+    global df
     print("You're going to add a new data.\n")
 
     add_ID = input("Enter ID : ")        
@@ -79,6 +80,7 @@ def add () :
     print("\nThe data has been created.")
 
 def update(search):
+    global df
     if search in df['id'].astype(str).values:
         new_availability = input("Enter new availability: ")
         try :
@@ -92,6 +94,7 @@ def update(search):
         print(f"There is no ID that like \"{search}\"")
 
 def delete():
+    global df
     print("You're going to delete a data by ID.\n")
     delete_ID = input("Enter ID to delete: ")
 
