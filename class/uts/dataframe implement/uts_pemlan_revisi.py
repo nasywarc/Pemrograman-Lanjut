@@ -107,12 +107,14 @@ def update(search):
     global df
     if search in df['id'].astype(str).values:
         new_availability = input("Enter new availability: ")
-        
         try :
-            df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability
+            new_availability_int = int(new_availability)
+        except ValueError :
+            print("Error : Please input an integer.")
+        
+        
+            df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability_int
             df.to_csv("new_york_housing.csv", index=False)
-        except FutureWarning :
-            print('')
 
         print(f"Availability for ID {search} updated successfully.\n")
     else:
