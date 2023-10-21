@@ -7,7 +7,7 @@ def print_data (data_by, condition, result, unique) :
         print("\nResult\n------")
         print(result[['id', 'name', 'neighbourhood_group', 'price']].to_string())
     else:
-        print(f"There is no {data_by} that {unique}\n")
+        print(f"There is no {data_by} that {unique}")
 
 def show () :
     global df
@@ -28,23 +28,20 @@ def search_by_name (search) :
 
 def search_by_filter(search):
     global df
+    price_check = False
     filter_neighbour = input("Enter Neighbourhood -> ")
-    filter_price = int(input("Enter Max Price -> $"))
 
-    try:
-        filter_price_int = int(filter_price)
-        result_df = df[(df['neighbourhood_group'].str.lower() == search.lower()) & (df['neighbourhood'].str.lower() == filter_neighbour.lower()) & (df['price'].astype(int) <= filter_price_int)]
+    while price_check != True :
+        try:
+            filter_price = input("Enter Max Price -> $")
+            filter_price_int = int(filter_price)
+            price_check = True
+        except ValueError:
+            print("\nError: Price is not an integer.")
+    
+    result_df = df[(df['neighbourhood_group'].str.lower() == search.lower()) & (df['neighbourhood'].str.lower() == filter_neighbour.lower()) & (df['price'].astype(int) <= filter_price_int)]
 
-        print_data(data_by="ID", condition=result_df.empty, result=result_df, unique='meets all of the criteria.')
-
-        # print("\nResult\n------")
-
-        # if not result_df.empty:
-        #     print(result_df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
-        # else:
-        #     print(f"There is no data that meets all of the criteria.\n")
-    except ValueError:
-        print("\nError: Price is not an integer.")
+    print_data(data_by="data", condition=result_df.empty, result=result_df, unique='meets all of the criteria.')
 
 def add () :
     global df
