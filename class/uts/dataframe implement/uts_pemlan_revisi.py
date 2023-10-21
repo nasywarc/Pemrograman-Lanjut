@@ -2,11 +2,6 @@ import os
 import art
 import pandas as pd
 
-def testing():
-    min_price = df['price'].astype(int).min()
-    print("Minimum price:", min_price)
-    # print(df[df['price'.min()]])
-
 def print_data() :
     global df
     print("\nResult\n------")
@@ -111,9 +106,9 @@ def update(search):
             new_availability_int = int(new_availability)
             df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability_int
             df.to_csv("new_york_housing.csv", index=False)
-            print(f"\nAvailability for ID {search} updated successfully.")
+            print(f"\nAvailability for ID \"{search}\" updated successfully.")
         except ValueError :
-            print("Error : Please input an integer.")
+            print("\nError : Please input an integer.")
     else:
         print(f"There is no ID such \"{search}\"")
 
@@ -147,7 +142,6 @@ def help_menu():
     print("============================================================")
 
 
-# file_path = "C:/Users/Nasywa Azizah/data/coding/git remote/Pemrograman-Lanjut/class/uts/testing/csv/new_york_housing.csv"
 file_path = "new_york_housing.csv"
 df = pd.read_csv('new_york_housing.csv')
 
@@ -159,8 +153,6 @@ print(art.logo)
 found = False
 loop = True
 run_again = 0
-
-# testing()
 
 while loop :
 
