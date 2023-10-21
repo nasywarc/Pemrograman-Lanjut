@@ -102,18 +102,6 @@ def add () :
     df.to_csv("new_york_housing.csv", index=False)
     print("\nThe data has been created.")
 
-def delete():
-    global df
-    print("You're going to delete a data by ID.\n")
-    delete_ID = input("Enter ID to delete: ")
-
-    if delete_ID in df['id'].astype(str).values:
-        df = df[df['id'].astype(str) != delete_ID]
-        df.to_csv("new_york_housing.csv", index=False)
-
-        print(f"Data with ID {delete_ID} deleted successfully.\n")
-    else:
-        print(f"There is no ID such \"{delete_ID}\"\n")
 
 def update(search):
     global df
@@ -130,6 +118,18 @@ def update(search):
     else:
         print(f"There is no ID such \"{search}\"\n")
 
+def delete():
+    global df
+    print("You're going to delete a data by ID.\n")
+    delete_ID = input("Enter ID to delete: ")
+
+    if delete_ID in df['id'].astype(str).values:
+        df = df[df['id'].astype(str) != delete_ID]
+        df.to_csv("new_york_housing.csv", index=False)
+
+        print(f"Data with ID {delete_ID} deleted successfully.\n")
+    else:
+        print(f"There is no ID such \"{delete_ID}\"\n")
 
 def help_menu():
     os.system('cls')
