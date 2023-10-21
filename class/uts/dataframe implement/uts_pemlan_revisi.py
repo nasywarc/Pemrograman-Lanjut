@@ -11,22 +11,18 @@ def print_data (data_by, condition, result, unique) :
     print(line)
 
 def show () :
-    global df
     print("\nResult\n------")
     print(df[['id', 'name', 'neighbourhood_group', 'price']].to_string())
 
 def search_by_id (search) :
-    global df
     result_df = df[df['id'].astype(str) == search]
     print_data(data_by="ID", condition=result_df.empty, result=result_df, unique=f'like \"{search}\"')
 
 def search_by_name (search) :
-    global df
     result_df = df[df['name'].astype(str).str.contains(search, case=False)]
     print_data(data_by="name", condition=result_df.empty, result=result_df, unique=f'like \"{search}\"')
 
 def search_by_filter(search):
-    global df
     price_check = False
     filter_neighbour = input("Enter Neighbourhood -> ")
 
@@ -42,7 +38,6 @@ def search_by_filter(search):
     print_data(data_by="data", condition=result_df.empty, result=result_df, unique='meets all of the criteria.')
 
 def add () :
-    global df
     print("You're going to add a new data.\n")
 
     add_ID = input("Enter ID : ")        
@@ -78,13 +73,13 @@ def add () :
                 'reviews_per_month': add_rev_per_mon,
                 'calculated_host_listings': add_calc_host,
                 'availability_365': add_avail}
+    
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
     df.to_csv("new_york_housing.csv", index=False)
     print("\nThe data has been created.")
 
 
 def update(search):
-    global df
     if search in df['id'].astype(str).values:
         new_availability = input("Enter new availability: ")
         try :
@@ -98,7 +93,6 @@ def update(search):
         print(f"There is no ID that like \"{search}\"")
 
 def delete():
-    global df
     print("You're going to delete a data by ID.\n")
     delete_ID = input("Enter ID to delete: ")
 
@@ -110,7 +104,6 @@ def delete():
         print(f"There is no ID that like \"{delete_ID}\"")
 
 def help_menu():
-    global line
     os.system('cls')
     print(art.logo)
     print("\n======================================== HELP MENU ===========================================")
@@ -129,23 +122,18 @@ def help_menu():
 file_path = "new_york_housing.csv"
 df = pd.read_csv('new_york_housing.csv')
 
-os.system('cls')
 line = '=============================================================================================='
-
-
+os.system('cls')
 print(line)
 print(art.logo)
 
-found = False
 loop = True
-run_again = 0
 
 while loop :
 
-    if run_again > 0 :
-        os.system('cls')
-        print(line)
-        print(art.logo)
+    os.system('cls')
+    print(line)
+    print(art.logo)
     print(line)
     search_by = input("1. Show data\n2. Find data by ID\n3. Find data by Name\n4. Find by Filter\n5. Add data\n6. Update data availability\n7. Delete data\n8. Help menu\n9. Exit\nInput (1-9) -> ")
 
@@ -200,8 +188,7 @@ while loop :
         help_menu()
 
     elif search_by == '9':
-        print("\nThe program has been stopped.")
-        print(line)
+        print('\n====================================== EXITING PROGRAM =======================================')
         loop = False
 
     else:
@@ -212,15 +199,13 @@ while loop :
     if search_by == '1'  or search_by == '2' or search_by == '3' or search_by == '4' or search_by == '5' or search_by == '6' or search_by == '7' or search_by == '8':
         keep_run = input("\nDo you want to continue?\nInput (Yes / No) -> ").lower()
 
-        if keep_run == 'yes' :
-            run_again += 1
-
-        elif keep_run == 'no'  :
-            print("\nThe program has been stopped.")
-            print(line)
+        if keep_run == 'no'  :
+            print("\nThe program has stopped.\n")
             loop = False
+
+        elif keep_run == 'yes' :
+            loop = True
 
         else :
             print("\nYour input is invalid.")
-            print(line)
             loop = False
