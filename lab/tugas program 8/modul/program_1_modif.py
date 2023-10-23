@@ -53,20 +53,20 @@ while loop :
     menghapus_orang = input('\nApa Anda ingin menghapus orang? "Ya" atau "Tidak".\nInput -> ').lower()
 
     if menghapus_orang == 'ya':
+        if orang :
+            del orang[-1]
 
-        del orang[len(orang)-1]
+            print('')
 
-        print('')
+            for semua_orang in orang :
+                semua_orang.katakanHalo()
 
-        for semua_orang in orang :
-            semua_orang.katakanHalo()
-
-        if len(orang) == 0 :
-            del orang
-            print('Semua orang sudah terhapus.')
+            if len(orang) == 0 :
+                del orang[:]
+                print('Semua orang sudah terhapus.')
+                loop = False
+        else :
             loop = False
-    else :
-        loop = False
 
     Orang.total_populasi()
 
