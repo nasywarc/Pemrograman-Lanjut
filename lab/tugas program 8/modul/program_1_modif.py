@@ -62,26 +62,10 @@ while loop :
                 semua_orang.katakanHalo()
 
             if len(orang) == 0 :
-                del orang[:]
+                Orang.__del__(orang)
                 print('Semua orang sudah terhapus.')
                 loop = False
         else :
             loop = False
 
     Orang.total_populasi()
-
-# print(f'{Orang.total_populasi()}')
-
-# org = Orang('Budi')
-# org.katakanHalo()
-# Orang.total_populasi()
-
-# org2 = Orang('Andi')
-# org2.katakanHalo()
-# Orang.total_populasi()
-
-# print("Object dihapus")
-# del org
-# del org2
-
-# Orang.total_populasi()
