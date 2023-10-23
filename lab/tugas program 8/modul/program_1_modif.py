@@ -28,7 +28,6 @@ class Orang:
 orang = []
 loop = True
 
-
 while loop:
 
     nama_orang = input('Masukkan nama\t\t: ')
