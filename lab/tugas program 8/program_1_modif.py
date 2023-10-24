@@ -50,6 +50,9 @@ while loop:
 
     if menambah_orang == 'tidak':
         loop = False
+    elif menambah_orang != 'ya':
+        print('Input anda tidak valid.')
+        loop = False
     
     print('')
 
@@ -82,8 +85,11 @@ while loop :
                 Orang.__del__(orang)
                 print('Semua orang sudah terhapus.')
                 loop = False
-    else :
+    elif menghapus_orang == 'tidak' :
         print('')
+        loop = False
+    else :
+        print('\nInput anda tidak valid.')
         loop = False
 
     # menampilkan total populasi yang tersisa
