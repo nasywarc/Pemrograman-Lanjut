@@ -3,10 +3,10 @@ class Orang:
     # variabel class, untuk menghitung jumlah orang
     total = 0
 
-    def __init__(self, nama, umur, jurusan):
+    def __init__(self, nama, fakultas, jurusan):
         #  inisialisasi data, data yang dibuat pada self merupakan variabel object
         self.nama = nama
-        self.umur = umur
+        self.fakultas = fakultas
         self.jurusan = jurusan
 
         # ketika ada orang yang dibuat, tambahkan orang 
@@ -17,7 +17,7 @@ class Orang:
         Orang.total -= 1
 
     def katakanHalo(self):
-        print(f"Halo, nama saya {self.nama} umur {self.umur} dari jurusan {self.jurusan}, apa kabar?")
+        print(f"Halo, nama saya {self.nama} dari Fakultas {self.fakultas}, Jurusan {self.jurusan}. Apa kabar?")
 
     def total_populasi(cls):
         print(f"Total orang, {cls.total}")
@@ -30,10 +30,10 @@ loop = True
 
 while loop:
 
-    nama_orang = input('Masukkan nama\t\t: ')
-    umur_orang = input('Masukkan umur\t\t: ')
-    jurusan_orang = input('Masukkan jurusan\t: ')
-    orang.append(Orang(nama_orang, umur_orang, jurusan_orang))
+    nama_orang = input('Masukkan nama : ')
+    fakultas_orang = input('Masukkan fakultas : ')
+    jurusan_orang = input('Masukkan jurusan : ')
+    orang.append(Orang(nama_orang, fakultas_orang, jurusan_orang))
 
     menambah_orang = input('\nApa Anda ingin menambah orang lagi? "Ya" atau "Tidak".\nInput -> ').lower()
 
@@ -65,7 +65,8 @@ while loop :
                 Orang.__del__(orang)
                 print('Semua orang sudah terhapus.')
                 loop = False
-        else :
-            loop = False
+    else :
+        print('')
+        loop = False
 
     Orang.total_populasi()
