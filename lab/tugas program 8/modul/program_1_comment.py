@@ -1,5 +1,5 @@
 # Nasywa Azizah Zharifah
-# # 225150307111060
+# 225150307111060
 
 class Orang:
 
