@@ -1,3 +1,6 @@
+# Nasywa Azizah Zharifah
+# # 225150307111060
+
 class Orang:
 
     # variabel class, untuk menghitung jumlah orang
