@@ -87,11 +87,10 @@ while program:
         for index in range(len(daftar_tugas)) :
             print(f'Tugas ke-{index+1}')
             daftar_tugas[index].print_tugas()
-            print('')
 
         # menampilkan total tugas
         Tugas.total_tugas()
-        lanjut = input('\tLanjutkan program? "Ya" atau "Tidak".\nInput -> ').lower()
+        lanjut = input('\nLanjutkan program? "Ya" atau "Tidak".\nInput -> ').lower()
         if lanjut != 'ya':
             program = False
 
@@ -128,6 +127,9 @@ while program:
             else :
                 print('\nInput anda tidak valid.')
                 loop = False
+
+    elif pilihan == 4 :
+        pass
 
     elif pilihan == 5:
         program = False
