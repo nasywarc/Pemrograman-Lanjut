@@ -8,9 +8,9 @@ class Tugas:
 
     total = 0
 
-    def __init__(self, nama_matkul, deskripsi, deadline, apakah_selesai):
+    def __init__(self, nama_matkul, materi, deadline, apakah_selesai):
         self.mk = nama_matkul
-        self.deskripsi = deskripsi
+        self.materi = materi
         self.tgl = deadline
         self.status = apakah_selesai
 
@@ -21,7 +21,7 @@ class Tugas:
 
     def print_tugas(self):
         print(f'Mata Kuliah\t: {self.mk}')
-        print(f'Deskripsi\t: {self.deskripsi}')
+        print(f'Materi\t\t: {self.materi}')
         print(f'Batas Akhir\t: {self.tgl}')
         print(f'Status\t\t: {self.status}')
 
@@ -42,30 +42,36 @@ while loop:
     
     # prompt untuk user mengisi data
     # akan dimasukkan ke list orang dalam bentuk Orang
-    matakuliah = input('Masukkan mata kuliah : ')
-    deskripsi_tugas = input('Masukkan deskripsi : ')
-    deadline_tugas = input('Masukkan batas pengumpulan : ')
-    status_tugas = 'belum selesai'
-    daftar_tugas.append(Tugas(matakuliah, deskripsi_tugas, deadline_tugas, status_tugas))
+    matakuliah = input('Masukkan Mata Kuliah : ')
+    materi_tugas = input('Masukkan Deskripsi Tugas : ')
+    deadline_tugas = input('Masukkan Batas Pengumpulan : ')
+    status_tugas = 'Belum Dikerjakan'
+    daftar_tugas.append(Tugas(matakuliah, materi_tugas, deadline_tugas, status_tugas))
     
     # prompt apakah ingin menambahkan lagi
-    menambah_orang = input('\nApa Anda ingin menambah orang lagi? "Ya" atau "Tidak".\nInput -> ').lower()
+    menambah_tugas = input('\nApa Anda ingin daftar tugas lagi? "Ya" atau "Tidak".\nInput -> ').lower()
 
-    if menambah_orang == 'tidak':
+    if menambah_tugas == 'tidak':
         loop = False
-    elif menambah_orang != 'ya':
+    elif menambah_tugas != 'ya':
         print('Input anda tidak valid.')
         loop = False
     
     print('')
 
+os.system('cls')
 print('--------------')
 print('| LIST TUGAS |')
 print('--------------')
 
 # menampilkan semua object untuk mengatakan halo
-for semua_tugas in daftar_tugas :
-    semua_tugas.print_tugas()
+# for semua_tugas in daftar_tugas :
+#     semua_tugas.print_tugas()
+
+for index in range(len(daftar_tugas)) :
+    print(f'Tugas ke-{index+1}')
+    daftar_tugas[index].print_tugas()
+    print('')
 
 # menampilkan total populasi
 Tugas.total_tugas()
