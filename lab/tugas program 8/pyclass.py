@@ -64,29 +64,29 @@ print('--------------')
 print('| LIST TUGAS |')
 print('--------------')
 
-# menampilkan semua object untuk ditampilkan
+# menampilkan semua object tugas untuk ditampilkan
 for index in range(len(daftar_tugas)) :
     print(f'Tugas ke-{index+1}')
     daftar_tugas[index].print_tugas()
     print('')
 
-# menampilkan total populasi
+# menampilkan total tugas
 Tugas.total_tugas()
 
 loop = True
 
 while loop :
-    # prompt apa ingin menghapus orang
+    # prompt apa ingin menghapus tugas
     menghapus_tugas = input('\nApa Anda ingin menghapus tugas? "Ya" atau "Tidak".\nInput -> ').lower()
     
-    # jika iya, akan menghapus orang yang berada di akhir list
+    # jika iya, akan menghapus tugas yang berada di akhir list
     if menghapus_tugas == 'ya':
         if daftar_tugas :
             del daftar_tugas[-1]
 
             print('')
             
-            # menampilkan katakanHalo untuk semua object yang tersisa
+            # menampilkan informasi untuk semua object yang tersisa
             for index in range(len(daftar_tugas)) :
                 print(f'Tugas ke-{index+1}')
                 daftar_tugas[index].print_tugas()
@@ -105,5 +105,5 @@ while loop :
         print('\nInput anda tidak valid.')
         loop = False
 
-    # menampilkan total populasi yang tersisa
+    # menampilkan total tugas yang tersisa
     Tugas.total_tugas()
