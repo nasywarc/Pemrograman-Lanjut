@@ -42,9 +42,9 @@ while loop:
     
     # prompt untuk user mengisi data
     # akan dimasukkan ke list orang dalam bentuk Tugas
-    matakuliah = input('Masukkan Mata Kuliah : ')
-    materi_tugas = input('Masukkan Deskripsi Tugas : ')
-    deadline_tugas = input('Masukkan Batas Pengumpulan : ')
+    matakuliah = input('Masukkan Mata Kuliah\t\t: ')
+    materi_tugas = input('Masukkan Materi Tugas\t\t: ')
+    deadline_tugas = input('Masukkan Batas Pengumpulan\t: ')
     status_tugas = 'Belum Dikerjakan'
     daftar_tugas.append(Tugas(matakuliah, materi_tugas, deadline_tugas, status_tugas))
     
@@ -73,4 +73,37 @@ for index in range(len(daftar_tugas)) :
 # menampilkan total populasi
 Tugas.total_tugas()
 
+loop = True
 
+while loop :
+    # prompt apa ingin menghapus orang
+    menghapus_tugas = input('\nApa Anda ingin menghapus tugas? "Ya" atau "Tidak".\nInput -> ').lower()
+    
+    # jika iya, akan menghapus orang yang berada di akhir list
+    if menghapus_tugas == 'ya':
+        if daftar_tugas :
+            del daftar_tugas[-1]
+
+            print('')
+            
+            # menampilkan katakanHalo untuk semua object yang tersisa
+            for index in range(len(daftar_tugas)) :
+                print(f'Tugas ke-{index+1}')
+                daftar_tugas[index].print_tugas()
+                print('')
+            
+            # jika len(orang) sudah 0, akan menghapus paksa object
+            if len(daftar_tugas) == 0 :
+                Tugas.__del__(daftar_tugas)
+                print('Semua tugas sudah terhapus.')
+                loop = False
+
+    elif menghapus_tugas == 'tidak' :
+        print('')
+        loop = False
+    else :
+        print('\nInput anda tidak valid.')
+        loop = False
+
+    # menampilkan total populasi yang tersisa
+    Tugas.total_tugas()
