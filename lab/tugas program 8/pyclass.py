@@ -8,6 +8,7 @@ class Tugas:
 
     total = 0
 
+
     def __init__(self, nama_matkul, materi, deadline, apakah_selesai):
         self.mk = nama_matkul
         self.materi = materi
@@ -16,8 +17,10 @@ class Tugas:
 
         Tugas.total += 1
 
+
     def __del__(self):
         Tugas.total -= 1
+
 
     def print_tugas(self):
         print(f'Mata Kuliah\t: {self.mk}')
@@ -25,11 +28,14 @@ class Tugas:
         print(f'Batas Akhir\t: {self.tgl}')
         print(f'Status\t\t: {self.status}')
 
+
     def ubah_status(self):
         pass
 
+
     def total_tugas(cls):
         print(f'\nJumlah tugas\t: {cls.total}')
+
 
     total_tugas = classmethod(total_tugas)
 
@@ -37,8 +43,6 @@ daftar_tugas = []
 program = True
 
 while program:
-
-
     os.system('cls')
     print('Selamat datang di program Pyclass. Silakan pilih salah satu menu di bawah :')
     print('1. Menambahkan tugas ke daftar.')
@@ -51,8 +55,8 @@ while program:
 
     if pilihan == 1:
         loop = True
+
         while loop:
-            
             # prompt untuk user mengisi data
             # akan dimasukkan ke list orang dalam bentuk Tugas
             matakuliah = input('Masukkan Mata Kuliah\t\t: ')
@@ -66,10 +70,11 @@ while program:
 
             if menambah_tugas == 'tidak':
                 loop = False
+
             elif menambah_tugas != 'ya':
                 print('Input anda tidak valid.')
                 loop = False
-            
+
             print('')
 
     elif pilihan == 2:
@@ -92,6 +97,7 @@ while program:
 
     elif pilihan == 3:
         loop = True
+
         while loop :
             # prompt apa ingin menghapus tugas
             menghapus_tugas = input('\nApa Anda ingin menghapus tugas? "Ya" atau "Tidak".\nInput -> ').lower()
@@ -118,6 +124,7 @@ while program:
             elif menghapus_tugas == 'tidak' :
                 print('')
                 loop = False
+                
             else :
                 print('\nInput anda tidak valid.')
                 loop = False
