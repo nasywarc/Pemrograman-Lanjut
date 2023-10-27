@@ -127,6 +127,3 @@ while program:
 
     else:
         print('Input Anda tidak valid.')
-
-    # menampilkan total tugas yang tersisa
-    # Tugas.total_tugas()
