@@ -41,7 +41,7 @@ os.system('cls')
 while loop:
     
     # prompt untuk user mengisi data
-    # akan dimasukkan ke list orang dalam bentuk Orang
+    # akan dimasukkan ke list orang dalam bentuk Tugas
     matakuliah = input('Masukkan Mata Kuliah : ')
     materi_tugas = input('Masukkan Deskripsi Tugas : ')
     deadline_tugas = input('Masukkan Batas Pengumpulan : ')
@@ -64,10 +64,7 @@ print('--------------')
 print('| LIST TUGAS |')
 print('--------------')
 
-# menampilkan semua object untuk mengatakan halo
-# for semua_tugas in daftar_tugas :
-#     semua_tugas.print_tugas()
-
+# menampilkan semua object untuk ditampilkan
 for index in range(len(daftar_tugas)) :
     print(f'Tugas ke-{index+1}')
     daftar_tugas[index].print_tugas()
