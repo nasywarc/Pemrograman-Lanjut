@@ -131,10 +131,12 @@ while program:
                     print(f'Tugas ke-{index+1}')
                     daftar_tugas[index].print_tugas()
 
-            # input menghapus object Tugas yang mana
-            hapus = int(input('\nSilakan pilih salah satu yang ingin dihapus.\nInput -> '))            
+            # input ingin menghapus object Tugas yang mana
+            hapus = int(input('\nSilakan pilih salah satu yang ingin dihapus.\nInput -> '))   
+
             if Tugas.cek_status(daftar_tugas[hapus-1]) :
                 del daftar_tugas[hapus-1]
+
             else :
                 os.system('cls')
                 print('---------------')
