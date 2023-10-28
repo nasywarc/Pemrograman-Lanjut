@@ -110,18 +110,27 @@ while program:
         print('---------------')
         print('| HAPUS TUGAS |')
         print('---------------')
-        
-        for index in range(len(daftar_tugas)) :
-                print(f'Tugas ke-{index+1}')
-                daftar_tugas[index].print_tugas()
 
-        # prompt apa ingin menghapus tugas
-        hapus = int(input('\nSilakan pilih salah satu yang ingin dihapus.\nInput -> '))
+        if daftar_tugas :
         
-        # jika iya, akan menghapus tugas yang berada di akhir list
-        del daftar_tugas[hapus-1]
-        # Tugas.__del__(daftar_tugas[hapus-1])
+            for index in range(len(daftar_tugas)) :
+                    print(f'Tugas ke-{index+1}')
+                    daftar_tugas[index].print_tugas()
 
+            # prompt apa ingin menghapus tugas
+            hapus = int(input('\nSilakan pilih salah satu yang ingin dihapus.\nInput -> '))
+            
+            # jika iya, akan menghapus tugas yang berada di akhir list
+            del daftar_tugas[hapus-1]
+            # Tugas.__del__(daftar_tugas[hapus-1])
+
+        else:
+            print('Tidak ada tugas yang dapat dihapus.')
+            lanjut = input('\nLanjutkan program? "Ya" atau "Tidak".\nInput -> ').lower()
+
+            if lanjut != 'ya':
+                print('\nProgram dihentikan.')
+                program = False
 
     elif pilihan == 4 :
         os.system('cls')
