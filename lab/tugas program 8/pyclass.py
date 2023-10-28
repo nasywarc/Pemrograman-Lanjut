@@ -30,12 +30,7 @@ class Tugas:
 
 
     def ubah_status(self):
-        for index in range(len(daftar_tugas)) :
-            print(f'Tugas ke-{index+1}')
-            daftar_tugas[index].print_tugas()
-
-        ubah = input('Silakan pilih salah satu yang ingin diubah.\nInput -> ')
-        self.status[ubah+1] = 'Selesai'
+        self.status = 'Selesai'
 
 
     def total_tugas(cls):
@@ -59,6 +54,11 @@ while program:
     pilihan = int(input('Input -> '))
 
     if pilihan == 1:
+        os.system('cls')
+        print('----------------')
+        print('| TAMBAH TUGAS |')
+        print('----------------')
+
         loop = True
 
         while loop:
@@ -67,7 +67,7 @@ while program:
             matakuliah = input('Masukkan Mata Kuliah\t\t: ')
             materi_tugas = input('Masukkan Materi Tugas\t\t: ')
             deadline_tugas = input('Masukkan Batas Pengumpulan\t: ')
-            status_tugas = 'Belum Dikerjakan'
+            status_tugas = 'Belum Selesai'
             daftar_tugas.append(Tugas(matakuliah, materi_tugas, deadline_tugas, status_tugas))
             
             # prompt apakah ingin menambahkan lagi
@@ -100,6 +100,11 @@ while program:
             program = False
 
     elif pilihan == 3:
+        os.system('cls')
+        print('----------------')
+        print('| HAPUS TUGAS |')
+        print('----------------')
+        
         loop = True
 
         while loop :
@@ -134,9 +139,20 @@ while program:
                 loop = False
 
     elif pilihan == 4 :
-        Tugas.ubah_status()
+        os.system('cls')
+        print('---------------')
+        print('| UBAH STATUS |')
+        print('---------------')
+
+        for index in range(len(daftar_tugas)) :
+            print(f'Tugas ke-{index+1}')
+            daftar_tugas[index].print_tugas()
+
+        ubah = int(input('\nSilakan pilih salah satu yang ingin diubah.\nInput -> '))
+        Tugas.ubah_status(daftar_tugas[ubah-1])
 
     elif pilihan == 5:
+        print('\nProgram dihentikan.')
         program = False
 
     else:
