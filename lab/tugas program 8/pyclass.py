@@ -118,11 +118,8 @@ while program:
                     daftar_tugas[index].print_tugas()
 
             # prompt apa ingin menghapus tugas
-            hapus = int(input('\nSilakan pilih salah satu yang ingin dihapus.\nInput -> '))
-            
-            # jika iya, akan menghapus tugas yang berada di akhir list
+            hapus = int(input('\nSilakan pilih salah satu yang ingin dihapus.\nInput -> '))            
             del daftar_tugas[hapus-1]
-            # Tugas.__del__(daftar_tugas[hapus-1])
 
         else:
             print('Tidak ada tugas yang dapat dihapus.')
