@@ -97,13 +97,14 @@ while program:
         Tugas.total_tugas()
         lanjut = input('\nLanjutkan program? "Ya" atau "Tidak".\nInput -> ').lower()
         if lanjut != 'ya':
+            print('\nProgram dihentikan.')
             program = False
 
     elif pilihan == 3:
         os.system('cls')
-        print('----------------')
+        print('---------------')
         print('| HAPUS TUGAS |')
-        print('----------------')
+        print('---------------')
         
         loop = True
 
