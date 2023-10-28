@@ -30,7 +30,12 @@ class Tugas:
 
 
     def ubah_status(self):
-        pass
+        for index in range(len(daftar_tugas)) :
+            print(f'Tugas ke-{index+1}')
+            daftar_tugas[index].print_tugas()
+
+        ubah = input('Silakan pilih salah satu yang ingin diubah.\nInput -> ')
+        self.status[ubah+1] = 'Selesai'
 
 
     def total_tugas(cls):
@@ -129,7 +134,7 @@ while program:
                 loop = False
 
     elif pilihan == 4 :
-        pass
+        Tugas.ubah_status()
 
     elif pilihan == 5:
         program = False
