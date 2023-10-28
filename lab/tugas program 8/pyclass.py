@@ -94,7 +94,10 @@ while program:
             daftar_tugas[index].print_tugas()
 
         # menampilkan total tugas
-        Tugas.total_tugas()
+        if Tugas.total > 0 :
+            Tugas.total_tugas()
+        else:
+            print('Daftar tugas kosong.')
         lanjut = input('\nLanjutkan program? "Ya" atau "Tidak".\nInput -> ').lower()
         if lanjut != 'ya':
             print('\nProgram dihentikan.')
