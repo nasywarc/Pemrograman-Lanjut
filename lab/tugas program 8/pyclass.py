@@ -23,10 +23,10 @@ class Tugas:
 
 
     def print_tugas(self):
-        print(f'Mata Kuliah\t: {self.mk}')
-        print(f'Materi\t\t: {self.materi}')
-        print(f'Batas Akhir\t: {self.tgl}')
-        print(f'Status\t\t: {self.status}')
+        print(f'\tMata Kuliah\t: {self.mk}')
+        print(f'\tMateri\t\t: {self.materi}')
+        print(f'\tBatas Akhir\t: {self.tgl}')
+        print(f'\tStatus\t\t: {self.status}')
 
 
     def ubah_status(self):
@@ -44,7 +44,7 @@ program = True
 
 while program:
     os.system('cls')
-    print('Selamat datang di program Pyclass. Silakan pilih salah satu menu di bawah :')
+    print('Selamat datang di program Pyclass. Silakan pilih salah satu dari menu di bawah :')
     print('1. Menambahkan tugas ke daftar.')
     print('2. Menampilkan tugas di daftar.')
     print('3. Menghapus tugas dari daftar.')
