@@ -100,7 +100,7 @@ while program:
             print('Daftar tugas kosong.')
 
         lanjut = input('\nLanjutkan program? "Ya" atau "Tidak".\nInput -> ').lower()
-        
+
         if lanjut != 'ya':
             print('\nProgram dihentikan.')
             program = False
@@ -111,38 +111,17 @@ while program:
         print('| HAPUS TUGAS |')
         print('---------------')
         
-        loop = True
+        for index in range(len(daftar_tugas)) :
+                print(f'Tugas ke-{index+1}')
+                daftar_tugas[index].print_tugas()
 
-        while loop :
-            # prompt apa ingin menghapus tugas
-            menghapus_tugas = input('\nApa Anda ingin menghapus tugas? "Ya" atau "Tidak".\nInput -> ').lower()
-            
-            # jika iya, akan menghapus tugas yang berada di akhir list
-            if menghapus_tugas == 'ya':
-                if daftar_tugas :
-                    del daftar_tugas[-1]
+        # prompt apa ingin menghapus tugas
+        hapus = int(input('\nSilakan pilih salah satu yang ingin dihapus.\nInput -> '))
+        
+        # jika iya, akan menghapus tugas yang berada di akhir list
+        del daftar_tugas[hapus-1]
+        # Tugas.__del__(daftar_tugas[hapus-1])
 
-                    print('')
-                    
-                    # menampilkan informasi untuk semua object yang tersisa
-                    for index in range(len(daftar_tugas)) :
-                        print(f'Tugas ke-{index+1}')
-                        daftar_tugas[index].print_tugas()
-                        print('')
-                    
-                    # jika len(orang) sudah 0, akan menghapus paksa object
-                    if len(daftar_tugas) == 0 :
-                        Tugas.__del__(daftar_tugas)
-                        print('Semua tugas sudah terhapus.')
-                        loop = False
-
-            elif menghapus_tugas == 'tidak' :
-                print('')
-                loop = False
-                
-            else :
-                print('\nInput anda tidak valid.')
-                loop = False
 
     elif pilihan == 4 :
         os.system('cls')
