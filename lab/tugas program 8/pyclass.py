@@ -98,7 +98,9 @@ while program:
             Tugas.total_tugas()
         else:
             print('Daftar tugas kosong.')
+
         lanjut = input('\nLanjutkan program? "Ya" atau "Tidak".\nInput -> ').lower()
+        
         if lanjut != 'ya':
             print('\nProgram dihentikan.')
             program = False
