@@ -29,3 +29,7 @@ A = Cat("Win")
 B = Dog("Wan")
 A.sound()
 B.sound()
+
+# BUKAN BAGIAN DARI PROGRAM
+A.info()
+B.info()
