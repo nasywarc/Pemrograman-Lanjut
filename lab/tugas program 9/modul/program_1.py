@@ -1,3 +1,6 @@
+# Nasywa Azizah Zharifah
+# 225150307111060
+
 from abc import ABC, abstractmethod
 
 class Animal(ABC):
