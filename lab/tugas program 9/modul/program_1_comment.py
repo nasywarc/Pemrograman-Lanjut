@@ -1,3 +1,6 @@
+# Nasywa Azizah Zharifah
+# 225150307111060
+
 # mengimport module ABC dan abstractmethod dari library abc
 from abc import ABC, abstractmethod
 

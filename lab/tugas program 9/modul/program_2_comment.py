@@ -1,3 +1,6 @@
+# Nasywa Azizah Zharifah
+# 225150307111060
+
 # penginisialan variable x yang sebelumnya dicomment
 # x = "Hi!"     #commented
 
