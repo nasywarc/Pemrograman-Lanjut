@@ -1,6 +1,8 @@
 # Nasywa Azizah Zharifah
 # 225150307111060
 
+import os
+
 class Calculator:
     def __init__(self, first_number, second_number):
         self.a = first_number
@@ -27,7 +29,9 @@ class Bagi(Calculator):
             return self.a / self.b
         except ZeroDivisionError:
             print('Tidak bisa membagi dengan angka nol.\n')
-    
+
+os.system('cls')
+
 angka_1 = int(input('Masukkan angka pertama : '))
 angka_2 = int(input('Masukkan angka kedua : '))
 
