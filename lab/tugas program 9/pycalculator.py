@@ -23,7 +23,10 @@ class Mul(Calculator):
     
 class Div(Calculator):
     def calculate(self):
-        return self.a / self.b
+        try:
+            return self.a / self.b
+        except ZeroDivisionError:
+            print('Tidak bisa membagi dengan angka nol.\n')
     
 angka_1 = int(input('Masukkan angka pertama : '))
 angka_2 = int(input('Masukkan angka kedua : '))
@@ -34,3 +37,6 @@ mul_result = Mul(angka_1, angka_2)
 div_result = Div(angka_1, angka_2)
 
 print(f'Hasil penjumlahan dari {angka_1} + {angka_2} adalah {sum_result.calculate()}')
+print(f'Hasil pengurangan dari {angka_1} - {angka_2} adalah {sub_result.calculate()}')
+print(f'Hasil perkalian dari {angka_1} * {angka_2} adalah {mul_result.calculate()}')
+print(f'Hasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}')
