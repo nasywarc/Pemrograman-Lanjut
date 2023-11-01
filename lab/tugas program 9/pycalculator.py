@@ -32,6 +32,10 @@ class Bagi(Calculator):
 
 os.system('cls')
 
+print(('Selamat datang di program Pycalculator.'))
+pilihan_user = input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
+                     \n2. Pengurangan\n3. Perkalian\n4. Pembagian\nInput -> ')
+
 angka_1 = int(input('Masukkan angka pertama : '))
 angka_2 = int(input('Masukkan angka kedua : '))
 
