@@ -5,28 +5,28 @@ import os
 
 class Calculator:
     def __init__(self, first_number, second_number):
-        self.a = first_number
-        self.b = second_number
+        self.first = first_number
+        self.second = second_number
 
     def calculate(self):
         pass
 
 class Tambah(Calculator):
     def calculate(self):
-        return self.a + self.b
+        return self.first + self.second
     
 class Kurang(Calculator):
     def calculate(self):
-        return self.a - self.b
+        return self.first - self.second
     
 class Kali(Calculator):
     def calculate(self):
-        return self.a * self.b
+        return self.first * self.second
     
 class Bagi(Calculator):
     def calculate(self):
         try:
-            return self.a / self.b
+            return self.first / self.second
         except ZeroDivisionError:
             print('Tidak bisa membagi dengan angka nol.\n')
 
