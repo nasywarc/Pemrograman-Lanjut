@@ -36,6 +36,7 @@ def re_run():
     if choice == 'tidak':
         program = False
     elif choice != 'ya':
+        program = False
         print('\nInput Anda invalid.')
 
 header = '''==============================================
@@ -64,19 +65,19 @@ while program:
 
         if pilihan_user == 1:
             sum_result = Tambah(angka_1, angka_2)
-            print(f'\nHasil penjumlahan dari {angka_1} + {angka_2} adalah {sum_result.calculate()}')
+            print(f'\nHasil penjumlahan dari {angka_1} + {angka_2} adalah {sum_result.calculate()}.')
             re_run()
         elif pilihan_user == 2:
             sub_result = Kurang(angka_1, angka_2)
-            print(f'\nHasil pengurangan dari {angka_1} - {angka_2} adalah {sub_result.calculate()}')
+            print(f'\nHasil pengurangan dari {angka_1} - {angka_2} adalah {sub_result.calculate()}.')
             re_run()
         elif pilihan_user == 3:
             mul_result = Kali(angka_1, angka_2)
-            print(f'\nHasil perkalian dari {angka_1} * {angka_2} adalah {mul_result.calculate()}')
+            print(f'\nHasil perkalian dari {angka_1} * {angka_2} adalah {mul_result.calculate()}.')
             re_run()
         elif pilihan_user == 4:
             div_result = Bagi(angka_1, angka_2)
-            print(f'\nHasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}')
+            print(f'\nHasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}.')
             re_run()
     elif pilihan_user == 5:
         program = False
