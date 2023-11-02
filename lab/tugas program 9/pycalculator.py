@@ -2,6 +2,7 @@
 # 225150307111060
 
 import os
+import math
 
 class Calculator:
     def __init__(self, first_number, second_number):
