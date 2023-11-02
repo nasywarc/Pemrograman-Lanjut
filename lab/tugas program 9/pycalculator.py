@@ -37,7 +37,7 @@ class Akar(Calculator):
 
 class Pangkat(Calculator):
     def calculate(self):
-        return self.first**2
+        return self.first**self.second
     
 def re_run():
     global program
@@ -99,8 +99,9 @@ while program:
     elif pilihan_user == 6:
         print(list_operasi[pilihan_user-1])
         angka_1 = int(input('Masukkan angka\t: '))
-        root_result = Pangkat(angka_1, None)
-        print(f'\nHasil pangkat dari {angka_1} adalah {root_result.calculate()}.')
+        angka_2 = int(input('Masukkan pangkat: '))
+        root_result = Pangkat(angka_1, angka_2)
+        print(f'\nHasil pangkat {angka_2} dari {angka_1} adalah {root_result.calculate()}.')
         re_run()
     elif pilihan_user == 7:
         program = False
