@@ -50,10 +50,11 @@ while program:
 
     os.system('cls')
     print(header)
-    list_operasi = ['Pertambahan', 'Pengurangan', 'Perkalian', 'Pembagian']
+    list_operasi = ['Pertambahan', 'Pengurangan', 'Perkalian', 'Pembagian', 'Akar']
 
     pilihan_user = int(input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
-                        \n2. Pengurangan\n3. Perkalian\n4. Pembagian\n5. Keluar\nInput -> '))
+                        \n2. Pengurangan\n3. Perkalian\n4. Pembagian\n5. Akar\n6. Pangkat\
+                             \n7. Keluar\nInput -> '))
 
     os.system('cls')
     print(header)
@@ -84,6 +85,7 @@ while program:
         program = False
     else :
         print('\nInput Anda invalid.')
+        program = False
 
 print('\nProgram telah dihentikan.')
 print('==============================================')
