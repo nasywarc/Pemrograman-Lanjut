@@ -28,14 +28,14 @@ class Bagi(Calculator):
         try:
             return self.first / self.second
         except ZeroDivisionError:
-            print('Tidak bisa membagi dengan angka nol.\n')
+            print('Tidak bisa membagi dengan angka nol.')
 
 def re_run():
     global program
-    choice = input('\nLanjutkan program? ("Yes" or "No)\nInput -> ').lower()
-    if choice == 'no':
+    choice = input('\nLanjutkan program? ("Ya" or "Tidak)\nInput -> ').lower()
+    if choice == 'tidak':
         program = False
-    elif choice != 'yes':
+    elif choice != 'ya':
         print('\nInput Anda invalid.')
 
 header = '''==============================================
@@ -57,10 +57,10 @@ while program:
 
     if pilihan_user not in ['1', '2', '3', '4']:
         print('\nInput Anda invalid.')
-        exit()
+        program = False
 
-    angka_1 = int(input('Masukkan angka pertama : '))
-    angka_2 = int(input('Masukkan angka kedua : '))
+    angka_1 = int(input('Masukkan angka pertama\t: '))
+    angka_2 = int(input('Masukkan angka kedua\t: '))
 
     if pilihan_user == '1':
         sum_result = Tambah(angka_1, angka_2)
