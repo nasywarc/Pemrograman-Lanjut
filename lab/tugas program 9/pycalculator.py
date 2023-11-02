@@ -30,11 +30,18 @@ class Bagi(Calculator):
         except ZeroDivisionError:
             print('Tidak bisa membagi dengan angka nol.\n')
 
-os.system('cls')
+header = '''==============================================
+||                PYCALCULATOR              ||
+=============================================='''
 
-print(('Selamat datang di program Pycalculator.'))
+os.system('cls')
+print(header)
+
 pilihan_user = input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
                      \n2. Pengurangan\n3. Perkalian\n4. Pembagian\nInput -> ')
+
+os.system('cls')
+print(header)
 
 if pilihan_user not in ['1', '2', '3', '4']:
     print('\nInput Anda invalid.')
