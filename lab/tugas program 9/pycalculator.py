@@ -31,6 +31,14 @@ class Bagi(Calculator):
         except ZeroDivisionError:
             print('Tidak bisa membagi dengan angka nol.')
 
+class Akar(Calculator):
+    def calculate(self):
+        return math.sqrt(self.first)
+
+class Pangkat(Calculator):
+    def calculate(self):
+        return self.first**2
+    
 def re_run():
     global program
     choice = input('\nLanjutkan program? ("Ya" atau "Tidak)\nInput -> ').lower()
@@ -82,6 +90,10 @@ while program:
             print(f'\nHasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}.')
             re_run()
     elif pilihan_user == 5:
+        program = False
+    elif pilihan_user == 6:
+        program = False
+    elif pilihan_user == 7:
         program = False
     else :
         print('\nInput Anda invalid.')
