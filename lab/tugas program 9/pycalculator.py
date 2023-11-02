@@ -30,39 +30,55 @@ class Bagi(Calculator):
         except ZeroDivisionError:
             print('Tidak bisa membagi dengan angka nol.\n')
 
+def re_run():
+    global program
+    choice = input('\nLanjutkan program? ("Yes" or "No)\nInput -> ').lower()
+    if choice == 'no':
+        program = False
+    elif choice != 'yes':
+        print('\nInput Anda invalid.')
+
 header = '''==============================================
 ||                PYCALCULATOR              ||
 =============================================='''
 
-os.system('cls')
-print(header)
+program = True
 
-pilihan_user = input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
-                     \n2. Pengurangan\n3. Perkalian\n4. Pembagian\nInput -> ')
+while program:
 
-os.system('cls')
-print(header)
+    os.system('cls')
+    print(header)
 
-if pilihan_user not in ['1', '2', '3', '4']:
-    print('\nInput Anda invalid.')
-    exit()
+    pilihan_user = input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
+                        \n2. Pengurangan\n3. Perkalian\n4. Pembagian\nInput -> ')
 
-angka_1 = int(input('\nMasukkan angka pertama : '))
-angka_2 = int(input('Masukkan angka kedua : '))
+    os.system('cls')
+    print(header)
 
-if pilihan_user == '1':
-    sum_result = Tambah(angka_1, angka_2)
-    print(f'\nHasil penjumlahan dari {angka_1} + {angka_2} adalah {sum_result.calculate()}')
-elif pilihan_user == '2':
-    sub_result = Kurang(angka_1, angka_2)
-    print(f'\nHasil pengurangan dari {angka_1} - {angka_2} adalah {sub_result.calculate()}')
-elif pilihan_user == '3':
-    mul_result = Kali(angka_1, angka_2)
-    print(f'\nHasil perkalian dari {angka_1} * {angka_2} adalah {mul_result.calculate()}')
-elif pilihan_user == '4':
-    div_result = Bagi(angka_1, angka_2)
-    print(f'\nHasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}')
-else :
-    print('\nInput Anda invalid.')
+    if pilihan_user not in ['1', '2', '3', '4']:
+        print('\nInput Anda invalid.')
+        exit()
 
+    angka_1 = int(input('Masukkan angka pertama : '))
+    angka_2 = int(input('Masukkan angka kedua : '))
 
+    if pilihan_user == '1':
+        sum_result = Tambah(angka_1, angka_2)
+        print(f'\nHasil penjumlahan dari {angka_1} + {angka_2} adalah {sum_result.calculate()}')
+        re_run()
+    elif pilihan_user == '2':
+        sub_result = Kurang(angka_1, angka_2)
+        print(f'\nHasil pengurangan dari {angka_1} - {angka_2} adalah {sub_result.calculate()}')
+        re_run()
+    elif pilihan_user == '3':
+        mul_result = Kali(angka_1, angka_2)
+        print(f'\nHasil perkalian dari {angka_1} * {angka_2} adalah {mul_result.calculate()}')
+        re_run()
+    elif pilihan_user == '4':
+        div_result = Bagi(angka_1, angka_2)
+        print(f'\nHasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}')
+        re_run()
+    else :
+        print('\nInput Anda invalid.')
+
+print('==============================================')
