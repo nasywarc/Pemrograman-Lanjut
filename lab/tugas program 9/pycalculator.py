@@ -58,7 +58,7 @@ while program:
 
     os.system('cls')
     print(header)
-    list_operasi = ['Pertambahan', 'Pengurangan', 'Perkalian', 'Pembagian', 'Akar']
+    list_operasi = ['Pertambahan', 'Pengurangan', 'Perkalian', 'Pembagian', 'Akar', 'Pangkat']
 
     pilihan_user = int(input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
                         \n2. Pengurangan\n3. Perkalian\n4. Pembagian\n5. Akar\n6. Pangkat\
@@ -89,10 +89,19 @@ while program:
             div_result = Bagi(angka_1, angka_2)
             print(f'\nHasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}.')
             re_run()
+    
     elif pilihan_user == 5:
-        program = False
+        print(list_operasi[pilihan_user-1])
+        angka_1 = int(input('Masukkan angka\t: '))
+        root_result = Akar(angka_1, None)
+        print(f'\nHasil akar dari {angka_1} adalah {root_result.calculate()}.')
+        re_run()
     elif pilihan_user == 6:
-        program = False
+        print(list_operasi[pilihan_user-1])
+        angka_1 = int(input('Masukkan angka\t: '))
+        root_result = Pangkat(angka_1, None)
+        print(f'\nHasil pangkat dari {angka_1} adalah {root_result.calculate()}.')
+        re_run()
     elif pilihan_user == 7:
         program = False
     else :
