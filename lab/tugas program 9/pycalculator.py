@@ -52,7 +52,9 @@ class Akar(Calculator):
     def calculate(self):
         return math.sqrt(self.first)
 
+# membuat subclass Pangkat dari class Calculator
 class Pangkat(Calculator):
+    # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first**self.second
     
