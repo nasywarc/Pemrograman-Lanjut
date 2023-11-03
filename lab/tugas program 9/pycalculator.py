@@ -1,14 +1,19 @@
 # Nasywa Azizah Zharifah
 # 225150307111060
 
+# mengimport module os untuk membersihkan terminal
 import os
+# mengimport module math untuk menghitung akar
 import math
 
+# membuat class bernama Calculator
 class Calculator:
+    # method __init__ untuk menginisialisasi object
     def __init__(self, first_number, second_number):
         self.first = first_number
         self.second = second_number
 
+    # method calculate pada class Calculator
     def calculate(self):
         pass
 
