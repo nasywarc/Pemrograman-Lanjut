@@ -57,7 +57,8 @@ class Pangkat(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first**self.second
-    
+
+# membuat fungsi untuk memberi pilihan ke user lanjut atau tidak    
 def re_run():
     global program
     choice = input('\nLanjutkan program? ("Ya" atau "Tidak)\nInput -> ').lower()
@@ -71,50 +72,61 @@ header = '''==============================================
 ||     + -      PYCALCULATOR       * /      ||
 =============================================='''
 
+# membuat variable bool program bernilai True
 program = True
 
+# loop program
 while program:
 
     os.system('cls')
     print(header)
+    # membuat list untuk operasi
     list_operasi = ['Pertambahan', 'Pengurangan', 'Perkalian', 'Pembagian', 'Akar', 'Pangkat']
-
+    
+    # prompt ke user
     pilihan_user = int(input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
                         \n2. Pengurangan\n3. Perkalian\n4. Pembagian\n5. Akar\n6. Pangkat\
                              \n7. Keluar\nInput -> '))
 
     os.system('cls')
     print(header)
-
+    
+    # jika pilihan_user dalam range 1-5
     if pilihan_user in range(1, 5):
 
         print(list_operasi[pilihan_user-1])
         angka_1 = int(input('Masukkan angka pertama\t: '))
         angka_2 = int(input('Masukkan angka kedua\t: '))
-
+        
+        # jika pilihan_user adalah 1 (pertambahan)
         if pilihan_user == 1:
             sum_result = Tambah(angka_1, angka_2)
             print(f'\nHasil penjumlahan dari {angka_1} + {angka_2} adalah {sum_result.calculate()}.')
             re_run()
+        # jika pilihan_user adalah 2 (pengurangan)
         elif pilihan_user == 2:
             sub_result = Kurang(angka_1, angka_2)
             print(f'\nHasil pengurangan dari {angka_1} - {angka_2} adalah {sub_result.calculate()}.')
             re_run()
+        # jika pilihan_user adalah 3 (perkalian)
         elif pilihan_user == 3:
             mul_result = Kali(angka_1, angka_2)
             print(f'\nHasil perkalian dari {angka_1} * {angka_2} adalah {mul_result.calculate()}.')
             re_run()
+        # jika pilihan_user adalah 4 (pembagian)
         elif pilihan_user == 4:
             div_result = Bagi(angka_1, angka_2)
             print(f'\nHasil pembagian dari {angka_1} / {angka_2} adalah {div_result.calculate()}.')
             re_run()
     
+    # jika pilihan_user adalah 5 (pengakaran)
     elif pilihan_user == 5:
         print(list_operasi[pilihan_user-1])
         angka_1 = int(input('Masukkan angka\t: '))
         root_result = Akar(angka_1, None)
         print(f'\nHasil akar dari {angka_1} adalah {root_result.calculate()}.')
         re_run()
+    # jika pilihan_user adalah 6 (pemangkatan)
     elif pilihan_user == 6:
         print(list_operasi[pilihan_user-1])
         angka_1 = int(input('Masukkan angka\t: '))
@@ -122,6 +134,7 @@ while program:
         root_result = Pangkat(angka_1, angka_2)
         print(f'\nHasil pangkat {angka_2} dari {angka_1} adalah {root_result.calculate()}.')
         re_run()
+    # jika pilihan_user adalah 7 (keluar program)
     elif pilihan_user == 7:
         program = False
     else :
