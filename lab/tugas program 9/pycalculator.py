@@ -17,13 +17,15 @@ class Calculator:
     def calculate(self):
         pass
 
-# membuat subclass tambah dari class Calculator
+# membuat subclass Tambah dari class Calculator
 class Tambah(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first + self.second
     
+# membuat subclass Kurang dari class Calculator
 class Kurang(Calculator):
+    # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first - self.second
     
