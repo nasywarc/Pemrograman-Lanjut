@@ -35,10 +35,14 @@ class Kali(Calculator):
     def calculate(self):
         return self.first * self.second
     
+# membuat subclass Bagi dari class Calculator
 class Bagi(Calculator):
+    # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
+        # menggunakan perintah try untuk mengantisipasi error
         try:
             return self.first / self.second
+        # jika terjadi ZeroDivisionError, maka akan menampilkan pesan
         except ZeroDivisionError:
             print('\nTidak bisa membagi dengan angka nol.')
 
