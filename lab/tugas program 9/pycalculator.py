@@ -29,7 +29,9 @@ class Kurang(Calculator):
     def calculate(self):
         return self.first - self.second
     
+# membuat subclass Kali dari class Calculator
 class Kali(Calculator):
+    # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first * self.second
     
