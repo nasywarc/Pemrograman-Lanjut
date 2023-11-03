@@ -46,7 +46,9 @@ class Bagi(Calculator):
         except ZeroDivisionError:
             print('\nTidak bisa membagi dengan angka nol.')
 
+# membuat subclass Akar dari class Calculator
 class Akar(Calculator):
+    # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return math.sqrt(self.first)
 
