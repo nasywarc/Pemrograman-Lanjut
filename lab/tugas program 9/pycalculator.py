@@ -29,7 +29,7 @@ class Bagi(Calculator):
         try:
             return self.first / self.second
         except ZeroDivisionError:
-            print('Tidak bisa membagi dengan angka nol.')
+            print('\nTidak bisa membagi dengan angka nol.')
 
 class Akar(Calculator):
     def calculate(self):
