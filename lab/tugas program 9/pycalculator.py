@@ -17,7 +17,9 @@ class Calculator:
     def calculate(self):
         pass
 
+# membuat subclass tambah dari class Calculator
 class Tambah(Calculator):
+    # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first + self.second
     
