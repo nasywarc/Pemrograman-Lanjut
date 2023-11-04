@@ -76,6 +76,7 @@ def print_operasi():
     print('')
     print(list_operasi[pilihan_user-1])
 
+# membuat string variabel header
 header = '''==============================================
 ||     + -      PYCALCULATOR       * /      ||
 =============================================='''
