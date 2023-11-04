@@ -70,6 +70,7 @@ def re_run():
         program = False
         print('\nInput Anda invalid.')
 
+# membuat fungsi untuk menampilkan pilihan_user
 def print_operasi():
     print('')
     print(list_operasi[pilihan_user-1])
