@@ -94,7 +94,7 @@ while program:
     # jika pilihan_user dalam range 1-5
     if pilihan_user in range(1, 5):
         
-        # menapilkan operasi pilihan_user
+        # menampilkan operasi pilihan_user
         print(list_operasi[pilihan_user-1])
         is_int = False
         while not is_int:
@@ -102,13 +102,15 @@ while program:
                 angka_1 = int(input('Masukkan angka pertama\t: '))
                 is_int = True
             except ValueError:
-                print('Masukkan angka.')
+                print('Hanya bisa menerima input angka.\n')
 
-        try:
-            angka_2 = int(input('Masukkan angka kedua\t: '))
-            is_int = True
-        except ValueError:
-            print('Masukkan angka.')
+        is_int = False
+        while not is_int:
+            try:
+                angka_2 = int(input('Masukkan angka kedua\t: '))
+                is_int = True
+            except ValueError:
+                print('Hanya bisa menerima input angka.\n')
 
         
         # jika pilihan_user adalah 1 (pertambahan)
