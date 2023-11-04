@@ -64,9 +64,15 @@ def re_run():
     choice = input('\nLanjutkan program? ("Ya" atau "Tidak)\nInput -> ').lower()
     if choice == 'tidak':
         program = False
+        print('\nProgram telah dihentikan.')
+        print('==============================================')
     elif choice != 'ya':
         program = False
         print('\nInput Anda invalid.')
+
+def print_operasi():
+    print('')
+    print(list_operasi[pilihan_user-1])
 
 header = '''==============================================
 ||     + -      PYCALCULATOR       * /      ||
@@ -87,15 +93,12 @@ while program:
     pilihan_user = int(input('Silakan pilih operasi yang ingin Anda gunakan.\n1. Pertambahan\
                         \n2. Pengurangan\n3. Perkalian\n4. Pembagian\n5. Akar\n6. Pangkat\
                              \n7. Keluar\nInput -> '))
-
-    os.system('cls')
-    print(header)
     
     # jika pilihan_user dalam range 1-5
     if pilihan_user in range(1, 5):
         
         # menampilkan operasi pilihan_user
-        print(list_operasi[pilihan_user-1])
+        print_operasi()
         is_int = False
         # membuat looping selama input user bukan int
         # menangkap error ValueError
@@ -138,7 +141,7 @@ while program:
     
     # jika pilihan_user adalah 5 (pengakaran)
     elif pilihan_user == 5:
-        print(list_operasi[pilihan_user-1])
+        print_operasi()
         is_int = False
         # membuat looping selama input user bukan int
         # menangkap error ValueError
@@ -153,7 +156,7 @@ while program:
         re_run()
     # jika pilihan_user adalah 6 (pemangkatan)
     elif pilihan_user == 6:
-        print(list_operasi[pilihan_user-1])
+        print_operasi()
         is_int = False
         # membuat looping selama input user bukan int
         # menangkap error ValueError
@@ -177,9 +180,9 @@ while program:
     # jika pilihan_user adalah 7 (keluar program)
     elif pilihan_user == 7:
         program = False
+        print('\nProgram telah dihentikan.')
+        print('==============================================')
     else :
         print('\nInput Anda invalid.')
         program = False
 
-print('\nProgram telah dihentikan.')
-print('==============================================')
