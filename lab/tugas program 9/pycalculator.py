@@ -97,6 +97,8 @@ while program:
         # menampilkan operasi pilihan_user
         print(list_operasi[pilihan_user-1])
         is_int = False
+        # membuat looping selama input user bukan int
+        # menangkap error ValueError
         while not is_int:
             try:
                 angka_1 = int(input('Masukkan angka pertama\t: '))
@@ -138,6 +140,8 @@ while program:
     elif pilihan_user == 5:
         print(list_operasi[pilihan_user-1])
         is_int = False
+        # membuat looping selama input user bukan int
+        # menangkap error ValueError
         while not is_int:
             try:
                 angka_1 = int(input('Masukkan angka\t: '))
@@ -151,6 +155,8 @@ while program:
     elif pilihan_user == 6:
         print(list_operasi[pilihan_user-1])
         is_int = False
+        # membuat looping selama input user bukan int
+        # menangkap error ValueError
         while not is_int:
             try:
                 angka_1 = int(input('Masukkan angka\t: '))
