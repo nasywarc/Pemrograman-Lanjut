@@ -18,25 +18,25 @@ class Calculator:
     def calculate(self):
         pass
 
-# membuat subclass Tambah dari class Calculator
+# membuat subclass Tambah dari class Calculator (inheritence)
 class Tambah(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first + self.second
     
-# membuat subclass Kurang dari class Calculator
+# membuat subclass Kurang dari class Calculator (inheritence)
 class Kurang(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first - self.second
     
-# membuat subclass Kali dari class Calculator
+# membuat subclass Kali dari class Calculator (inheritence)
 class Kali(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return self.first * self.second
     
-# membuat subclass Bagi dari class Calculator
+# membuat subclass Bagi dari class Calculator (inheritence)
 class Bagi(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
@@ -47,13 +47,13 @@ class Bagi(Calculator):
         except ZeroDivisionError:
             print('\nTidak bisa membagi dengan angka nol.')
 
-# membuat subclass Akar dari class Calculator
+# membuat subclass Akar dari class Calculator (inheritence)
 class Akar(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
         return math.sqrt(self.first)
 
-# membuat subclass Pangkat dari class Calculator
+# membuat subclass Pangkat dari class Calculator (inheritence)
 class Pangkat(Calculator):
     # menggunakan polimorfisme untuk meng-overide method calculate
     def calculate(self):
