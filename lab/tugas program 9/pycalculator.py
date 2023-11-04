@@ -186,6 +186,6 @@ while program:
         print('\nProgram telah dihentikan.')
         print('==============================================')
     else :
-        print('\nInput Anda invalid.')
         program = False
+        print('\nInput Anda invalid.')
 
