@@ -137,15 +137,34 @@ while program:
     # jika pilihan_user adalah 5 (pengakaran)
     elif pilihan_user == 5:
         print(list_operasi[pilihan_user-1])
-        angka_1 = int(input('Masukkan angka\t: '))
+        is_int = False
+        while not is_int:
+            try:
+                angka_1 = int(input('Masukkan angka\t: '))
+                is_int = True
+            except ValueError:
+                print('Hanya bisa menerima input angka.\n')
         root_result = Akar(angka_1, None)
         print(f'\nHasil akar dari {angka_1} adalah {root_result.calculate()}.')
         re_run()
     # jika pilihan_user adalah 6 (pemangkatan)
     elif pilihan_user == 6:
         print(list_operasi[pilihan_user-1])
-        angka_1 = int(input('Masukkan angka\t: '))
-        angka_2 = int(input('Masukkan pangkat: '))
+        is_int = False
+        while not is_int:
+            try:
+                angka_1 = int(input('Masukkan angka\t: '))
+                is_int = True
+            except ValueError:
+                print('Hanya bisa menerima input angka.\n')
+        is_int = False
+        while not is_int:
+            try:
+                angka_2 = int(input('Masukkan pangkat: '))
+                is_int = True
+            except ValueError:
+                print('Hanya bisa menerima input angka.\n')
+
         root_result = Pangkat(angka_1, angka_2)
         print(f'\nHasil pangkat {angka_2} dari {angka_1} adalah {root_result.calculate()}.')
         re_run()
