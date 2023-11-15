@@ -1,3 +1,6 @@
+# Nasywa Azizah Zharifah
+# 225150307111060
+
 # mengimport semua dari module tkinter
 from tkinter import *
 
