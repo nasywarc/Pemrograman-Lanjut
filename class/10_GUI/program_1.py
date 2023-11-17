@@ -42,3 +42,5 @@ tk.title('Entry Text')
 L1 = Label(tk, text='User Name')
 L1.pack(side=LEFT)
 E1 = Entry(tk)
+
+tk.mainloop()
