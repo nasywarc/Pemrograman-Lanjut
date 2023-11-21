@@ -136,6 +136,7 @@
 
 
 # # MUSIC PLAYER THREADING
+import os
 import tkinter as tk
 from tkinter import filedialog
 import threading
@@ -146,7 +147,7 @@ def play_music():
     global playing
     try:
         subprocess.Popen(['start', '', file_path], shell=True)
-        status_label.config(text=f"Now Playing: {file_path}")
+        status_label.config(text=f"Now Playing: {file_name}")
         playing = True
     except Exception as e:
         status_label.config(text="Error: " + str(e))
@@ -161,10 +162,12 @@ def stop_music():
         status_label.config(text="Error: " + str(e))
 
 def choose_file():
-    global file_path
+    global file_path, file_name
     file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.mp3;*.wav")])
     if file_path:
-        status_label.config(text="Selected File: " + file_path)
+        file_name = os.path.basename(file_path)
+        status_label.config(text="Selected File: " + file_name)
+
 
 def update_status():
     global playing
@@ -175,6 +178,7 @@ def update_status():
 # Global variables
 playing = False
 file_path = ""
+file_name = None
 
 # GUI setup
 app = tk.Tk()
