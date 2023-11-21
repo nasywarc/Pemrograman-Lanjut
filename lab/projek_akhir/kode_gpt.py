@@ -136,92 +136,188 @@
 
 
 # # MUSIC PLAYER THREADING
-import os
-import tkinter as tk
-from tkinter import filedialog
-import threading
-import time
-import subprocess
-import ctypes as ct
+# import os
+# import tkinter as tk
+# from tkinter import filedialog
+# import threading
+# import time
+# import subprocess
+# import ctypes as ct
 
 
-def dark_title_bar(window):
-    """
-    MORE INFO:
-    https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
-    """
-    window.update()
-    DWMWA_USE_IMMERSIVE_DARK_MODE = 20
-    set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
-    get_parent = ct.windll.user32.GetParent
-    hwnd = get_parent(window.winfo_id())
-    rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
-    value = 2
-    value = ct.c_int(value)
-    set_window_attribute(hwnd, rendering_policy, ct.byref(value),
-                         ct.sizeof(value))
+# def dark_title_bar(window):
+#     """
+#     MORE INFO:
+#     https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
+#     """
+#     window.update()
+#     DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+#     set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
+#     get_parent = ct.windll.user32.GetParent
+#     hwnd = get_parent(window.winfo_id())
+#     rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
+#     value = 2
+#     value = ct.c_int(value)
+#     set_window_attribute(hwnd, rendering_policy, ct.byref(value),
+#                          ct.sizeof(value))
 
-def play_music():
-    global playing
-    try:
-        subprocess.Popen(['start', '', file_path], shell=True)
-        status_label.config(text=f"Now Playing: {file_name}", bg='#2C2A2C', fg='#FFF')
-        playing = True
-    except Exception as e:
-        status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
+# def play_music():
+#     global playing
+#     try:
+#         subprocess.Popen(['start', '', file_path], shell=True)
+#         status_label.config(text=f"Now Playing: {file_name}", bg='#2C2A2C', fg='#FFF')
+#         playing = True
+#     except Exception as e:
+#         status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
 
-def stop_music():
-    global playing
-    try:
-        subprocess.run(["taskkill", "/F", "/IM", 'Microsoft.Media.Player.exe'], shell=True)
-        status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
-        playing = False
-    except Exception as e:
-        status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
+# def stop_music():
+#     global playing
+#     try:
+#         subprocess.run(["taskkill", "/F", "/IM", 'Microsoft.Media.Player.exe'], shell=True)
+#         status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
+#         playing = False
+#     except Exception as e:
+#         status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
 
-def choose_file():
-    global file_path, file_name
-    file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.mp3;*.wav")])
-    if file_path:
-        file_name = os.path.basename(file_path)
-        status_label.config(text="Selected File: " + file_name, bg='#2C2A2C', fg='#FFF')
+# def choose_file():
+#     global file_path, file_name
+#     file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.mp3;*.wav")])
+#     if file_path:
+#         file_name = os.path.basename(file_path)
+#         status_label.config(text="Selected File: " + file_name, bg='#2C2A2C', fg='#FFF')
 
 
-def update_status():
-    global playing
-    while playing:
-        time.sleep(1)
-    status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
+# def update_status():
+#     global playing
+#     while playing:
+#         time.sleep(1)
+#     status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
 
-# Global variables
-playing = False
-file_path = ""
-file_name = None
+# # Global variables
+# playing = False
+# file_path = ""
+# file_name = None
 
-# GUI setup
-app = tk.Tk()
-app.title("Music Player")
-app.minsize(width=400, height=100)
-app.config(background='#2C2A2C')
-dark_title_bar(app)
+# # GUI setup
+# app = tk.Tk()
+# app.title("Music Player")
+# app.minsize(width=400, height=100)
+# app.config(background='#2C2A2C')
+# dark_title_bar(app)
 
-# Widgets
-choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file, bg='#8E6360', fg='#EFF0EF')
-choose_file_button.pack(pady=10)
+# # Widgets
+# choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file, bg='#8E6360', fg='#EFF0EF')
+# choose_file_button.pack(pady=10)
 
-play_button = tk.Button(app, text="Play", command=play_music, bg='#8E6360', fg='#EFF0EF')
-play_button.pack(pady=5)
+# play_button = tk.Button(app, text="Play", command=play_music, bg='#8E6360', fg='#EFF0EF')
+# play_button.pack(pady=5)
 
-stop_button = tk.Button(app, text="Stop", command=stop_music, bg='#8E6360', fg='#EFF0EF')
-stop_button.pack(pady=5)
+# stop_button = tk.Button(app, text="Stop", command=stop_music, bg='#8E6360', fg='#EFF0EF')
+# stop_button.pack(pady=5)
 
-status_label = tk.Label(app, text="Status: No music selected", bg='#2C2A2C', fg='#FFF')
-status_label.pack(pady=10)
+# status_label = tk.Label(app, text="Status: No music selected", bg='#2C2A2C', fg='#FFF')
+# status_label.pack(pady=10)
 
-# Run the application
-app.mainloop()
+# # Run the application
+# app.mainloop()
 
-# Start thread to update status
-status_thread = threading.Thread(target=update_status)
-status_thread.start()
+# # Start thread to update status
+# status_thread = threading.Thread(target=update_status)
+# status_thread.start()
 
+
+# MUSIC PLAYER PYGAME FAILED
+# import os
+# import tkinter as tk
+# from tkinter import filedialog
+# import threading
+# import time
+# import subprocess
+# import ctypes as ct
+# import pygame
+
+# pygame.init()
+
+
+# def dark_title_bar(window):
+#     """
+#     MORE INFO:
+#     https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
+#     """
+#     window.update()
+#     DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+#     set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
+#     get_parent = ct.windll.user32.GetParent
+#     hwnd = get_parent(window.winfo_id())
+#     rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
+#     value = 2
+#     value = ct.c_int(value)
+#     set_window_attribute(hwnd, rendering_policy, ct.byref(value),
+#                          ct.sizeof(value))
+
+# def play_music():
+#     global playing, file_path, file_name
+
+#     try:
+#         pygame.mixer.init()
+#         pygame.mixer.music.load(file_path)
+#         pygame.mixer.music.play()
+#         status_label.config(text=f"Now Playing: {file_name}", bg='#2C2A2C', fg='#FFF')
+#         playing = True
+#     except Exception as e:
+#         status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
+
+# def stop_music():
+#     global playing
+#     try:
+#         subprocess.run(["taskkill", "/F", "/IM", 'Microsoft.Media.Player.exe'], shell=True)
+#         status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
+#         playing = False
+#     except Exception as e:
+#         status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
+
+# def choose_file():
+#     global file_path, file_name
+#     file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.mp3;*.wav")])
+#     if file_path:
+#         file_name = os.path.basename(file_path)
+#         status_label.config(text="Selected File: " + file_name, bg='#2C2A2C', fg='#FFF')
+
+
+# def update_status():
+#     global playing
+#     while playing:
+#         time.sleep(1)
+#     status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
+
+# # Global variables
+# playing = False
+# file_path = ""
+# file_name = None
+
+# # GUI setup
+# app = tk.Tk()
+# app.title("Music Player")
+# app.minsize(width=400, height=100)
+# app.config(background='#2C2A2C')
+# dark_title_bar(app)
+
+# # Widgets
+# choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file, bg='#8E6360', fg='#EFF0EF')
+# choose_file_button.pack(pady=10)
+
+# play_button = tk.Button(app, text="Play", command=play_music, bg='#8E6360', fg='#EFF0EF')
+# play_button.pack(pady=5)
+
+# stop_button = tk.Button(app, text="Stop", command=stop_music, bg='#8E6360', fg='#EFF0EF')
+# stop_button.pack(pady=5)
+
+# status_label = tk.Label(app, text="Status: No music selected", bg='#2C2A2C', fg='#FFF')
+# status_label.pack(pady=10)
+
+# # Run the application
+# app.mainloop()
+
+# # Start thread to update status
+# status_thread = threading.Thread(target=update_status)
+# status_thread.start()
