@@ -46,40 +46,86 @@
 # app.mainloop()
 
 
+# import tkinter as tk
+# from tkinter import messagebox
+
+# def add_task():
+#     task = entry.get()
+#     if task:
+#         listbox.insert(tk.END, task)
+#         entry.delete(0, tk.END)
+#     else:
+#         messagebox.showwarning("Warning", "Please enter a task.")
+
+# def delete_task():
+#     try:
+#         selected_task_index = listbox.curselection()[0]
+#         listbox.delete(selected_task_index)
+#     except IndexError:
+#         messagebox.showwarning("Warning", "Please select a task to delete.")
+
+# # GUI setup
+# app = tk.Tk()
+# app.title("To-Do List App")
+
+# # Widgets
+# entry = tk.Entry(app, width=30)
+# entry.pack(pady=10)
+
+# add_button = tk.Button(app, text="Add Task", command=add_task)
+# add_button.pack(pady=5)
+
+# delete_button = tk.Button(app, text="Delete Task", command=delete_task)
+# delete_button.pack(pady=5)
+
+# listbox = tk.Listbox(app, selectmode=tk.SINGLE, height=10, width=40)
+# listbox.pack(pady=10)
+
+# # Run the application
+# app.mainloop()
+
+
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import filedialog
+import pygame
 
-def add_task():
-    task = entry.get()
-    if task:
-        listbox.insert(tk.END, task)
-        entry.delete(0, tk.END)
-    else:
-        messagebox.showwarning("Warning", "Please enter a task.")
-
-def delete_task():
+def play_music():
     try:
-        selected_task_index = listbox.curselection()[0]
-        listbox.delete(selected_task_index)
-    except IndexError:
-        messagebox.showwarning("Warning", "Please select a task to delete.")
+        pygame.mixer.music.load(file_path)
+        pygame.mixer.music.play()
+        status_label.config(text="Now Playing: " + file_path)
+    except Exception as e:
+        status_label.config(text="Error: " + str(e))
+
+def stop_music():
+    pygame.mixer.music.stop()
+    status_label.config(text="Music Stopped")
+
+def choose_file():
+    global file_path
+    file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.mp3;*.wav")])
+    if file_path:
+        status_label.config(text="Selected File: " + file_path)
+
+# Initialize Pygame
+pygame.mixer.init()
 
 # GUI setup
 app = tk.Tk()
-app.title("To-Do List App")
+app.title("Music Player")
 
 # Widgets
-entry = tk.Entry(app, width=30)
-entry.pack(pady=10)
+choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file)
+choose_file_button.pack(pady=10)
 
-add_button = tk.Button(app, text="Add Task", command=add_task)
-add_button.pack(pady=5)
+play_button = tk.Button(app, text="Play", command=play_music)
+play_button.pack(pady=5)
 
-delete_button = tk.Button(app, text="Delete Task", command=delete_task)
-delete_button.pack(pady=5)
+stop_button = tk.Button(app, text="Stop", command=stop_music)
+stop_button.pack(pady=5)
 
-listbox = tk.Listbox(app, selectmode=tk.SINGLE, height=10, width=40)
-listbox.pack(pady=10)
+status_label = tk.Label(app, text="Status: No music selected")
+status_label.pack(pady=10)
 
 # Run the application
 app.mainloop()
