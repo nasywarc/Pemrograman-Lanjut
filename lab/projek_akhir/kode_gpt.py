@@ -1,3 +1,5 @@
+# # WEATHER APP
+
 # import tkinter as tk
 # from tkinter import messagebox
 # import requests
@@ -46,6 +48,7 @@
 # app.mainloop()
 
 
+# # TO-DO LIST
 # import tkinter as tk
 # from tkinter import messagebox
 
@@ -85,6 +88,7 @@
 # app.mainloop()
 
 
+# # MUSIC PLAYER PYGAME
 # import tkinter as tk
 # from tkinter import filedialog
 # import pygame
@@ -131,6 +135,7 @@
 # app.mainloop()
 
 
+# # MUSIC PLAYER THREADING
 import tkinter as tk
 from tkinter import filedialog
 import threading
@@ -140,8 +145,8 @@ import subprocess
 def play_music():
     global playing
     try:
-        subprocess.Popen(["start", "your_music_file.mp3"], shell=True)
-        status_label.config(text="Now Playing: your_music_file.mp3")
+        subprocess.Popen(['start', '', file_path], shell=True)
+        status_label.config(text=f"Now Playing: {file_path}")
         playing = True
     except Exception as e:
         status_label.config(text="Error: " + str(e))
@@ -149,7 +154,7 @@ def play_music():
 def stop_music():
     global playing
     try:
-        subprocess.run(["taskkill", "/F", "/IM", "your_music_player_process.exe"], shell=True)
+        subprocess.run(["taskkill", "/F", "/IM", 'Microsoft.Media.Player.exe'], shell=True)
         status_label.config(text="Music Stopped")
         playing = False
     except Exception as e:
@@ -169,10 +174,12 @@ def update_status():
 
 # Global variables
 playing = False
+file_path = ""
 
 # GUI setup
 app = tk.Tk()
 app.title("Music Player")
+app.minsize(width=400, height=100)
 
 # Widgets
 choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file)
@@ -193,3 +200,4 @@ app.mainloop()
 # Start thread to update status
 status_thread = threading.Thread(target=update_status)
 status_thread.start()
+
