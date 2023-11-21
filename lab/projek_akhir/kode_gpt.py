@@ -142,12 +142,30 @@ from tkinter import filedialog
 import threading
 import time
 import subprocess
+import ctypes as ct
+
+
+def dark_title_bar(window):
+    """
+    MORE INFO:
+    https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
+    """
+    window.update()
+    DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+    set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
+    get_parent = ct.windll.user32.GetParent
+    hwnd = get_parent(window.winfo_id())
+    rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
+    value = 2
+    value = ct.c_int(value)
+    set_window_attribute(hwnd, rendering_policy, ct.byref(value),
+                         ct.sizeof(value))
 
 def play_music():
     global playing
     try:
         subprocess.Popen(['start', '', file_path], shell=True)
-        status_label.config(text=f"Now Playing: {file_name}")
+        status_label.config(text=f"Now Playing: {file_name}", bg='#EFF0EF')
         playing = True
     except Exception as e:
         status_label.config(text="Error: " + str(e))
@@ -184,18 +202,20 @@ file_name = None
 app = tk.Tk()
 app.title("Music Player")
 app.minsize(width=400, height=100)
+app.config(background='#2C2A2C')
+dark_title_bar(app)
 
 # Widgets
-choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file)
+choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file, bg='#8E6360', fg='#EFF0EF')
 choose_file_button.pack(pady=10)
 
-play_button = tk.Button(app, text="Play", command=play_music)
+play_button = tk.Button(app, text="Play", command=play_music, bg='#8E6360', fg='#EFF0EF')
 play_button.pack(pady=5)
 
-stop_button = tk.Button(app, text="Stop", command=stop_music)
+stop_button = tk.Button(app, text="Stop", command=stop_music, bg='#8E6360', fg='#EFF0EF')
 stop_button.pack(pady=5)
 
-status_label = tk.Label(app, text="Status: No music selected")
+status_label = tk.Label(app, text="Status: No music selected", bg='#8E6360', fg='#EFF0EF')
 status_label.pack(pady=10)
 
 # Run the application
