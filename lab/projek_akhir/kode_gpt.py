@@ -85,21 +85,75 @@
 # app.mainloop()
 
 
+# import tkinter as tk
+# from tkinter import filedialog
+# import pygame
+
+# def play_music():
+#     try:
+#         pygame.mixer.music.load(file_path)
+#         pygame.mixer.music.play()
+#         status_label.config(text="Now Playing: " + file_path)
+#     except Exception as e:
+#         status_label.config(text="Error: " + str(e))
+
+# def stop_music():
+#     pygame.mixer.music.stop()
+#     status_label.config(text="Music Stopped")
+
+# def choose_file():
+#     global file_path
+#     file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.mp3;*.wav")])
+#     if file_path:
+#         status_label.config(text="Selected File: " + file_path)
+
+# # Initialize Pygame
+# pygame.mixer.init()
+
+# # GUI setup
+# app = tk.Tk()
+# app.title("Music Player")
+
+# # Widgets
+# choose_file_button = tk.Button(app, text="Choose Music File", command=choose_file)
+# choose_file_button.pack(pady=10)
+
+# play_button = tk.Button(app, text="Play", command=play_music)
+# play_button.pack(pady=5)
+
+# stop_button = tk.Button(app, text="Stop", command=stop_music)
+# stop_button.pack(pady=5)
+
+# status_label = tk.Label(app, text="Status: No music selected")
+# status_label.pack(pady=10)
+
+# # Run the application
+# app.mainloop()
+
+
 import tkinter as tk
 from tkinter import filedialog
-import pygame
+import threading
+import time
+import subprocess
 
 def play_music():
+    global playing
     try:
-        pygame.mixer.music.load(file_path)
-        pygame.mixer.music.play()
-        status_label.config(text="Now Playing: " + file_path)
+        subprocess.Popen(["start", "your_music_file.mp3"], shell=True)
+        status_label.config(text="Now Playing: your_music_file.mp3")
+        playing = True
     except Exception as e:
         status_label.config(text="Error: " + str(e))
 
 def stop_music():
-    pygame.mixer.music.stop()
-    status_label.config(text="Music Stopped")
+    global playing
+    try:
+        subprocess.run(["taskkill", "/F", "/IM", "your_music_player_process.exe"], shell=True)
+        status_label.config(text="Music Stopped")
+        playing = False
+    except Exception as e:
+        status_label.config(text="Error: " + str(e))
 
 def choose_file():
     global file_path
@@ -107,8 +161,14 @@ def choose_file():
     if file_path:
         status_label.config(text="Selected File: " + file_path)
 
-# Initialize Pygame
-pygame.mixer.init()
+def update_status():
+    global playing
+    while playing:
+        time.sleep(1)
+    status_label.config(text="Music Stopped")
+
+# Global variables
+playing = False
 
 # GUI setup
 app = tk.Tk()
@@ -129,3 +189,7 @@ status_label.pack(pady=10)
 
 # Run the application
 app.mainloop()
+
+# Start thread to update status
+status_thread = threading.Thread(target=update_status)
+status_thread.start()
