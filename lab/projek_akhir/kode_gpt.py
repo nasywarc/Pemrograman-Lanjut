@@ -165,33 +165,33 @@ def play_music():
     global playing
     try:
         subprocess.Popen(['start', '', file_path], shell=True)
-        status_label.config(text=f"Now Playing: {file_name}", bg='#EFF0EF')
+        status_label.config(text=f"Now Playing: {file_name}", bg='#2C2A2C', fg='#FFF')
         playing = True
     except Exception as e:
-        status_label.config(text="Error: " + str(e))
+        status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
 
 def stop_music():
     global playing
     try:
         subprocess.run(["taskkill", "/F", "/IM", 'Microsoft.Media.Player.exe'], shell=True)
-        status_label.config(text="Music Stopped")
+        status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
         playing = False
     except Exception as e:
-        status_label.config(text="Error: " + str(e))
+        status_label.config(text="Error: " + str(e), bg='#2C2A2C', fg='#FFF')
 
 def choose_file():
     global file_path, file_name
     file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.mp3;*.wav")])
     if file_path:
         file_name = os.path.basename(file_path)
-        status_label.config(text="Selected File: " + file_name)
+        status_label.config(text="Selected File: " + file_name, bg='#2C2A2C', fg='#FFF')
 
 
 def update_status():
     global playing
     while playing:
         time.sleep(1)
-    status_label.config(text="Music Stopped")
+    status_label.config(text="Music Stopped", bg='#2C2A2C', fg='#FFF')
 
 # Global variables
 playing = False
@@ -215,7 +215,7 @@ play_button.pack(pady=5)
 stop_button = tk.Button(app, text="Stop", command=stop_music, bg='#8E6360', fg='#EFF0EF')
 stop_button.pack(pady=5)
 
-status_label = tk.Label(app, text="Status: No music selected", bg='#8E6360', fg='#EFF0EF')
+status_label = tk.Label(app, text="Status: No music selected", bg='#2C2A2C', fg='#FFF')
 status_label.pack(pady=10)
 
 # Run the application
