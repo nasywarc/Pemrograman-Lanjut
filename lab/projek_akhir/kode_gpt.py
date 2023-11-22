@@ -323,58 +323,128 @@
 # status_thread.start()
 
 
-# Kalkulator Sederhana
+# Simple Calculator
+
+# import tkinter as tk
+
+# def on_button_click(value):
+#     current_text = entry.get()
+#     entry.delete(0, tk.END)
+#     entry.insert(tk.END, current_text + str(value))
+
+# def clear_entry():
+#     entry.delete(0, tk.END)
+
+# def calculate_result():
+#     try:
+#         expression = entry.get()
+#         result = eval(expression)
+#         entry.delete(0, tk.END)
+#         entry.insert(tk.END, str(result))
+#     except Exception as e:
+#         entry.delete(0, tk.END)
+#         entry.insert(tk.END, "Error")
+
+# # GUI setup
+# app = tk.Tk()
+# app.title("Simple Calculator")
+
+# # Entry widget for input and display
+# entry = tk.Entry(app, width=20, font=('Arial', 14))
+# entry.grid(row=0, column=0, columnspan=4)
+
+# # Buttons
+# buttons = [
+#     '7', '8', '9', '/',
+#     '4', '5', '6', '*',
+#     '1', '2', '3', '-',
+#     '0', '.', '=', '+'
+# ]
+
+# row_val = 1
+# col_val = 0
+
+# for button in buttons:
+#     tk.Button(app, text=button, width=5, height=2, command=lambda b=button: on_button_click(b)).grid(row=row_val, column=col_val)
+#     col_val += 1
+#     if col_val > 3:
+#         col_val = 0
+#         row_val += 1
+
+# # Clear button
+# tk.Button(app, text="C", width=5, height=2, command=clear_entry).grid(row=row_val, column=col_val)
+
+# # Equal button
+# tk.Button(app, text="=", width=5, height=2, command=calculate_result).grid(row=row_val, column=col_val + 1)
+
+# # Run the application
+# app.mainloop()
+
+
+# Money Converter
+
 import tkinter as tk
+from tkinter import ttk
+import requests
 
-def on_button_click(value):
-    current_text = entry.get()
-    entry.delete(0, tk.END)
-    entry.insert(tk.END, current_text + str(value))
+class CurrencyConverter:
+    def __init__(self, app):
+        self.app = app
+        self.app.title("Currency Converter")
 
-def clear_entry():
-    entry.delete(0, tk.END)
+        self.amount_label = ttk.Label(app, text="Enter Amount:")
+        self.amount_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
 
-def calculate_result():
-    try:
-        expression = entry.get()
-        result = eval(expression)
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, str(result))
-    except Exception as e:
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, "Error")
+        self.amount_entry = ttk.Entry(app, width=15, font=('Arial', 14))
+        self.amount_entry.grid(row=0, column=1, padx=10, pady=10)
 
-# GUI setup
-app = tk.Tk()
-app.title("Simple Calculator")
+        self.from_currency_label = ttk.Label(app, text="From Currency:")
+        self.from_currency_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
-# Entry widget for input and display
-entry = tk.Entry(app, width=20, font=('Arial', 14))
-entry.grid(row=0, column=0, columnspan=4)
+        self.from_currency_combobox = ttk.Combobox(app, values=self.get_currency_list(), width=15)
+        self.from_currency_combobox.grid(row=1, column=1, padx=10, pady=10)
+        self.from_currency_combobox.set("USD")
 
-# Buttons
-buttons = [
-    '7', '8', '9', '/',
-    '4', '5', '6', '*',
-    '1', '2', '3', '-',
-    '0', '.', '=', '+'
-]
+        self.to_currency_label = ttk.Label(app, text="To Currency:")
+        self.to_currency_label.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
 
-row_val = 1
-col_val = 0
+        self.to_currency_combobox = ttk.Combobox(app, values=self.get_currency_list(), width=15)
+        self.to_currency_combobox.grid(row=2, column=1, padx=10, pady=10)
+        self.to_currency_combobox.set("EUR")
 
-for button in buttons:
-    tk.Button(app, text=button, width=5, height=2, command=lambda b=button: on_button_click(b)).grid(row=row_val, column=col_val)
-    col_val += 1
-    if col_val > 3:
-        col_val = 0
-        row_val += 1
+        self.convert_button = ttk.Button(app, text="Convert", command=self.convert_currency)
+        self.convert_button.grid(row=3, column=0, columnspan=2, pady=10)
 
-# Clear button
-tk.Button(app, text="C", width=5, height=2, command=clear_entry).grid(row=row_val, column=col_val)
+        self.result_label = ttk.Label(app, text="")
+        self.result_label.grid(row=4, column=0, columnspan=2, pady=10)
 
-# Equal button
-tk.Button(app, text="=", width=5, height=2, command=calculate_result).grid(row=row_val, column=col_val + 1)
+    def get_currency_list(self):
+        # Get the list of currencies from the API
+        url = "https://open.er-api.com/v6/latest"
+        response = requests.get(url)
+        data = response.json()
+        currencies = list(data["rates"].keys())
+        return currencies
 
-# Run the application
-app.mainloop()
+    def convert_currency(self):
+        try:
+            amount = float(self.amount_entry.get())
+            from_currency = self.from_currency_combobox.get()
+            to_currency = self.to_currency_combobox.get()
+
+            # Get the exchange rate from the API
+            url = f"https://open.er-api.com/v6/latest?base={from_currency}"
+            response = requests.get(url)
+            data = response.json()
+            exchange_rate = data["rates"][to_currency]
+
+            # Perform the conversion
+            result = amount * exchange_rate
+            self.result_label.config(text=f"Result: {amount} {from_currency} = {result:.2f} {to_currency}")
+        except Exception as e:
+            self.result_label.config(text="Error: Invalid input or conversion failed")
+
+if __name__ == "__main__":
+    app = tk.Tk()
+    converter = CurrencyConverter(app)
+    app.mainloop()
