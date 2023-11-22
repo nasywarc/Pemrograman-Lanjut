@@ -534,6 +534,9 @@ class SimpleQuizApp:
         self.result_label = ttk.Label(app, text="")
         self.result_label.grid(row=3, column=0, columnspan=2, pady=10)
 
+        self.score_label = ttk.Label(app, text="Score: 0")
+        self.score_label.grid(row=4, column=0, columnspan=2, pady=10)
+
         # Quiz data (change or add questions as needed)
         self.quiz_data = [
             {"question": "What is the capital of France?", "answer": "Paris"},
@@ -543,6 +546,7 @@ class SimpleQuizApp:
 
         # Initialize the quiz
         self.current_question = 0
+        self.score = 0
         self.load_question()
 
     def load_question(self):
@@ -559,6 +563,7 @@ class SimpleQuizApp:
 
         if user_answer == correct_answer:
             self.result_label.config(text="Correct!", foreground="green")
+            self.score += 1
         else:
             self.result_label.config(text="Incorrect. The correct answer is: " + correct_answer, foreground="red")
 
@@ -567,9 +572,12 @@ class SimpleQuizApp:
         if self.current_question < len(self.quiz_data):
             self.load_question()
         else:
-            self.result_label.config(text="Quiz completed!")
+            self.result_label.config(text="Quiz completed! Your final score is: " + str(self.score))
+            self.check_button.config(state=tk.DISABLED)  # Disable the Check Answer button
+            self.score_label.config(text="Final Score: " + str(self.score))
 
 if __name__ == "__main__":
     app = tk.Tk()
     quiz_app = SimpleQuizApp(app)
     app.mainloop()
+
