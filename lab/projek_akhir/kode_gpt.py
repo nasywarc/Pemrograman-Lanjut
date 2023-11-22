@@ -454,52 +454,52 @@
 
 # Health Note App
 
-import tkinter as tk
-from tkinter import ttk
+# import tkinter as tk
+# from tkinter import ttk
 
-class HealthNotesApp:
-    def __init__(self, app):
-        self.app = app
-        self.app.title("Health Notes App")
+# class HealthNotesApp:
+#     def __init__(self, app):
+#         self.app = app
+#         self.app.title("Health Notes App")
 
-        self.weight_label = ttk.Label(app, text="Weight (kg):")
-        self.weight_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
+#         self.weight_label = ttk.Label(app, text="Weight (kg):")
+#         self.weight_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
 
-        self.weight_entry = ttk.Entry(app, width=15, font=('Arial', 14))
-        self.weight_entry.grid(row=0, column=1, padx=10, pady=10)
+#         self.weight_entry = ttk.Entry(app, width=15, font=('Arial', 14))
+#         self.weight_entry.grid(row=0, column=1, padx=10, pady=10)
 
-        self.blood_pressure_label = ttk.Label(app, text="Blood Pressure:")
-        self.blood_pressure_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
+#         self.blood_pressure_label = ttk.Label(app, text="Blood Pressure:")
+#         self.blood_pressure_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
-        self.blood_pressure_entry = ttk.Entry(app, width=15, font=('Arial', 14))
-        self.blood_pressure_entry.grid(row=1, column=1, padx=10, pady=10)
+#         self.blood_pressure_entry = ttk.Entry(app, width=15, font=('Arial', 14))
+#         self.blood_pressure_entry.grid(row=1, column=1, padx=10, pady=10)
 
-        self.height_label = ttk.Label(app, text="Height (cm):")
-        self.height_label.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
+#         self.height_label = ttk.Label(app, text="Height (cm):")
+#         self.height_label.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
 
-        self.height_entry = ttk.Entry(app, width=15, font=('Arial', 14))
-        self.height_entry.grid(row=2, column=1, padx=10, pady=10)
+#         self.height_entry = ttk.Entry(app, width=15, font=('Arial', 14))
+#         self.height_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        self.save_button = ttk.Button(app, text="Save", command=self.save_health_data)
-        self.save_button.grid(row=3, column=0, columnspan=2, pady=10)
+#         self.save_button = ttk.Button(app, text="Save", command=self.save_health_data)
+#         self.save_button.grid(row=3, column=0, columnspan=2, pady=10)
 
-        self.result_label = ttk.Label(app, text="")
-        self.result_label.grid(row=4, column=0, columnspan=2, pady=10)
+#         self.result_label = ttk.Label(app, text="")
+#         self.result_label.grid(row=4, column=0, columnspan=2, pady=10)
 
-    def save_health_data(self):
-        try:
-            weight = float(self.weight_entry.get())
-            blood_pressure = self.blood_pressure_entry.get()
-            height = float(self.height_entry.get())
+#     def save_health_data(self):
+#         try:
+#             weight = float(self.weight_entry.get())
+#             blood_pressure = self.blood_pressure_entry.get()
+#             height = float(self.height_entry.get())
 
-            # Save health data to a file or database as needed
-            # Here, we print the data as an example
-            result_text = f"Weight: {weight} kg\nBlood Pressure: {blood_pressure}\nHeight: {height} cm"
-            self.result_label.config(text=result_text)
-        except Exception as e:
-            self.result_label.config(text="Error: Invalid input")
+#             # Save health data to a file or database as needed
+#             # Here, we print the data as an example
+#             result_text = f"Weight: {weight} kg\nBlood Pressure: {blood_pressure}\nHeight: {height} cm"
+#             self.result_label.config(text=result_text)
+#         except Exception as e:
+#             self.result_label.config(text="Error: Invalid input")
 
-if __name__ == "__main__":
-    app = tk.Tk()
-    health_notes_app = HealthNotesApp(app)
-    app.mainloop()
+# if __name__ == "__main__":
+#     app = tk.Tk()
+#     health_notes_app = HealthNotesApp(app)
+#     app.mainloop()
