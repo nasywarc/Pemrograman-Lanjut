@@ -321,3 +321,60 @@
 # # Start thread to update status
 # status_thread = threading.Thread(target=update_status)
 # status_thread.start()
+
+
+# Kalkulator Sederhana
+import tkinter as tk
+
+def on_button_click(value):
+    current_text = entry.get()
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, current_text + str(value))
+
+def clear_entry():
+    entry.delete(0, tk.END)
+
+def calculate_result():
+    try:
+        expression = entry.get()
+        result = eval(expression)
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, str(result))
+    except Exception as e:
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, "Error")
+
+# GUI setup
+app = tk.Tk()
+app.title("Simple Calculator")
+
+# Entry widget for input and display
+entry = tk.Entry(app, width=20, font=('Arial', 14))
+entry.grid(row=0, column=0, columnspan=4)
+
+# Buttons
+buttons = [
+    '7', '8', '9', '/',
+    '4', '5', '6', '*',
+    '1', '2', '3', '-',
+    '0', '.', '=', '+'
+]
+
+row_val = 1
+col_val = 0
+
+for button in buttons:
+    tk.Button(app, text=button, width=5, height=2, command=lambda b=button: on_button_click(b)).grid(row=row_val, column=col_val)
+    col_val += 1
+    if col_val > 3:
+        col_val = 0
+        row_val += 1
+
+# Clear button
+tk.Button(app, text="C", width=5, height=2, command=clear_entry).grid(row=row_val, column=col_val)
+
+# Equal button
+tk.Button(app, text="=", width=5, height=2, command=calculate_result).grid(row=row_val, column=col_val + 1)
+
+# Run the application
+app.mainloop()
