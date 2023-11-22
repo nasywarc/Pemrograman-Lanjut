@@ -440,7 +440,9 @@ class CurrencyConverter:
 
             # Perform the conversion
             result = amount * exchange_rate
-            self.result_label.config(text=f"Result: {amount} {from_currency} = {result:.2f} {to_currency}")
+            formatted_amount = "{:,.2f}".format(amount)
+            formatted_result = "{:,.2f}".format(result)
+            self.result_label.config(text=f"Result: {formatted_amount} {from_currency} = {formatted_result} {to_currency}")
         except Exception as e:
             self.result_label.config(text="Error: Invalid input or conversion failed")
 
