@@ -507,77 +507,79 @@
 
 # Simple Quiz
 
-import tkinter as tk
-from tkinter import ttk
-import random
+# import tkinter as tk
+# from tkinter import ttk
+# import random
 
-class SimpleQuizApp:
-    def __init__(self, app):
-        self.app = app
-        self.app.title("Simple Quiz App")
+# class SimpleQuizApp:
+#     def __init__(self, app):
+#         self.app = app
+#         self.app.title("Simple Quiz App")
 
-        self.question_label = ttk.Label(app, text="Question:")
-        self.question_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
+#         self.question_label = ttk.Label(app, text="Question:")
+#         self.question_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
 
-        self.question_text = ttk.Label(app, text="")
-        self.question_text.grid(row=0, column=1, padx=10, pady=10)
+#         self.question_text = ttk.Label(app, text="")
+#         self.question_text.grid(row=0, column=1, padx=10, pady=10)
 
-        self.answer_label = ttk.Label(app, text="Your Answer:")
-        self.answer_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
+#         self.answer_label = ttk.Label(app, text="Your Answer:")
+#         self.answer_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
-        self.answer_entry = ttk.Entry(app, width=20, font=('Arial', 14))
-        self.answer_entry.grid(row=1, column=1, padx=10, pady=10)
+#         self.answer_entry = ttk.Entry(app, width=20, font=('Arial', 14))
+#         self.answer_entry.grid(row=1, column=1, padx=10, pady=10)
 
-        self.check_button = ttk.Button(app, text="Check Answer", command=self.check_answer)
-        self.check_button.grid(row=2, column=0, columnspan=2, pady=10)
+#         self.check_button = ttk.Button(app, text="Check Answer", command=self.check_answer)
+#         self.check_button.grid(row=2, column=0, columnspan=2, pady=10)
 
-        self.result_label = ttk.Label(app, text="")
-        self.result_label.grid(row=3, column=0, columnspan=2, pady=10)
+#         self.result_label = ttk.Label(app, text="")
+#         self.result_label.grid(row=3, column=0, columnspan=2, pady=10)
 
-        self.score_label = ttk.Label(app, text="Score: 0")
-        self.score_label.grid(row=4, column=0, columnspan=2, pady=10)
+#         self.score_label = ttk.Label(app, text="Score: 0")
+#         self.score_label.grid(row=4, column=0, columnspan=2, pady=10)
 
-        # Quiz data (change or add questions as needed)
-        self.quiz_data = [
-            {"question": "What is the capital of France?", "answer": "Paris"},
-            {"question": "What is the largest planet in our solar system?", "answer": "Jupiter"},
-            {"question": "Who wrote 'Romeo and Juliet'?", "answer": "William Shakespeare"},
-        ]
+#         # Quiz data (change or add questions as needed)
+#         self.quiz_data = [
+#             {"question": "What is the capital of France?", "answer": "Paris"},
+#             {"question": "What is the largest planet in our solar system?", "answer": "Jupiter"},
+#             {"question": "Who wrote 'Romeo and Juliet'?", "answer": "William Shakespeare"},
+#         ]
 
-        # Initialize the quiz
-        self.current_question = 0
-        self.score = 0
-        self.load_question()
+#         # Initialize the quiz
+#         self.current_question = 0
+#         self.score = 0
+#         self.load_question()
 
-    def load_question(self):
-        # Load the current question
-        question_data = self.quiz_data[self.current_question]
-        self.question_text.config(text=question_data["question"])
-        self.answer_entry.delete(0, tk.END)
-        self.result_label.config(text="")
+#     def load_question(self):
+#         # Load the current question
+#         question_data = self.quiz_data[self.current_question]
+#         self.question_text.config(text=question_data["question"])
+#         self.answer_entry.delete(0, tk.END)
+#         self.result_label.config(text="")
 
-    def check_answer(self):
-        # Check the answer and provide feedback
-        user_answer = self.answer_entry.get().strip().lower()
-        correct_answer = self.quiz_data[self.current_question]["answer"].lower()
+#     def check_answer(self):
+#         # Check the answer and provide feedback
+#         user_answer = self.answer_entry.get().strip().lower()
+#         correct_answer = self.quiz_data[self.current_question]["answer"].lower()
 
-        if user_answer == correct_answer:
-            self.result_label.config(text="Correct!", foreground="green")
-            self.score += 1
-        else:
-            self.result_label.config(text="Incorrect. The correct answer is: " + correct_answer, foreground="red")
+#         if user_answer == correct_answer:
+#             self.result_label.config(text="Correct!", foreground="green")
+#             self.score += 1
+#         else:
+#             self.result_label.config(text="Incorrect. The correct answer is: " + correct_answer, foreground="red")
 
-        # Move to the next question or end the quiz
-        self.current_question += 1
-        if self.current_question < len(self.quiz_data):
-            self.load_question()
-        else:
-            self.result_label.config(text="Quiz completed! Your final score is: " + str(self.score))
-            self.check_button.config(state=tk.DISABLED)  # Disable the Check Answer button
-            self.score_label.config(text="Final Score: " + str(self.score))
+#         # Move to the next question or end the quiz
+#         self.current_question += 1
+#         if self.current_question < len(self.quiz_data):
+#             self.load_question()
+#         else:
+#             self.result_label.config(text="Quiz completed! Your final score is: " + str(self.score))
+#             self.check_button.config(state=tk.DISABLED)  # Disable the Check Answer button
+#             self.score_label.config(text="Final Score: " + str(self.score))
 
-if __name__ == "__main__":
-    app = tk.Tk()
-    quiz_app = SimpleQuizApp(app)
-    app.mainloop()
+# if __name__ == "__main__":
+#     app = tk.Tk()
+#     quiz_app = SimpleQuizApp(app)
+#     app.mainloop()
 
+
+# Cross Word
