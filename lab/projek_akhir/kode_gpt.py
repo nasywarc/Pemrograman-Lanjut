@@ -583,3 +583,52 @@
 
 
 # Cross Word
+
+import tkinter as tk
+from tkinter import ttk
+
+class CrosswordMakerApp:
+    def __init__(self, app):
+        self.app = app
+        self.app.title("Crossword Maker")
+
+        self.clues_label = ttk.Label(app, text="Across/Down Clues:")
+        self.clues_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
+
+        self.clues_entry = tk.Text(app, width=40, height=5, wrap=tk.WORD)
+        self.clues_entry.grid(row=1, column=0, padx=10, pady=10)
+
+        self.crossword_label = ttk.Label(app, text="Crossword Grid:")
+        self.crossword_label.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
+
+        self.crossword_entry = tk.Text(app, width=40, height=10, wrap=tk.WORD)
+        self.crossword_entry.grid(row=3, column=0, padx=10, pady=10)
+
+        self.generate_button = ttk.Button(app, text="Generate Crossword", command=self.generate_crossword)
+        self.generate_button.grid(row=4, column=0, padx=10, pady=10)
+
+    def generate_crossword(self):
+        # Get clues from the text entry
+        clues_text = self.clues_entry.get("1.0", tk.END).strip().split("\n")
+
+        # Process clues and generate the crossword grid
+        crossword_grid = self.process_clues(clues_text)
+
+        # Display the generated crossword in the entry widget
+        self.crossword_entry.config(state=tk.NORMAL)
+        self.crossword_entry.delete("1.0", tk.END)
+        self.crossword_entry.insert(tk.END, crossword_grid)
+        self.crossword_entry.config(state=tk.DISABLED)
+
+    def process_clues(self, clues_text):
+        # Implement your crossword generation logic here
+        # This is a placeholder, and you might want to replace it with a more sophisticated algorithm
+        crossword_grid = ""
+        for clue in clues_text:
+            crossword_grid += clue + "\n"
+        return crossword_grid
+
+if __name__ == "__main__":
+    app = tk.Tk()
+    crossword_app = CrosswordMakerApp(app)
+    app.mainloop()
