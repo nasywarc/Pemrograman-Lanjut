@@ -632,3 +632,30 @@
 #     app = tk.Tk()
 #     crossword_app = CrosswordMakerApp(app)
 #     app.mainloop()
+
+
+# DIGITAL CLOCK
+
+import tkinter as tk
+from time import strftime
+
+class DigitalClockApp:
+    def __init__(self, app):
+        self.app = app
+        self.app.title("Digital Clock")
+
+        self.time_label = tk.Label(app, font=('calibri', 40, 'bold'), background='black', foreground='white')
+        self.time_label.pack(anchor='center', pady=100)
+
+        # Update the time display
+        self.update_time()
+
+    def update_time(self):
+        time_string = strftime('%H:%M:%S %p')
+        self.time_label.config(text=time_string)
+        self.time_label.after(1000, self.update_time)  # Update every 1000 milliseconds (1 second)
+
+if __name__ == "__main__":
+    app = tk.Tk()
+    digital_clock_app = DigitalClockApp(app)
+    app.mainloop()
