@@ -5,6 +5,7 @@ import pyperclip
 
 file_path = 'data.txt'
 
+
 def generate_password():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
                'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -21,6 +22,29 @@ def generate_password():
     password = "".join(password_list)
     password_entry.insert(0, password)
     pyperclip.copy(password)
+    
+    
+def save():
+
+    if len(website_entry.get()) == 0 or len(password_entry.get()) == 0:
+        messagebox.showwarning(
+            title='Oops', message='Please don\'t leave any fields empty!')
+    else:
+
+        is_ok = messagebox.askokcancel(title=website_entry.get(
+        ), message=f'These are the details entered:\nEmail:{email_usn_entry.get()}\nPassword: {password_entry.get()}\nIs it okay to save?')
+
+        if is_ok:
+            with open(file_path, "a", newline='', encoding="cp437", errors='ignore') as pass_file:
+                pass_file.write(
+                    f'\n{website_entry.get()}\t\t{email_usn_entry.get()}\t\t{password_entry.get()}')
+
+        # deleting entry after button get pressed
+        website_entry.delete(0, END)
+        password_entry.delete(0, END)
+
+        website_entry.focus()
+
 
 window = Tk()
 window.title('Password Manager')
