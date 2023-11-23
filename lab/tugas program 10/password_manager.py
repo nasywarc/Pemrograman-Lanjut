@@ -20,3 +20,12 @@ email_usn_label = Label(text='Email/Username:')
 email_usn_label.grid(row=2, column=0)
 password_label = Label(text='Password:')
 password_label.grid(row=3, column=0)
+
+website_entry = Entry()
+website_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
+website_entry.focus()  # auto focusing the cursor
+email_usn_entry = Entry()
+email_usn_entry.grid(row=2, column=1, columnspan=2, sticky="EW")
+email_usn_entry.insert(0, 'dummy@gmail.com')
+password_entry = Entry()
+password_entry.grid(row=3, column=1, sticky="EW")
