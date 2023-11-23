@@ -1,4 +1,7 @@
+from random import choice, randint, shuffle
 from tkinter import *
+from tkinter import messagebox
+import pyperclip
 
 BLACK = '#00F' # 000
 WHITE = '#FF0' # FFF
