@@ -29,3 +29,8 @@ email_usn_entry.grid(row=2, column=1, columnspan=2, sticky="EW")
 email_usn_entry.insert(0, 'dummy@gmail.com')
 password_entry = Entry()
 password_entry.grid(row=3, column=1, sticky="EW")
+
+generate_button = Button(text='Generate Password', command=generate_password)
+generate_button.grid(row=3, column=2, sticky="EW")
+add_button = Button(text='Add', command=save)
+add_button.grid(row=4, column=1, columnspan=2, sticky="EW")
