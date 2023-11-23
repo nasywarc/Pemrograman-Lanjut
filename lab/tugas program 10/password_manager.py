@@ -34,3 +34,5 @@ generate_button = Button(text='Generate Password', command=generate_password)
 generate_button.grid(row=3, column=2, sticky="EW")
 add_button = Button(text='Add', command=save)
 add_button.grid(row=4, column=1, columnspan=2, sticky="EW")
+
+window.mainloop()
