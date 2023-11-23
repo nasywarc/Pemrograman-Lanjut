@@ -5,7 +5,7 @@ WHITE = '#FFF'
 
 window = Tk()
 
-window.title('My Program')
+window.title('Password Manager')
 window.minsize(width=300, height=300)
 
 my_label = Label(text='Lorem Ipsum', font=(20), fg=BLACK)
