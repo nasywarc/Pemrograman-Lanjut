@@ -1,6 +1,6 @@
 from tkinter import *
 
-BLACK = '#000'
+BLACK = '#00F' # 000
 WHITE = '#FFF'
 
 window = Tk()
