@@ -1,7 +1,7 @@
 from tkinter import *
 
 BLACK = '#00F' # 000
-WHITE = '#FF0'
+WHITE = '#FF0' # FFF
 
 window = Tk()
 
