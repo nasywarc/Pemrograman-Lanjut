@@ -661,12 +661,48 @@
 #     app.mainloop()
 
 
+# TODO
 # Calendar App
+
+# import tkinter as tk
+# from tkinter import messagebox
+# from tkcalendar import Calendar
+# from datetime import datetime
+
+# def set_reminder():
+#     date_selected = cal.get_date()
+#     reminder_date = datetime.strptime(date_selected, "%m/%d/%y").date()
+#     current_date = datetime.now().date()
+
+#     if reminder_date >= current_date:
+#         messagebox.showinfo("Reminder Set", f"Reminder set for {date_selected}")
+#     else:
+#         messagebox.showerror("Invalid Date", "Please select a valid date.")
+
+# # Create main window
+# root = tk.Tk()
+# root.title("Reminder App")
+
+# # Calendar widget
+# cal = Calendar(root, selectmode="day", date_pattern="mm/dd/yy")
+# cal.pack(pady=20)
+
+# # Button to set reminder
+# reminder_button = tk.Button(root, text="Set Reminder", command=set_reminder)
+# reminder_button.pack(pady=10)
+
+# # Run the application
+# root.mainloop()
+
+
+# Calendar App update
 
 import tkinter as tk
 from tkinter import messagebox
 from tkcalendar import Calendar
 from datetime import datetime
+from tkcalendar import DateEntry
+from ttkthemes import ThemedStyle  # Untuk tema
 
 def set_reminder():
     date_selected = cal.get_date()
@@ -675,20 +711,62 @@ def set_reminder():
 
     if reminder_date >= current_date:
         messagebox.showinfo("Reminder Set", f"Reminder set for {date_selected}")
+        reminders.append({"date": date_selected, "message": "Your reminder message here"})
     else:
         messagebox.showerror("Invalid Date", "Please select a valid date.")
+
+def show_reminders():
+    reminder_list.delete(0, tk.END)
+    for reminder in reminders:
+        reminder_list.insert(tk.END, f"{reminder['date']} - {reminder['message']}")
+
+def delete_selected_reminder():
+    selected_index = reminder_list.curselection()
+    if selected_index:
+        reminders.pop(selected_index[0])
+        show_reminders()
+
+def show_notification():
+    selected_index = reminder_list.curselection()
+    if selected_index:
+        selected_reminder = reminders[selected_index[0]]
+        messagebox.showinfo("Reminder", f"{selected_reminder['message']} - {selected_reminder['date']}")
 
 # Create main window
 root = tk.Tk()
 root.title("Reminder App")
+root.minsize(width=250, height=300)
+
+# Style
+style = ThemedStyle(root)
+style.set_theme("equilux")  # Ganti "equilux" dengan tema yang diinginkan, misalnya "light" atau "dark"
 
 # Calendar widget
-cal = Calendar(root, selectmode="day", date_pattern="mm/dd/yy")
+cal = DateEntry(root, width=12, background="darkblue", foreground="white", borderwidth=2)
 cal.pack(pady=20)
 
 # Button to set reminder
 reminder_button = tk.Button(root, text="Set Reminder", command=set_reminder)
 reminder_button.pack(pady=10)
+
+# Reminder data list
+reminders = []
+
+# Show reminders button
+show_reminders_button = tk.Button(root, text="Show Reminders", command=show_reminders)
+show_reminders_button.pack(pady=5)
+
+# Reminder listbox
+reminder_list = tk.Listbox(root, selectmode=tk.SINGLE)
+reminder_list.pack(pady=10)
+
+# Delete selected reminder button
+delete_button = tk.Button(root, text="Delete Selected Reminder", command=delete_selected_reminder)
+delete_button.pack(pady=5)
+
+# Show notification button
+show_notification_button = tk.Button(root, text="Show Notification", command=show_notification)
+show_notification_button.pack(pady=5)
 
 # Run the application
 root.mainloop()
