@@ -706,14 +706,17 @@ from ttkthemes import ThemedStyle  # Untuk tema
 
 def set_reminder():
     date_selected = cal.get_date()
-    reminder_date = datetime.strptime(date_selected, "%m/%d/%y").date()
+    reminder_date = datetime.strptime(date_selected.strftime("%m/%d/%y"), "%m/%d/%y").date()
     current_date = datetime.now().date()
 
     if reminder_date >= current_date:
-        messagebox.showinfo("Reminder Set", f"Reminder set for {date_selected}")
-        reminders.append({"date": date_selected, "message": "Your reminder message here"})
+        formatted_date = date_selected.strftime("%m/%d/%y")
+        messagebox.showinfo("Reminder Set", f"Reminder set for {formatted_date}")
+        reminders.append({"date": formatted_date, "message": "Your reminder message here"})
+        show_reminders()  # Call this function to update the listbox immediately
     else:
         messagebox.showerror("Invalid Date", "Please select a valid date.")
+
 
 def show_reminders():
     reminder_list.delete(0, tk.END)
