@@ -662,3 +662,33 @@
 
 
 # Calendar App
+
+import tkinter as tk
+from tkinter import messagebox
+from tkcalendar import Calendar
+from datetime import datetime
+
+def set_reminder():
+    date_selected = cal.get_date()
+    reminder_date = datetime.strptime(date_selected, "%m/%d/%y").date()
+    current_date = datetime.now().date()
+
+    if reminder_date >= current_date:
+        messagebox.showinfo("Reminder Set", f"Reminder set for {date_selected}")
+    else:
+        messagebox.showerror("Invalid Date", "Please select a valid date.")
+
+# Create main window
+root = tk.Tk()
+root.title("Reminder App")
+
+# Calendar widget
+cal = Calendar(root, selectmode="day", date_pattern="mm/dd/yy")
+cal.pack(pady=20)
+
+# Button to set reminder
+reminder_button = tk.Button(root, text="Set Reminder", command=set_reminder)
+reminder_button.pack(pady=10)
+
+# Run the application
+root.mainloop()
