@@ -1,6 +1,9 @@
 from tkinter import *
 from tkcalendar import Calendar
 
+def exit_program():
+    exit()
+
 def back_first():
     global add_task_button, add_event_button, delete_task_button, delete_event_button, back_to_home_button, task_manager_button, event_manager_button
 
@@ -142,6 +145,12 @@ label_for_space.grid(row=3, column=2)
 event_manager_button = Button(text='Event Manager', command=event_choice)
 event_manager_button.grid(row=4, column=2)
 
+label_for_space_3 = Label(text='')
+label_for_space_3.grid(row=5, column=2)
+
+exit_button = Button(text='Exit', command=exit_program)
+exit_button.grid(row=6, column=2)
+
 add_task_button = None
 delete_task_button = None
 add_event_button = None
@@ -150,15 +159,15 @@ back_to_home_button = None
 from_where = ''
 
 tasks_listbox = Listbox(window, selectmode=SINGLE)
-tasks_listbox.grid(row=2, column=3, rowspan=5)
+tasks_listbox.grid(row=2, column=0, rowspan=5)
 
-label_for_space_3 = Label(text='')
-label_for_space_3.grid(row=3, column=2)
+label_for_space_4 = Label(text='')
+label_for_space_4.grid(row=3, column=2)
 
 events_listbox = Listbox(window, selectmode=SINGLE)  
 events_listbox.grid(row=2, column=4, rowspan=5)  
 
-label_for_space_4 = Label(text='')
-label_for_space_4.grid(row=3, column=3)  
+label_for_space_5 = Label(text='')
+label_for_space_5.grid(row=3, column=3)  
 
 window.mainloop()
