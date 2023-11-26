@@ -244,10 +244,6 @@ def find_event():
 all_tasks = []
 all_events = []
 
-# window = Tk()
-# window.title('Dayminder')
-# window.config(padx=20, pady=50, bg='#F5F7F8')
-
 add_task_button = None
 delete_task_button = None
 add_event_button = None
