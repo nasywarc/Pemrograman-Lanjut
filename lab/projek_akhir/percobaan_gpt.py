@@ -180,7 +180,7 @@ def add_new_event():
         else:
             event_text = f"{selected_date} - {event_details}"
             events_listbox.insert(END, event_text)
-            all_events.append(event_text)  # Append event to global list
+            all_events.append(event_text) 
             add_event_window.destroy()
             back_first()
 
