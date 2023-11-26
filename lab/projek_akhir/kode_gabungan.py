@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, IntVar
 from tkcalendar import DateEntry
 from datetime import datetime
-from ttkthemes import ThemedStyle
+# from ttkthemes import ThemedStyle
 
 class ReminderApp:
     def __init__(self, window):
