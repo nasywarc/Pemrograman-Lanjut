@@ -171,6 +171,45 @@ def add_new_event():
     event_entry = Entry(add_event_window, width=20)
     event_entry.grid(row=1, column=1, pady=5)
 
+    Label(add_event_window, text='Select Categories:').grid(row=2, column=0, pady=5)
+
+    category_var_1 = IntVar()
+    category_checkbutton_1 = Checkbutton(add_event_window, text='General', variable=category_var_1)
+    category_checkbutton_1.grid(row=2, column=1, sticky='w')
+
+    category_var_2 = IntVar()
+    category_checkbutton_2 = Checkbutton(add_event_window, text='Education', variable=category_var_2)
+    category_checkbutton_2.grid(row=3, column=1, sticky='w')
+    
+    category_var_3 = IntVar()
+    category_checkbutton_3 = Checkbutton(add_event_window, text='Personal Work', variable=category_var_3)
+    category_checkbutton_3.grid(row=4, column=1, sticky='w')
+    
+    category_var_4 = IntVar()
+    category_checkbutton_4 = Checkbutton(add_event_window, text='Projects', variable=category_var_4)
+    category_checkbutton_4.grid(row=5, column=1, sticky='w')
+    
+    category_var_5 = IntVar()
+    category_checkbutton_5 = Checkbutton(add_event_window, text='Meetings', variable=category_var_5)
+    category_checkbutton_5.grid(row=6, column=1, sticky='w')
+    
+    category_var_6 = IntVar()
+    category_checkbutton_6 = Checkbutton(add_event_window, text='Holidays', variable=category_var_6)
+    category_checkbutton_6.grid(row=7, column=1, sticky='w')
+    
+    category_var_7 = IntVar()
+    category_checkbutton_7 = Checkbutton(add_event_window, text='Health', variable=category_var_7)
+    category_checkbutton_7.grid(row=8, column=1, sticky='w')
+    
+    category_var_8 = IntVar()
+    category_checkbutton_8 = Checkbutton(add_event_window, text='Social Events', variable=category_var_8)
+    category_checkbutton_8.grid(row=9, column=1, sticky='w')
+    
+    category_var_9 = IntVar()
+    category_checkbutton_9 = Checkbutton(add_event_window, text='Financial', variable=category_var_9)
+    category_checkbutton_9.grid(row=10, column=1, sticky='w')
+    
+
     def save_event():
         selected_date = calendar.get_date()
         event_details = event_entry.get()
@@ -178,14 +217,37 @@ def add_new_event():
         if event_details == '':
             messagebox.showerror('Oops', 'Fill all the blank box!')
         else:
-            event_text = f"{selected_date} - {event_details}"
+            selected_categories = []
+            if category_var_1.get():
+                selected_categories.append(category_checkbutton_1['text'])
+            if category_var_2.get():
+                selected_categories.append(category_checkbutton_2['text'])
+            if category_var_3.get():
+                selected_categories.append(category_checkbutton_3['text'])
+            if category_var_4.get():
+                selected_categories.append(category_checkbutton_4['text'])
+            if category_var_5.get():
+                selected_categories.append(category_checkbutton_5['text'])
+            if category_var_6.get():
+                selected_categories.append(category_checkbutton_6['text'])
+            if category_var_7.get():
+                selected_categories.append(category_checkbutton_7['text'])
+            if category_var_8.get():
+                selected_categories.append(category_checkbutton_8['text'])
+            if category_var_9.get():
+                selected_categories.append(category_checkbutton_9['text'])
+            if len(selected_categories) == 0:
+                selected_categories.append(category_checkbutton_1['text'])
+            
+
+            event_text = f"{selected_date} - {event_details} ({', '.join(selected_categories)})"
             events_listbox.insert(END, event_text)
-            all_events.append(event_text) 
+            all_events.append(event_text)
             add_event_window.destroy()
             back_first()
 
     save_button = Button(add_event_window, text='Save', command=save_event)
-    save_button.grid(row=2, column=0, columnspan=2, pady=10)
+    save_button.grid(row=12, column=0, columnspan=2, pady=10)
 
 def delete_event():
     selected_event_index = events_listbox.curselection()
@@ -243,10 +305,6 @@ def find_event():
 
 all_tasks = []
 all_events = []
-
-# window = Tk()
-# window.title('Dayminder')
-# window.config(padx=20, pady=50, bg='#F5F7F8')
 
 add_task_button = None
 delete_task_button = None
