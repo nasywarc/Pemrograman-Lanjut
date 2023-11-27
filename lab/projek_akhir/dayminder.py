@@ -3,6 +3,7 @@ from tkcalendar import Calendar
 from tkinter import messagebox
 from tkinter import ttk
 
+
 def task_choice():
     global add_task_button, delete_task_button, back_to_home_button, from_where, exit_button
 
@@ -26,6 +27,7 @@ def task_choice():
 
     back_to_home_button = Button(text='Back', command=back_first, bg='#f4ce14', fg='#000')
     back_to_home_button.grid(row=6, column=2)
+    
 
 def event_choice():
     global add_event_button, delete_event_button, back_to_home_button, from_where, exit_button
@@ -50,6 +52,7 @@ def event_choice():
 
     back_to_home_button = Button(text='Back', command=back_first, bg='#f4ce14', fg='#000')
     back_to_home_button.grid(row=6, column=2)
+    
 
 def find_choice():
     global find_task_button, find_event_button, back_to_home_button, exit_button, from_where
@@ -79,8 +82,10 @@ def find_choice():
     back_to_home_button = Button(text='Back', command=back_first, bg='#f4ce14', fg='#000')
     back_to_home_button.grid(row=6, column=2)
     
+    
 def exit_program():
     exit()
+    
     
 def add_new_task():
     add_task_window = Toplevel(window)
@@ -112,6 +117,7 @@ def add_new_task():
     save_button = Button(add_task_window, text='Save', command=save_task)
     save_button.grid(row=3, column=0, columnspan=2, pady=10)
     
+    
 def find_task():
     find_window = Toplevel(window)
     find_window.title('Find Task')
@@ -134,6 +140,7 @@ def find_task():
     search_button = Button(find_window, text='Search', command=filter_tasks)
     search_button.grid(row=1, column=0, columnspan=2, pady=10)
     
+    
 def delete_task():
     selected_task_index = tasks_listbox.curselection()
     if selected_task_index:
@@ -143,6 +150,7 @@ def delete_task():
             tasks_listbox.delete(selected_task_index)
             all_tasks.remove(deleted_task)
     back_first()
+    
     
 def add_new_event():
     add_event_window = Toplevel(window)
@@ -235,7 +243,6 @@ def add_new_event():
     save_button.grid(row=12, column=0, columnspan=2, pady=10)
 
 
-
 def find_event():
     find_window = Toplevel(window)
     find_window.title('Find Event')
@@ -258,6 +265,7 @@ def find_event():
     search_button = Button(find_window, text='Search', command=filter_events)
     search_button.grid(row=1, column=0, columnspan=2, pady=10)
     
+    
 def delete_event():
     selected_event_index = events_listbox.curselection()
     if selected_event_index:
@@ -267,6 +275,7 @@ def delete_event():
             events_listbox.delete(selected_event_index)
             all_events.remove(deleted_event)  
     back_first()
+    
     
 def back_first():
     global add_task_button, add_event_button, delete_task_button, delete_event_button, back_to_home_button
@@ -303,8 +312,6 @@ def back_first():
     
     exit_button = Button(text='Exit', command=exit_program, bg='#f4ce14', fg='#000')
     exit_button.grid(row=8, column=2)
-
-
 
 
 all_tasks = []
