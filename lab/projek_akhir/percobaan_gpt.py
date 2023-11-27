@@ -5,7 +5,7 @@ from tkinter import ttk
 
 def exit_program():
     exit()
-    
+
 def find_choice():
     global find_task_button, find_event_button, back_to_home_button, exit_button, from_where
     from_where = 'find'
@@ -33,23 +33,24 @@ def find_choice():
 
     back_to_home_button = Button(text='Back', command=back_first, bg='#f4ce14', fg='#000')
     back_to_home_button.grid(row=6, column=2)
-    
 
 def back_first():
     global add_task_button, add_event_button, delete_task_button, delete_event_button, back_to_home_button
-    global task_manager_button, event_manager_button, exit_button
+    global task_manager_button, event_manager_button, exit_button, edit_task_button, edit_event_button
 
     if from_where == 'task':
         add_task_button.grid_forget()
         delete_task_button.grid_forget()
+        edit_task_button.grid_forget()
     elif from_where == 'event':
         add_event_button.grid_forget()
         delete_event_button.grid_forget()
-    else :
+        edit_event_button.grid_forget()
+    else:
         tasks_listbox.delete(0, END)
         for task in all_tasks:
             tasks_listbox.insert(END, task)
-            
+
         events_listbox.delete(0, END)
         for event in all_events:
             events_listbox.insert(END, event)
@@ -64,15 +65,15 @@ def back_first():
 
     event_manager_button = Button(text='Event Manager', command=event_choice, bg='#f4ce14', fg='#000')
     event_manager_button.grid(row=4, column=2)
-    
+
     find_button = Button(text='Find', command=find_choice, bg='#f4ce14', fg='#000')
     find_button.grid(row=6, column=2)
-    
+
     exit_button = Button(text='Exit', command=exit_program, bg='#f4ce14', fg='#000')
     exit_button.grid(row=8, column=2)
 
 def task_choice():
-    global add_task_button, delete_task_button, back_to_home_button, from_where, exit_button
+    global add_task_button, delete_task_button, back_to_home_button, edit_task_button, from_where, exit_button
 
     from_where = 'task'
 
@@ -92,11 +93,17 @@ def task_choice():
     label_for_space_2 = Label(text='')
     label_for_space_2.grid(row=5, column=2)
 
+    edit_task_button = Button(text='Edit Task', command=edit_task, bg='#f4ce14', fg='#000')
+    edit_task_button.grid(row=6, column=2)
+    
+    label_for_space_3 = Label(text='')
+    label_for_space_3.grid(row=7, column=2)
+
     back_to_home_button = Button(text='Back', command=back_first, bg='#f4ce14', fg='#000')
-    back_to_home_button.grid(row=6, column=2)
+    back_to_home_button.grid(row=8, column=2)
 
 def event_choice():
-    global add_event_button, delete_event_button, back_to_home_button, from_where, exit_button
+    global add_event_button, delete_event_button, back_to_home_button, edit_event_button, from_where, exit_button
 
     from_where = 'event'
 
@@ -116,8 +123,11 @@ def event_choice():
     label_for_space_2 = Label(text='')
     label_for_space_2.grid(row=5, column=2)
 
+    edit_event_button = Button(text='Edit Event', command=edit_event, bg='#f4ce14', fg='#000')
+    edit_event_button.grid(row=6, column=2)
+
     back_to_home_button = Button(text='Back', command=back_first, bg='#f4ce14', fg='#000')
-    back_to_home_button.grid(row=6, column=2)
+    back_to_home_button.grid(row=7, column=2)
 
 def add_new_task():
     add_task_window = Toplevel(window)
@@ -303,20 +313,80 @@ def find_event():
     search_button = Button(find_window, text='Search', command=filter_events)
     search_button.grid(row=1, column=0, columnspan=2, pady=10)
 
+def edit_task():
+    selected_task_index = tasks_listbox.curselection()
+    if selected_task_index:
+        task_to_edit = tasks_listbox.get(selected_task_index)
+        edit_task_window = Toplevel(window)
+        edit_task_window.title('Edit Task')
+        edit_task_window.attributes('-topmost', 'true')
+
+        # Extracting time and details from the selected task
+        task_time, task_details = extract_task_info(task_to_edit)
+
+        # Existing code...
+
+        def save_edited_task():
+            # Existing code...
+
+            edit_task_button.grid_forget()
+
+            # Existing code...
+
+    # Existing code...
+
+def edit_event():
+    selected_event_index = events_listbox.curselection()
+    if selected_event_index:
+        event_to_edit = events_listbox.get(selected_event_index)
+        edit_event_window = Toplevel(window)
+        edit_event_window.title('Edit Event')
+        edit_event_window.attributes('-topmost', 'true')
+
+        # Extracting date, details, and categories from the selected event
+        event_date, event_details, event_categories = extract_event_info(event_to_edit)
+
+        # Existing code...
+
+        def save_edited_event():
+            # Existing code...
+
+            edit_event_button.grid_forget()
+
+            # Existing code...
+
+    # Existing code...
+    
+def extract_task_info(task_text):
+    # Task text format: "hh:mm - Task details"
+    task_time, task_details = task_text.split(' - ', 1)
+    return task_time, task_details
+
+def extract_event_info(event_text):
+    # Event text format: "yyyy-mm-dd - Event details (Category 1, Category 2, ...)"
+    event_date, rest = event_text.split(' - ', 1)
+    event_details, categories_text = rest.split(' (', 1)
+    # Removing the closing parenthesis from categories_text
+    categories_text = categories_text.rstrip(')')
+    event_categories = [category.strip() for category in categories_text.split(',')]
+    return event_date, event_details, event_categories
+
+
 all_tasks = []
 all_events = []
 
 add_task_button = None
 delete_task_button = None
+edit_task_button = None
 add_event_button = None
 delete_event_button = None
+edit_event_button = None
 back_to_home_button = None
 from_where = ''
 
 window = Tk()
 window.title('Dayminder')
 window.config(padx=20, pady=20, bg='#F5F7F8')
-
 
 # Canvas
 
@@ -371,7 +441,6 @@ tasks_listbox = Listbox(window, selectmode=SINGLE, width=35)
 tasks_listbox.grid(row=2, column=0, rowspan=5, columnspan=2)
 
 events_listbox = Listbox(window, selectmode=SINGLE, width=35)  
-events_listbox.grid(row=2, column=4, rowspan=5, columnspan=2)  
-
+events_listbox.grid(row=2, column=4, rowspan=5, columnspan=2)
 
 window.mainloop()
