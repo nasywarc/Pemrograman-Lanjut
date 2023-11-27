@@ -2,6 +2,7 @@ from tkinter import *
 from tkcalendar import Calendar
 from tkinter import messagebox
 from tkinter import ttk
+from datetime import datetime
 
 def exit_program():
     exit()
@@ -125,9 +126,12 @@ def event_choice():
 
     edit_event_button = Button(text='Edit Event', command=edit_event, bg='#f4ce14', fg='#000')
     edit_event_button.grid(row=6, column=2)
+    
+    label_for_space_3 = Label(text='')
+    label_for_space_3.grid(row=7, column=2)
 
     back_to_home_button = Button(text='Back', command=back_first, bg='#f4ce14', fg='#000')
-    back_to_home_button.grid(row=7, column=2)
+    back_to_home_button.grid(row=8, column=2)
 
 def add_new_task():
     add_task_window = Toplevel(window)
@@ -322,18 +326,125 @@ def edit_task():
         edit_task_window.attributes('-topmost', 'true')
 
         # Extracting time and details from the selected task
-        task_time, task_details = extract_task_info(task_to_edit)
+        try:
+            task_time, task_details = extract_task_info(task_to_edit)
+        except ValueError:
+            messagebox.showerror('Error', 'Invalid task format')
+            return
 
-        # Existing code...
+        Label(edit_task_window, text='Task time:').grid(row=1, column=0, pady=5)
+        time_picker = ttk.Combobox(edit_task_window, values=[f'{hour:02d}:{minute:02d}' for hour in range(24) for minute in range(0, 60, 15)])
+        time_picker.set(task_time) 
+        time_picker.grid(row=1, column=1, pady=5)
+
+        Label(edit_task_window, text='Task details:').grid(row=2, column=0, pady=5)
+        task_entry = Entry(edit_task_window, width=20)
+        task_entry.insert(0, task_details)
+        task_entry.grid(row=2, column=1, pady=5)
 
         def save_edited_task():
-            # Existing code...
+            new_task_details = task_entry.get()
+            new_task_time = time_picker.get()
 
-            edit_task_button.grid_forget()
+            if new_task_details == '' or new_task_time == '':
+                messagebox.showerror('Oops', 'Fill all the blank boxes!')
+            else:
+                edited_task_text = f"{new_task_time} - {new_task_details}"
+                tasks_listbox.delete(selected_task_index)
+                tasks_listbox.insert(selected_task_index, edited_task_text)
+                all_tasks[selected_task_index] = edited_task_text
+                edit_task_window.destroy()
+                back_first()
 
-            # Existing code...
+        save_button = Button(edit_task_window, text='Save', command=save_edited_task)
+        save_button.grid(row=3, column=0, columnspan=2, pady=10)
 
-    # Existing code...
+# def edit_event():
+#     selected_event_index = events_listbox.curselection()
+#     if selected_event_index:
+#         event_to_edit = events_listbox.get(selected_event_index)
+#         edit_event_window = Toplevel(window)
+#         edit_event_window.title('Edit Event')
+#         edit_event_window.attributes('-topmost', 'true')
+
+#         # Extracting date, details, and categories from the selected event
+#         try:
+#             event_date, event_details, event_categories = extract_event_info(event_to_edit)
+#         except ValueError:
+#             messagebox.showerror('Error', 'Invalid event format')
+#             return
+
+#         calendar = Calendar(edit_event_window, selectmode='day', date_pattern='yyyy-mm-dd')
+#         calendar.set_date(event_date)
+#         calendar.grid(row=0, column=0, columnspan=2, pady=10)
+
+#         Label(edit_event_window, text='Event details:').grid(row=1, column=0, pady=5)
+#         event_entry = Entry(edit_event_window, width=20)
+#         event_entry.insert(0, event_details)
+#         event_entry.grid(row=1, column=1, pady=5)
+
+#         Label(edit_event_window, text='Select Categories:').grid(row=2, column=0, pady=5)
+
+#         category_var_1 = IntVar()
+#         category_checkbutton_1 = Checkbutton(edit_event_window, text='General', variable=category_var_1)
+#         category_checkbutton_1.grid(row=2, column=1, sticky='w')
+
+#         category_var_1 = IntVar()
+#         category_checkbutton_1 = Checkbutton(edit_event_window, text='General', variable=category_var_1)
+#         category_checkbutton_1.grid(row=2, column=1, sticky='w')
+
+#         category_var_2 = IntVar()
+#         category_checkbutton_2 = Checkbutton(edit_event_window, text='Education', variable=category_var_2)
+#         category_checkbutton_2.grid(row=3, column=1, sticky='w')
+        
+#         category_var_3 = IntVar()
+#         category_checkbutton_3 = Checkbutton(edit_event_window, text='Personal Work', variable=category_var_3)
+#         category_checkbutton_3.grid(row=4, column=1, sticky='w')
+        
+#         category_var_4 = IntVar()
+#         category_checkbutton_4 = Checkbutton(edit_event_window, text='Projects', variable=category_var_4)
+#         category_checkbutton_4.grid(row=5, column=1, sticky='w')
+        
+#         category_var_5 = IntVar()
+#         category_checkbutton_5 = Checkbutton(edit_event_window, text='Meetings', variable=category_var_5)
+#         category_checkbutton_5.grid(row=6, column=1, sticky='w')
+        
+#         category_var_6 = IntVar()
+#         category_checkbutton_6 = Checkbutton(edit_event_window, text='Holidays', variable=category_var_6)
+#         category_checkbutton_6.grid(row=7, column=1, sticky='w')
+        
+#         category_var_7 = IntVar()
+#         category_checkbutton_7 = Checkbutton(edit_event_window, text='Health', variable=category_var_7)
+#         category_checkbutton_7.grid(row=8, column=1, sticky='w')
+        
+#         category_var_8 = IntVar()
+#         category_checkbutton_8 = Checkbutton(edit_event_window, text='Social Events', variable=category_var_8)
+#         category_checkbutton_8.grid(row=9, column=1, sticky='w')
+        
+#         category_var_9 = IntVar()
+#         category_checkbutton_9 = Checkbutton(edit_event_window, text='Financial', variable=category_var_9)
+#         category_checkbutton_9.grid(row=10, column=1, sticky='w')
+
+#         def save_edited_event():
+#             selected_date = calendar.get_date()
+#             new_event_details = event_entry.get()
+
+#             if new_event_details == '':
+#                 messagebox.showerror('Oops', 'Fill all the blank boxes!')
+#             else:
+#                 edited_event_text = f"{selected_date} - {new_event_details} ({', '.join(event_categories)})"
+#                 events_listbox.delete(selected_event_index)
+#                 events_listbox.insert(selected_event_index, edited_event_text)
+#                 all_events[selected_event_index] = edited_event_text
+#                 edit_event_window.destroy()
+#                 back_first()
+
+#         save_button = Button(edit_event_window, text='Save', command=save_edited_event)
+#         save_button.grid(row=12, column=0, columnspan=2, pady=10)
+
+from datetime import datetime
+
+# ...
 
 def edit_event():
     selected_event_index = events_listbox.curselection()
@@ -344,18 +455,82 @@ def edit_event():
         edit_event_window.attributes('-topmost', 'true')
 
         # Extracting date, details, and categories from the selected event
-        event_date, event_details, event_categories = extract_event_info(event_to_edit)
+        try:
+            event_date, event_details, event_categories = extract_event_info(event_to_edit)
+        except ValueError:
+            messagebox.showerror('Error', 'Invalid event format')
+            return
 
-        # Existing code...
+        calendar = Calendar(edit_event_window, selectmode='day', date_pattern='yyyy-mm-dd')
+        calendar_date = datetime.strptime(event_date, '%Y-%m-%d')
+        calendar.set_date(calendar_date)
+        calendar.grid(row=0, column=0, columnspan=2, pady=10)
+
+        Label(edit_event_window, text='Event details:').grid(row=1, column=0, pady=5)
+        event_entry = Entry(edit_event_window, width=20)
+        event_entry.insert(0, event_details)
+        event_entry.grid(row=1, column=1, pady=5)
+
+        Label(edit_event_window, text='Select Categories:').grid(row=2, column=0, pady=5)
+
+        category_var_1 = IntVar()
+        category_checkbutton_1 = Checkbutton(edit_event_window, text='General', variable=category_var_1)
+        category_checkbutton_1.grid(row=2, column=1, sticky='w')
+
+        category_var_1 = IntVar()
+        category_checkbutton_1 = Checkbutton(edit_event_window, text='General', variable=category_var_1)
+        category_checkbutton_1.grid(row=2, column=1, sticky='w')
+
+        category_var_2 = IntVar()
+        category_checkbutton_2 = Checkbutton(edit_event_window, text='Education', variable=category_var_2)
+        category_checkbutton_2.grid(row=3, column=1, sticky='w')
+        
+        category_var_3 = IntVar()
+        category_checkbutton_3 = Checkbutton(edit_event_window, text='Personal Work', variable=category_var_3)
+        category_checkbutton_3.grid(row=4, column=1, sticky='w')
+        
+        category_var_4 = IntVar()
+        category_checkbutton_4 = Checkbutton(edit_event_window, text='Projects', variable=category_var_4)
+        category_checkbutton_4.grid(row=5, column=1, sticky='w')
+        
+        category_var_5 = IntVar()
+        category_checkbutton_5 = Checkbutton(edit_event_window, text='Meetings', variable=category_var_5)
+        category_checkbutton_5.grid(row=6, column=1, sticky='w')
+        
+        category_var_6 = IntVar()
+        category_checkbutton_6 = Checkbutton(edit_event_window, text='Holidays', variable=category_var_6)
+        category_checkbutton_6.grid(row=7, column=1, sticky='w')
+        
+        category_var_7 = IntVar()
+        category_checkbutton_7 = Checkbutton(edit_event_window, text='Health', variable=category_var_7)
+        category_checkbutton_7.grid(row=8, column=1, sticky='w')
+        
+        category_var_8 = IntVar()
+        category_checkbutton_8 = Checkbutton(edit_event_window, text='Social Events', variable=category_var_8)
+        category_checkbutton_8.grid(row=9, column=1, sticky='w')
+        
+        category_var_9 = IntVar()
+        category_checkbutton_9 = Checkbutton(edit_event_window, text='Financial', variable=category_var_9)
+        category_checkbutton_9.grid(row=10, column=1, sticky='w')
 
         def save_edited_event():
-            # Existing code...
+            selected_date = calendar.get_date()
+            new_event_details = event_entry.get()
 
-            edit_event_button.grid_forget()
+            if new_event_details == '':
+                messagebox.showerror('Oops', 'Fill all the blank boxes!')
+            else:
+                edited_event_text = f"{selected_date} - {new_event_details} ({', '.join(event_categories)})"
+                events_listbox.delete(selected_event_index)
+                events_listbox.insert(selected_event_index, edited_event_text)
+                all_events[selected_event_index] = edited_event_text
+                edit_event_window.destroy()
+                back_first()
 
-            # Existing code...
+        save_button = Button(edit_event_window, text='Save', command=save_edited_event)
+        save_button.grid(row=12, column=0, columnspan=2, pady=10)
 
-    # Existing code...
+
     
 def extract_task_info(task_text):
     # Task text format: "hh:mm - Task details"
