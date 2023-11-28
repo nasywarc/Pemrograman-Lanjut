@@ -12,8 +12,8 @@ def cube(n):
         
 n = [1,2,3,4,5,6,7,8]
 
-t1 =threading.Thread(target=sqr, args=(10,))
-t2 =threading.Thread(target=cube, args=(10,))
+t1 =threading.Thread(target=sqr(n), args=(10,))
+t2 =threading.Thread(target=cube(n), args=(10,))
 
 start = time()
 t1.start()
