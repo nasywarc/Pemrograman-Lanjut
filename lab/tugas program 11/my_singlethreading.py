@@ -1,3 +1,6 @@
+# Nasywa Azizah Zharifah
+# 225150307111060
+
 from time import *
 
 def print_name(n):
