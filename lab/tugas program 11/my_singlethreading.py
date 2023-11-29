@@ -1,16 +1,6 @@
 from time import *
 
-def first(n):
-    for let in n:
-        print (let, end='')
-        sleep(1)
-
-def second(n):
-    for let in n:
-        print (let, end='')
-        sleep(1)
-        
-def third(n):
+def print_name(n):
     for let in n:
         print (let, end='')
         sleep(1)
@@ -21,11 +11,11 @@ last_name = ['Z', 'h', 'a', 'r', 'i', 'f', 'a', 'h']
 
 start = time()
 
-first(first_name)
+print_name(first_name)
 print('\n')
-second(mid_name)
+print_name(mid_name)
 print('\n')
-third(last_name)
+print_name(last_name)
 print('\n')
 
 end = time()
