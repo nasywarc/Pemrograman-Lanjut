@@ -12,10 +12,9 @@ last_name = ['Z', 'h', 'a', 'r', 'i', 'f', 'a', 'h']
 start = time()
 
 print_name(first_name)
-print('\n')
 print_name(mid_name)
-print('\n')
 print_name(last_name)
+
 print('\n')
 
 end = time()

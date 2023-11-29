@@ -24,6 +24,8 @@ t1.join()
 t2.join()
 t3.join()
 
+print('\n')
+
 end = time()
 duration = end - start
 print(f'Duration : {duration}')
