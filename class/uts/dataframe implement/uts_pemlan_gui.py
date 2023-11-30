@@ -18,7 +18,6 @@ def show():
 
     tree = ttk.Treeview(show_window)
     
-    # Menampilkan data dari DataFrame ke dalam Treeview
     tree["columns"] = tuple(df.columns)
     tree.heading("#0", text="Index")
     for col in df.columns:
