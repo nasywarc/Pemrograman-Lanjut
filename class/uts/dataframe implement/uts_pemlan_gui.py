@@ -220,4 +220,3 @@ exit_button = Button(text='Exit', command=exit)
 exit_button.grid(row=18, column=1)
  
 window.mainloop()
- 
