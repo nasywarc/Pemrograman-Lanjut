@@ -71,7 +71,29 @@ def show_search_results(result_df):
  
 def search_filter():
     set_button_color(search_filter_button, '#67B274', '#FFFFFF')
- 
+    
+    neighborhood_group = simpledialog.askstring("Filter by Neighborhood Group", "Enter Neighborhood Group:")
+    neighborhood = simpledialog.askstring("Filter by Neighborhood", "Enter Neighborhood:")
+    
+    while True:
+        filter_price = simpledialog.askstring("Filter by Price", "Enter Max Price:")
+        if filter_price is not None:
+            try:
+                filter_price_int = int(filter_price)
+                break
+            except ValueError:
+                messagebox.showwarning("Invalid Input", "Please enter a valid integer for price.")
+        else:
+            return
+    
+    result_df = df[
+        (df['neighbourhood_group'].str.lower() == neighborhood_group.lower()) &
+        (df['neighbourhood'].str.lower() == neighborhood.lower()) &
+        (df['price'].astype(int) <= filter_price_int)
+    ]
+    show_search_results(result_df)
+
+     
 def add_data_gui():
     global df
     add_data_window = Toplevel(window)
