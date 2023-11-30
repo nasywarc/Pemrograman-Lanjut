@@ -15,25 +15,6 @@ def set_button_color(button, color, textcolor):
 
 def show():
     set_button_color(show_button, '#67B274', '#FFFFFF')
-    # show_data()
-
-# def show_data():
-#     show_window = Toplevel(window)
-#     show_window.title('Show Data')
-#     data_listbox = Listbox(show_window, width=50, height=10)
-#     data_listbox.pack(padx=10, pady=10)
-#     data = df[['id', 'name', 'neighbourhood_group', 'price']].to_string(index=False)
-#     data_listbox.insert(END, data)
-
-# def show_result():
-#     show_result_window = Toplevel(window)
-#     show_result_window.title('Result')
-#     result_label = Label(show_result_window, text="\nResult\n------")
-#     result_label.pack(padx=10, pady=10)
-#     result_text = df[['id', 'name', 'neighbourhood_group', 'price']].to_string(index=False)
-#     result_listbox = Listbox(show_result_window, width=50, height=10)
-#     result_listbox.pack(padx=10, pady=10)
-#     result_listbox.insert(END, result_text)
 
 def search_id():
     set_button_color(search_id_button, '#67B274', '#FFFFFF')
@@ -69,8 +50,6 @@ def help():
                 "6. Update data\t\t: Update availability of the housing.\n" \
                 "7. Delete data\t\t: Delete entry by id.\n" \
                 "9. Exit\t\t\t: Stop the program.\n" \
-                # "================================ HELP MENU ================================\n\n" \
-                # "=========================================================================" \
 
     help_label = Label(help_window, text=help_text, justify=LEFT)
     help_label.pack(padx=10, pady=10)
