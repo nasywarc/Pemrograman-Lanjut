@@ -15,27 +15,35 @@ def set_button_color(button, color, textcolor):
 
 def show():
     set_button_color(show_button, '#67B274', '#FFFFFF')
+    pass
 
 def search_id():
     set_button_color(search_id_button, '#67B274', '#FFFFFF')
+    pass
 
 def search_name():
     set_button_color(search_name_button, '#67B274', '#FFFFFF')
+    pass
 
 def search_filter():
     set_button_color(search_filter_button, '#67B274', '#FFFFFF')
+    pass
 
 def add():
     set_button_color(add_button, '#67B274', '#FFFFFF')
+    pass
 
 def update():
     set_button_color(update_button, '#67B274', '#FFFFFF')
+    pass
 
 def delete():
     set_button_color(delete_button, '#67B274', '#FFFFFF')
+    pass
 
 def help():
     set_button_color(help_button, '#67B274', '#FFFFFF')
+    pass
 
     help_window = Toplevel(window)
     help_window.title('Help Menu')
