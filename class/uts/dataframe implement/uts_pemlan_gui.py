@@ -59,7 +59,7 @@ def help():
     help_window = Toplevel(window)
     help_window.title('Help Menu')
 
-    help_text = "HELP MENU\n\n" \
+    help_text = "\t\t\t\t\tHELP MENU\n\n" \
                 "1. Show data\t\t: Show every data in CSV file.\n" \
                 "2. Find data by ID\t\t: Search data by Housing ID.\n" \
                 "3. Find data by Name\t: Search data by the name of the housing.\n" \
