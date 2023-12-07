@@ -21,3 +21,4 @@
 # print(a)
 # a += int('0x10', 16)
 # print(a)
+# print(bin(2))
