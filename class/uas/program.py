@@ -22,3 +22,11 @@
 # a += int('0x10', 16)
 # print(a)
 # print(bin(2))
+
+string = 'pemrograman'
+print(string[-5:])
+print(string[-5:-3])
+
+file = open('contoh_file.txt', 'a')
+file.write('\nline lima')
+file.close()
