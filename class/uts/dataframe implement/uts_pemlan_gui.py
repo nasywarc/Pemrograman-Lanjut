@@ -3,47 +3,46 @@ from tkinter import ttk
 from tkinter import simpledialog, messagebox
 import pandas as pd
 import os
- 
+import threading
+
+data_lock = threading.Lock()
+
 def set_button_color(button, color, textcolor):
     for btn in [show_button, search_id_button, search_name_button, search_filter_button,
                 add_button, update_button, delete_button, help_button]:
         btn.config(bg='SystemButtonFace', fg='Black')
     button.config(bg=color, fg=textcolor)
-    
+
 def show():
     set_button_color(show_button, '#67B274', '#FFFFFF')
 
-    show_window = Toplevel(window)
-    show_window.title('New York Housing')
-    show_window.geometry("500x250")
+    def show_worker():
+        with data_lock:
+            show_window = Toplevel(window)
+            show_window.title('New York Housing')
+            show_window.geometry("500x250")
 
-    tree = ttk.Treeview(show_window)
-    
-    tree["columns"] = tuple(df.columns)
-    tree.heading("#0", text="Index")
-    
-    xscrollbar = ttk.Scrollbar(show_window, orient="horizontal", command=tree.xview)
-    xscrollbar.pack(side="bottom", fill="x")
-    tree.configure(xscrollcommand=xscrollbar.set)
-    
-    yscrollbar = ttk.Scrollbar(show_window, orient="vertical", command=tree.yview)
-    yscrollbar.pack(side="left", fill="y")
-    tree.configure(yscrollcommand=yscrollbar.set)
-        
-    for col in df.columns:
-        tree.heading(col, text=col)
-    for index, row in df.iterrows():
-        tree.insert("", "end", values=list(row))
-    
-    tree.pack()
- 
-def show_data():
-    show_window = Toplevel(window)
-    show_window.title('Show Data')
-    data_listbox = Listbox(show_window, width=50, height=10)
-    data_listbox.pack(padx=10, pady=10)
-    data = df[['id', 'name', 'neighbourhood_group', 'price']].to_string(index=False)
-    data_listbox.insert(END, data)
+            tree = ttk.Treeview(show_window)
+
+            tree["columns"] = tuple(df.columns)
+            tree.heading("#0", text="Index")
+
+            xscrollbar = ttk.Scrollbar(show_window, orient="horizontal", command=tree.xview)
+            xscrollbar.pack(side="bottom", fill="x")
+            tree.configure(xscrollcommand=xscrollbar.set)
+
+            yscrollbar = ttk.Scrollbar(show_window, orient="vertical", command=tree.yview)
+            yscrollbar.pack(side="left", fill="y")
+            tree.configure(yscrollcommand=yscrollbar.set)
+
+            for col in df.columns:
+                tree.heading(col, text=col)
+            for index, row in df.iterrows():
+                tree.insert("", "end", values=list(row))
+
+            tree.pack()
+
+    threading.Thread(target=show_worker).start()
  
 def search_id():
     set_button_color(search_id_button, '#67B274', '#FFFFFF')
@@ -62,30 +61,33 @@ def search_name():
 def show_search_results(result_df):
     result_window = Toplevel(window)
     result_window.title('Search Results')
-    tree = ttk.Treeview(result_window)
- 
+    result_window.geometry("500x250")
+    
     if result_df.empty:
         result_label = Label(result_window, text=f"No results found.")
         result_label.pack(padx=10, pady=10)
     else:
-        result_listbox = Listbox(result_window, width=50, height=10)
-        result_listbox.pack(padx=10, pady=10)
-        
-        xscrollbar = ttk.Scrollbar(result_window, orient="horizontal", command=tree.xview)
-        xscrollbar.pack(side="bottom", fill="x")
-        tree.configure(xscrollcommand=xscrollbar.set)
-        
-        yscrollbar = ttk.Scrollbar(result_window, orient="vertical", command=tree.yview)
+        result_tree = ttk.Treeview(result_window)
+
+        result_tree["columns"] = tuple(result_df.columns)
+        result_tree.heading("#0", text="Index")
+
+        for col in result_df.columns:
+            result_tree.heading(col, text=col)
+
+        yscrollbar = ttk.Scrollbar(result_window, orient="vertical", command=result_tree.yview)
         yscrollbar.pack(side="left", fill="y")
-        tree.configure(yscrollcommand=yscrollbar.set)
- 
+        result_tree.configure(yscrollcommand=yscrollbar.set)
+
+        xscrollbar = ttk.Scrollbar(result_window, orient="horizontal", command=result_tree.xview)
+        xscrollbar.pack(side="bottom", fill="x")
+        result_tree.configure(xscrollcommand=xscrollbar.set)
+
         for index, row in result_df.iterrows():
-            result_listbox.insert(END, f"ID: {row['id']}")
-            result_listbox.insert(END, f"Name: {row['name']}")
-            result_listbox.insert(END, f"Neighbourhood Group: {row['neighbourhood_group']}")
-            result_listbox.insert(END, f"Price: {row['price']}")
-            result_listbox.insert(END, f"Availability: {row['availability_365']}")
-            result_listbox.insert(END, "-" * 50)  # Separator between housing entries
+            result_tree.insert("", "end", values=list(row))
+
+        result_tree.pack(padx=10, pady=10)
+
  
 def search_filter():
     set_button_color(search_filter_button, '#67B274', '#FFFFFF')
@@ -142,7 +144,6 @@ def update():
                     df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability
                     df.to_csv("new_york_housing.csv", index=False)
                     messagebox.showinfo("Update Successful", f"Availability for ID {search} updated successfully.")
-                    # show_data()
                 else:
                     messagebox.showwarning("Invalid Input", "Please enter a valid integer for availability.")
             else:
@@ -157,9 +158,11 @@ def delete():
 
     if delete_ID is not None:
         if delete_ID in df['id'].astype(str).values:
-            df = df[df['id'].astype(str) != delete_ID]
-            df.to_csv("new_york_housing.csv", index=False)
-            messagebox.showinfo("Delete Successful", f"Data with ID {delete_ID} deleted successfully.")
+            delete_or_no = messagebox.askokcancel('Delete Data', f'Do you want to delete {delete_ID} data?')
+            if delete_or_no:
+                df = df[df['id'].astype(str) != delete_ID]
+                df.to_csv("new_york_housing.csv", index=False)
+                messagebox.showinfo("Delete Successful", f"Data with ID {delete_ID} deleted successfully.")
         else:
             messagebox.showwarning("ID not found", f"There is no ID that matches '{delete_ID}'.")
 

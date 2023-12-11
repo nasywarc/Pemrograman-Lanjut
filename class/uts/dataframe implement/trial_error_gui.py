@@ -4,61 +4,52 @@ from tkinter import simpledialog, messagebox
 import pandas as pd
 import os
 import threading
- 
+
+data_lock = threading.Lock()
+
 def set_button_color(button, color, textcolor):
     for btn in [show_button, search_id_button, search_name_button, search_filter_button,
                 add_button, update_button, delete_button, help_button]:
         btn.config(bg='SystemButtonFace', fg='Black')
     button.config(bg=color, fg=textcolor)
-    
+
 def show():
     set_button_color(show_button, '#67B274', '#FFFFFF')
 
-    def show_data_thread():
-        show_window = Toplevel(window)
-        show_window.title('New York Housing')
+    def show_worker():
+        with data_lock:
+            show_window = Toplevel(window)
+            show_window.title('New York Housing')
+            show_window.geometry("500x250")
 
-        tree = ttk.Treeview(show_window)
+            tree = ttk.Treeview(show_window)
 
-        tree["columns"] = tuple(df.columns)
-        tree.heading("#0", text="Index")
-        
-    
-        for col in df.columns:
-            tree.heading(col, text=col)
-        for index, row in df.iterrows():
-            tree.insert("", "end", values=list(row))
-            
-        xscrollbar = ttk.Scrollbar(show_window, orient="horizontal", command=tree.xview)
-        xscrollbar.pack(side="bottom", fill="x")
-        tree.configure(xscrollcommand=xscrollbar.set)
-        
-        yscrollbar = ttk.Scrollbar(show_window, orient="vertical", command=tree.yview)
-        yscrollbar.pack(side="left", fill="y")
-        tree.configure(yscrollcommand=yscrollbar.set)
+            tree["columns"] = tuple(df.columns)
+            tree.heading("#0", text="Index")
 
-        tree.pack()
+            xscrollbar = ttk.Scrollbar(show_window, orient="horizontal", command=tree.xview)
+            xscrollbar.pack(side="bottom", fill="x")
+            tree.configure(xscrollcommand=xscrollbar.set)
 
-    threading.Thread(target=show_data_thread).start()
- 
-def show_data():
-    show_window = Toplevel(window)
-    show_window.title('Show Data')
-    data_listbox = Listbox(show_window, width=50, height=10)
-    data_listbox.pack(padx=10, pady=10)
-    data = df[['id', 'name', 'neighbourhood_group', 'price']].to_string(index=False)
-    data_listbox.insert(END, data)
+            yscrollbar = ttk.Scrollbar(show_window, orient="vertical", command=tree.yview)
+            yscrollbar.pack(side="left", fill="y")
+            tree.configure(yscrollcommand=yscrollbar.set)
+
+            for col in df.columns:
+                tree.heading(col, text=col)
+            for index, row in df.iterrows():
+                tree.insert("", "end", values=list(row))
+
+            tree.pack()
+
+    threading.Thread(target=show_worker).start()
  
 def search_id():
     set_button_color(search_id_button, '#67B274', '#FFFFFF')
-
-    def search_id_thread():
-        search = simpledialog.askstring("Search by ID", "Enter ID to search:")
-        if search is not None:
-            result_df = df[df['id'].astype(str) == search]
-            show_search_results(result_df)
-
-    threading.Thread(target=search_id_thread).start()
+    search = simpledialog.askstring("Search by ID", "Enter ID to search:")
+    if search is not None:
+        result_df = df[df['id'].astype(str) == search]
+        show_search_results(result_df)
  
 def search_name():
     set_button_color(search_name_button, '#67B274', '#FFFFFF')
@@ -70,55 +61,61 @@ def search_name():
 def show_search_results(result_df):
     result_window = Toplevel(window)
     result_window.title('Search Results')
- 
+    result_window.geometry("500x250")
+    
     if result_df.empty:
         result_label = Label(result_window, text=f"No results found.")
         result_label.pack(padx=10, pady=10)
     else:
-        result_listbox = Listbox(result_window, width=50, height=10)
-        result_listbox.pack(padx=10, pady=10)
- 
+        result_tree = ttk.Treeview(result_window)
+
+        result_tree["columns"] = tuple(result_df.columns)
+        result_tree.heading("#0", text="Index")
+
+        for col in result_df.columns:
+            result_tree.heading(col, text=col)
+
+        yscrollbar = ttk.Scrollbar(result_window, orient="vertical", command=result_tree.yview)
+        yscrollbar.pack(side="left", fill="y")
+        result_tree.configure(yscrollcommand=yscrollbar.set)
+
+        xscrollbar = ttk.Scrollbar(result_window, orient="horizontal", command=result_tree.xview)
+        xscrollbar.pack(side="bottom", fill="x")
+        result_tree.configure(xscrollcommand=xscrollbar.set)
+
         for index, row in result_df.iterrows():
-            result_listbox.insert(END, f"ID: {row['id']}")
-            result_listbox.insert(END, f"Name: {row['name']}")
-            result_listbox.insert(END, f"Neighbourhood Group: {row['neighbourhood_group']}")
-            result_listbox.insert(END, f"Price: {row['price']}")
-            result_listbox.insert(END, f"Availability: {row['availability_365']}")
-            result_listbox.insert(END, "-" * 50)
+            result_tree.insert("", "end", values=list(row))
+
+        result_tree.pack(padx=10, pady=10)
+
  
 def search_filter():
     set_button_color(search_filter_button, '#67B274', '#FFFFFF')
-
-    def search_filter_thread():
-        neighborhood_group = simpledialog.askstring("Filter by Neighborhood Group", "Enter Neighborhood Group:")
-        neighborhood = simpledialog.askstring("Filter by Neighborhood", "Enter Neighborhood:")
-
-        while True:
-            filter_price = simpledialog.askstring("Filter by Price", "Enter Max Price:")
-            if filter_price is not None:
-                try:
-                    filter_price_int = int(filter_price)
-                    break
-                except ValueError:
-                    messagebox.showwarning("Invalid Input", "Please enter a valid integer for price.")
-            else:
-                return
-
-        result_df = df[
-            (df['neighbourhood_group'].str.lower() == neighborhood_group.lower()) &
-            (df['neighbourhood'].str.lower() == neighborhood.lower()) &
-            (df['price'].astype(int) <= filter_price_int)
-        ]
-        show_search_results(result_df)
-
-    threading.Thread(target=search_filter_thread).start()
+    
+    neighborhood_group = simpledialog.askstring("Filter by Neighborhood Group", "Enter Neighborhood Group:")
+    neighborhood = simpledialog.askstring("Filter by Neighborhood", "Enter Neighborhood:")
+    
+    while True:
+        filter_price = simpledialog.askstring("Filter by Price", "Enter Max Price:")
+        if filter_price is not None:
+            try:
+                filter_price_int = int(filter_price)
+                break
+            except ValueError:
+                messagebox.showwarning("Invalid Input", "Please enter a valid integer for price.")
+        else:
+            return
+    
+    result_df = df[
+        (df['neighbourhood_group'].str.lower() == neighborhood_group.lower()) &
+        (df['neighbourhood'].str.lower() == neighborhood.lower()) &
+        (df['price'].astype(int) <= filter_price_int)
+    ]
+    show_search_results(result_df)
 
      
 def add_data_gui():
-    global df
-    add_data_window = Toplevel(window)
-    add_data_window.title("Add Data")
- 
+    global df 
     entries = ['ID', 'Name', 'Host Name', 'Host ID', 'Neighbourhood Group', 'Neighbourhood', 'Latitude', 'Longitude',
                'Room Type', 'Price', 'Minimum Nights', 'Number of Reviews', 'Last Review', 'Reviews per Month',
                'Calculated Host Listings', 'Availability']
@@ -157,14 +154,15 @@ def update():
 def delete():
     set_button_color(delete_button, '#67B274', '#FFFFFF')
     global df
-
     delete_ID = simpledialog.askstring("Delete Data", "Enter ID to delete:")
 
     if delete_ID is not None:
         if delete_ID in df['id'].astype(str).values:
-            df = df[df['id'].astype(str) != delete_ID]
-            df.to_csv("new_york_housing.csv", index=False)
-            messagebox.showinfo("Delete Successful", f"Data with ID {delete_ID} deleted successfully.")
+            delete_or_no = messagebox.askokcancel('Delete Data', f'Do you want to delete {delete_ID} data?')
+            if delete_or_no:
+                df = df[df['id'].astype(str) != delete_ID]
+                df.to_csv("new_york_housing.csv", index=False)
+                messagebox.showinfo("Delete Successful", f"Data with ID {delete_ID} deleted successfully.")
         else:
             messagebox.showwarning("ID not found", f"There is no ID that matches '{delete_ID}'.")
 
