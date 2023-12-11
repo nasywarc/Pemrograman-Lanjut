@@ -15,11 +15,21 @@ def show():
 
     show_window = Toplevel(window)
     show_window.title('New York Housing')
+    show_window.geometry("500x250")
 
     tree = ttk.Treeview(show_window)
     
     tree["columns"] = tuple(df.columns)
     tree.heading("#0", text="Index")
+    
+    xscrollbar = ttk.Scrollbar(show_window, orient="horizontal", command=tree.xview)
+    xscrollbar.pack(side="bottom", fill="x")
+    tree.configure(xscrollcommand=xscrollbar.set)
+    
+    yscrollbar = ttk.Scrollbar(show_window, orient="vertical", command=tree.yview)
+    yscrollbar.pack(side="left", fill="y")
+    tree.configure(yscrollcommand=yscrollbar.set)
+        
     for col in df.columns:
         tree.heading(col, text=col)
     for index, row in df.iterrows():
@@ -52,6 +62,7 @@ def search_name():
 def show_search_results(result_df):
     result_window = Toplevel(window)
     result_window.title('Search Results')
+    tree = ttk.Treeview(result_window)
  
     if result_df.empty:
         result_label = Label(result_window, text=f"No results found.")
@@ -59,6 +70,14 @@ def show_search_results(result_df):
     else:
         result_listbox = Listbox(result_window, width=50, height=10)
         result_listbox.pack(padx=10, pady=10)
+        
+        xscrollbar = ttk.Scrollbar(result_window, orient="horizontal", command=tree.xview)
+        xscrollbar.pack(side="bottom", fill="x")
+        tree.configure(xscrollcommand=xscrollbar.set)
+        
+        yscrollbar = ttk.Scrollbar(result_window, orient="vertical", command=tree.yview)
+        yscrollbar.pack(side="left", fill="y")
+        tree.configure(yscrollcommand=yscrollbar.set)
  
         for index, row in result_df.iterrows():
             result_listbox.insert(END, f"ID: {row['id']}")
@@ -94,10 +113,7 @@ def search_filter():
 
      
 def add_data_gui():
-    global df
-    add_data_window = Toplevel(window)
-    add_data_window.title("Add Data")
- 
+    global df 
     entries = ['ID', 'Name', 'Host Name', 'Host ID', 'Neighbourhood Group', 'Neighbourhood', 'Latitude', 'Longitude',
                'Room Type', 'Price', 'Minimum Nights', 'Number of Reviews', 'Last Review', 'Reviews per Month',
                'Calculated Host Listings', 'Availability']
@@ -113,7 +129,6 @@ def add_data_gui():
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
     df.to_csv("new_york_housing.csv", index=False)
     messagebox.showinfo("Add Successful", "The data has been added.")
-    # show_data()
  
 def update():
     set_button_color(update_button, '#67B274', '#FFFFFF')
@@ -138,7 +153,6 @@ def update():
 def delete():
     set_button_color(delete_button, '#67B274', '#FFFFFF')
     global df
-
     delete_ID = simpledialog.askstring("Delete Data", "Enter ID to delete:")
 
     if delete_ID is not None:
