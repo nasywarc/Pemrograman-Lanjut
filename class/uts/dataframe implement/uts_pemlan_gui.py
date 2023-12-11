@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import simpledialog, messagebox
 import pandas as pd
-import os
 import threading
 
 data_lock = threading.Lock()
@@ -214,7 +213,6 @@ space_8 = Label(text='')
 space_8.grid(row=15, column=1)
 space_9 = Label(text='')
 space_9.grid(row=17, column=1)
-
 
 show_button = Button(text='Show', command=show)
 show_button.grid(row=2, column=1)
