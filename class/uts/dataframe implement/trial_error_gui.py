@@ -1,5 +1,6 @@
 from tkinter import *
-from tkinter import ttk, simpledialog, messagebox
+from tkinter import ttk
+from tkinter import simpledialog, messagebox
 import pandas as pd
 import threading
 
@@ -41,24 +42,26 @@ def show():
             tree.pack()
 
     threading.Thread(target=show_worker).start()
-
-def search(query, column, case_sensitive=False):
+ 
+def search_id():
     set_button_color(search_id_button, '#67B274', '#FFFFFF')
-
-    def search_worker():
-        global df
-        with data_lock:
-            result_df = df[df[column].astype(str).str.contains(query, case=case_sensitive, regex=False)]
-            show_search_results(result_df)
-
-
-    threading.Thread(target=search_worker).start()
-
+    search = simpledialog.askstring("Search by ID", "Enter ID to search:")
+    if search is not None:
+        result_df = df[df['id'].astype(str) == search]
+        show_search_results(result_df)
+ 
+def search_name():
+    set_button_color(search_name_button, '#67B274', '#FFFFFF')
+    search = simpledialog.askstring("Search by Name", "Enter name to search:")
+    if search is not None:
+        result_df = df[df['name'].astype(str).str.contains(search, case=False)]
+        show_search_results(result_df)
+ 
 def show_search_results(result_df):
     result_window = Toplevel(window)
     result_window.title('Search Results')
     result_window.geometry("500x250")
-
+    
     if result_df.empty:
         result_label = Label(result_window, text=f"No results found.")
         result_label.pack(padx=10, pady=10)
@@ -84,24 +87,13 @@ def show_search_results(result_df):
 
         result_tree.pack(padx=10, pady=10)
 
-def search_id():
-    search_id_button = '#67B274'
-    search = simpledialog.askstring("Search by ID", "Enter ID to search:")
-    if search is not None:
-        search(search, 'id')
-
-def search_name():
-    search_name_button = '#67B274'
-    search = simpledialog.askstring("Search by Name", "Enter name to search:")
-    if search is not None:
-        search(search, 'name', case_sensitive=False)
-
+ 
 def search_filter():
     set_button_color(search_filter_button, '#67B274', '#FFFFFF')
-
+    
     neighborhood_group = simpledialog.askstring("Filter by Neighborhood Group", "Enter Neighborhood Group:")
     neighborhood = simpledialog.askstring("Filter by Neighborhood", "Enter Neighborhood:")
-
+    
     while True:
         filter_price = simpledialog.askstring("Filter by Price", "Enter Max Price:")
         if filter_price is not None:
@@ -112,7 +104,7 @@ def search_filter():
                 messagebox.showwarning("Invalid Input", "Please enter a valid integer for price.")
         else:
             return
-
+    
     result_df = df[
         (df['neighbourhood_group'].str.lower() == neighborhood_group.lower()) &
         (df['neighbourhood'].str.lower() == neighborhood.lower()) &
@@ -120,27 +112,28 @@ def search_filter():
     ]
     show_search_results(result_df)
 
+     
 def add_data_gui():
-    global df
+    global df 
     entries = ['ID', 'Name', 'Host Name', 'Host ID', 'Neighbourhood Group', 'Neighbourhood', 'Latitude', 'Longitude',
                'Room Type', 'Price', 'Minimum Nights', 'Number of Reviews', 'Last Review', 'Reviews per Month',
                'Calculated Host Listings', 'Availability']
-
+ 
     entry_values = []
     for entry in entries:
         value = simpledialog.askstring("Add Data", f"Enter {entry}:")
         if value is None:
             return
         entry_values.append((entry.lower().replace(' ', '_'), value))
-
+ 
     new_data = dict(entry_values)
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
     df.to_csv("new_york_housing.csv", index=False)
     messagebox.showinfo("Add Successful", "The data has been added.")
-
+ 
 def update():
     set_button_color(update_button, '#67B274', '#FFFFFF')
-
+ 
     def update_data():
         search = simpledialog.askstring("Update Data", "Enter ID to update:")
         if search is not None:
@@ -154,9 +147,9 @@ def update():
                     messagebox.showwarning("Invalid Input", "Please enter a valid integer for availability.")
             else:
                 messagebox.showwarning("ID not found", f"There is no ID that matches '{search}'.")
-
+ 
     update_data()
-
+ 
 def delete():
     set_button_color(delete_button, '#67B274', '#FFFFFF')
     global df
@@ -172,12 +165,13 @@ def delete():
         else:
             messagebox.showwarning("ID not found", f"There is no ID that matches '{delete_ID}'.")
 
+ 
 def help():
     set_button_color(help_button, '#67B274', '#FFFFFF')
-
+ 
     help_window = Toplevel(window)
     help_window.title('Help Menu')
-
+ 
     help_text = "HELP MENU\n\n" \
                 "1. Show data\t\t: Show every data in CSV file.\n" \
                 "2. Find data by ID\t\t: Search data by Housing ID.\n" \
@@ -188,12 +182,12 @@ def help():
                 "6. Update data\t\t: Update availability of the housing.\n" \
                 "7. Delete data\t\t: Delete entry by id.\n" \
                 "9. Exit\t\t\t: Stop the program.\n"
-
+ 
     help_label = Label(help_window, text=help_text, justify=LEFT)
     help_label.pack(padx=10, pady=10)
-
+ 
 df = pd.read_csv('new_york_housing.csv')
-
+ 
 window = Tk()
 window.title('New York Housing')
 window.config(padx=50, pady=30)
@@ -201,8 +195,24 @@ window.minsize(width=300, height=200)
 
 title_label = Label(text='New York Housing', width=30)
 title_label.grid(row=0, column=0, columnspan=3)
-
-# Add more space labels as needed
+space_1 = Label(text='')
+space_1.grid(row=1, column=1)
+space_2 = Label(text='')
+space_2.grid(row=3, column=1)
+space_3 = Label(text='')
+space_3.grid(row=5, column=1)
+space_4 = Label(text='')
+space_4.grid(row=7, column=1)
+space_5 = Label(text='')
+space_5.grid(row=9, column=1)
+space_6 = Label(text='')
+space_6.grid(row=11, column=1)
+space_7 = Label(text='')
+space_7.grid(row=13, column=1)
+space_8 = Label(text='')
+space_8.grid(row=15, column=1)
+space_9 = Label(text='')
+space_9.grid(row=17, column=1)
 
 show_button = Button(text='Show', command=show)
 show_button.grid(row=2, column=1)
@@ -222,5 +232,5 @@ help_button = Button(text='Help', command=help)
 help_button.grid(row=16, column=1)
 exit_button = Button(text='Exit', command=exit)
 exit_button.grid(row=18, column=1)
-
+ 
 window.mainloop()
