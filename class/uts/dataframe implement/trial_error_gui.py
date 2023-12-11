@@ -39,7 +39,6 @@ def show():
 
         tree.pack()
 
-    # Create a new thread and start it
     threading.Thread(target=show_data_thread).start()
  
 def show_data():
@@ -59,7 +58,6 @@ def search_id():
             result_df = df[df['id'].astype(str) == search]
             show_search_results(result_df)
 
-    # Create a new thread and start it
     threading.Thread(target=search_id_thread).start()
  
 def search_name():
@@ -86,7 +84,7 @@ def show_search_results(result_df):
             result_listbox.insert(END, f"Neighbourhood Group: {row['neighbourhood_group']}")
             result_listbox.insert(END, f"Price: {row['price']}")
             result_listbox.insert(END, f"Availability: {row['availability_365']}")
-            result_listbox.insert(END, "-" * 50)  # Separator between housing entries
+            result_listbox.insert(END, "-" * 50)
  
 def search_filter():
     set_button_color(search_filter_button, '#67B274', '#FFFFFF')
@@ -113,7 +111,6 @@ def search_filter():
         ]
         show_search_results(result_df)
 
-    # Create a new thread and start it
     threading.Thread(target=search_filter_thread).start()
 
      
@@ -137,7 +134,6 @@ def add_data_gui():
     df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
     df.to_csv("new_york_housing.csv", index=False)
     messagebox.showinfo("Add Successful", "The data has been added.")
-    # show_data()
  
 def update():
     set_button_color(update_button, '#67B274', '#FFFFFF')
@@ -151,7 +147,6 @@ def update():
                     df.loc[df['id'].astype(str) == search, 'availability_365'] = new_availability
                     df.to_csv("new_york_housing.csv", index=False)
                     messagebox.showinfo("Update Successful", f"Availability for ID {search} updated successfully.")
-                    # show_data()
                 else:
                     messagebox.showwarning("Invalid Input", "Please enter a valid integer for availability.")
             else:
