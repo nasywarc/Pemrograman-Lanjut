@@ -114,6 +114,7 @@ def search_filter():
 
      
 def add_data_gui():
+    set_button_color(add_button, '#67B274', '#FFFFFF')
     global df 
     entries = ['ID', 'Name', 'Host Name', 'Host ID', 'Neighbourhood Group', 'Neighbourhood', 'Latitude', 'Longitude',
                'Room Type', 'Price', 'Minimum Nights', 'Number of Reviews', 'Last Review', 'Reviews per Month',
